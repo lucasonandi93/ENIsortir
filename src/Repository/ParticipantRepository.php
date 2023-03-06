@@ -24,7 +24,7 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
         parent::__construct($registry, Participant::class);
     }
 
-    public function add(Participant $entity, bool $flush = false): void
+    public function save(Participant $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -53,7 +53,7 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
 
         $user->setPassword($newHashedPassword);
 
-        $this->add($user, true);
+        $this->save($user, true);
     }
 
 //    /**

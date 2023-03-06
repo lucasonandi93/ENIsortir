@@ -21,7 +21,7 @@ class EtatRepository extends ServiceEntityRepository
         parent::__construct($registry, Etat::class);
     }
 
-    public function add(Etat $entity, bool $flush = false): void
+    public function save(Etat $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
