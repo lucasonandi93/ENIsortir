@@ -34,11 +34,6 @@ class Sortie
     #[ORM\Column(type: Types::TEXT)]
     private ?string $infosSortie = null;
 
-    #[ORM\ManyToOne(inversedBy: 'organisateur')]
-    private ?Participant $organisateur = null;
-
-    #[ORM\ManyToMany(targetEntity: Participant::class, mappedBy: 'sortir')]
-    private Collection $inscrit;
 
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
@@ -51,6 +46,13 @@ class Sortie
     #[ORM\ManyToOne(inversedBy: 'sorties')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
+
+    #[ORM\ManyToOne(inversedBy: 'organisateur')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Participant $participant = null;
+
+    #[ORM\ManyToMany(targetEntity: Participant::class, mappedBy: 'inscrit')]
+    private Collection $inscrit;
 
     public function __construct()
     {
@@ -135,44 +137,6 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?Participant
-    {
-        return $this->organisateur;
-    }
-
-    public function setOrganisateur(?Participant $organisateur): self
-    {
-        $this->organisateur = $organisateur;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Participant>
-     */
-    public function getInscrit(): Collection
-    {
-        return $this->inscrit;
-    }
-
-    public function addInscrit(Participant $inscrit): self
-    {
-        if (!$this->inscrit->contains($inscrit)) {
-            $this->inscrit->add($inscrit);
-            $inscrit->addSortir($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInscrit(Participant $inscrit): self
-    {
-        if ($this->inscrit->removeElement($inscrit)) {
-            $inscrit->removeSortir($this);
-        }
-
-        return $this;
-    }
 
     public function getLieu(): ?Lieu
     {
@@ -206,6 +170,45 @@ class Sortie
     public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getParticipant(): ?Participant
+    {
+        return $this->participant;
+    }
+
+    public function setParticipant(?Participant $participant): self
+    {
+        $this->participant = $participant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Participant>
+     */
+    public function getInscrit(): Collection
+    {
+        return $this->inscrit;
+    }
+
+    public function addInscrit(Participant $inscrit): self
+    {
+        if (!$this->inscrit->contains($inscrit)) {
+            $this->inscrit->add($inscrit);
+            $inscrit->addInscrit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInscrit(Participant $inscrit): self
+    {
+        if ($this->inscrit->removeElement($inscrit)) {
+            $inscrit->removeInscrit($this);
+        }
 
         return $this;
     }
