@@ -41,6 +41,16 @@ class VilleRepository extends ServiceEntityRepository
 
 
 
+    public function findAllVilles():array
+    {
+        $qb = $this->createQueryBuilder('v')
+            ->select('v.nom')
+            ->distinct()
+            ->orderBy('v.nom', 'ASC');
+
+        return array_column($qb->getQuery()->getArrayResult(), 'nom');
+    }
+
 //    /**
 //     * @return Ville[] Returns an array of Ville objects
 //     */
