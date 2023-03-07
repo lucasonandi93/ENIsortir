@@ -47,16 +47,15 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Etat $etat = null;
 
-    #[ORM\ManyToOne(inversedBy: 'organisateur')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Participant $participant = null;
+    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    private ?User $user = null;
 
-    #[ORM\ManyToMany(targetEntity: Participant::class, mappedBy: 'inscrit')]
-    private Collection $inscrit;
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'inscrit')]
+    private Collection $users;
 
     public function __construct()
     {
-        $this->inscrit = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 
@@ -167,51 +166,43 @@ class Sortie
         return $this->etat;
     }
 
-    public function setEtat(?Etat $etat): self
+    public function getUser(): ?User
     {
-        $this->etat = $etat;
-
-        return $this;
+        return $this->user;
     }
 
-    public function getParticipant(): ?Participant
+    public function setUser(?User $user): self
     {
-        return $this->participant;
-    }
-
-    public function setParticipant(?Participant $participant): self
-    {
-        $this->participant = $participant;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Participant>
+     * @return Collection<int, User>
      */
-    public function getInscrit(): Collection
+    public function getUsers(): Collection
     {
-        return $this->inscrit;
+        return $this->users;
     }
 
-    public function addInscrit(Participant $inscrit): self
+    public function addUser(User $user): self
     {
-        if (!$this->inscrit->contains($inscrit)) {
-            $this->inscrit->add($inscrit);
-            $inscrit->addInscrit($this);
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addInscrit($this);
         }
 
         return $this;
     }
 
-    public function removeInscrit(Participant $inscrit): self
+    public function removeUser(User $user): self
     {
-        if ($this->inscrit->removeElement($inscrit)) {
-            $inscrit->removeInscrit($this);
+        if ($this->users->removeElement($user)) {
+            $user->removeInscrit($this);
         }
 
         return $this;
     }
-
 
 }
