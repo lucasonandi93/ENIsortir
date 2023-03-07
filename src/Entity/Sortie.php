@@ -53,6 +53,25 @@ class Sortie
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'inscrit')]
     private Collection $users;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $ville;
+
+    // ...
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
