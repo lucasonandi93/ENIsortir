@@ -16,13 +16,12 @@
     {{ form_row(sortieForm.infosSortie) }}
     {{ form_row(sortieForm.campus) }}
     {{ form_row(sortieForm.lieu) }}
-    {#{{ form_row(sortieForm.ville) }}#}
     {{ form_row(sortieForm.inscriptionAuto) }}
 
     <button name="enregistrer">Enregistrer</button>
     <button name="publier">Publier</button>
 
     {{ form_end(sortieForm) }}
-    <a href="{{ path('sortie_list') }}"><button>Annuler</button></a>
+    <a href="{{ path('main_home') }}"><button>Annuler</button></a>
 {% endblock %}
 
