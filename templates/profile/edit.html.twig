@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+{{ form_start(userUpdateForm) }}
+{{ form_widget(userUpdateForm) }}
+<button>{% block buttonLabel %}{% endblock %}</button>
+{{ form_end(userUpdateForm) }}
+{% endblock %}

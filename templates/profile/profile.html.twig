@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProfileController!{% endblock %}
+
+{% block body %}
+    <h2>list de profiles</h2>
+    <section class="profile-list">
+        {% for profile in user %}
+            <article>
+               <a href="{{ path('profile_show', {'id': profile.id}) }}">
+                         {{ profile.nom }} | {{ profile.prenom | length }}
+               </a>
+
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
