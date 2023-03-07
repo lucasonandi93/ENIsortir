@@ -50,11 +50,10 @@ class SortieController extends AbstractController
             throw $this->createNotFoundException('Oups, cette sortie n\'existe pas');
         }
 
-        return $this->render('sortie/sortie.html.twig', [
+        return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);
     }
-
 
     #[Route('/new', name: 'new')]
     public function new(Request $request, SortieRepository $sortieRepository): Response
