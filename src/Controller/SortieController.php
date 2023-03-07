@@ -26,18 +26,18 @@ class SortieController extends AbstractController
         $filterForm = $this->createForm(FiltreType::class, null, ['csrf_protection' => false]);
         $filterForm->handleRequest($request);
 
-        if ($filterForm->isSubmitted()) {
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
             $filters = $filterForm->getData();
-
             $sorties =$sortieRepository-> findFiltered($filters);
         } else {
             //$sorties = $sortieRepository->findAllOrderedBySites();
-            $sorties = $sortieRepository->findByNom('');
+            //$sorties = $sortieRepository->findByNom('');
+            $sorties = $sortieRepository->findAll();
         }
 
-
         return $this->render('sortie/list.html.twig', [
-            'sorties' => $sorties
+            'sorties' => $sorties,
+             'filterForm' => $filterForm->createView(),
         ]);
     }
 
@@ -55,30 +55,35 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'new')]
-    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, UserRepository $userRepository): Response
+    #[Route('/{id}', name: 'details')]
+    public function details(Sortie $sortie): Response
     {
+        return $this->render('sortie/details.html.twig', [
+            'sortie' => $sortie
+        ]);
+    }
 
+    #[Route('/new', name: 'new')]
+    public function new(Request $request, SortieRepository $sortieRepository): Response
+    {
         $sortie = new Sortie();
         $ville = new Ville();
+
         $sortieForm = $this->createForm(SortieType::class, $sortie);
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-            // Récupérer la ville sélectionnée dans le formulaire
-            $ville = $sortieForm->get('ville')->getData();
-
-            // Définir la ville de la sortie
-            $sortie->setVille($ville);
-
-            // Enregistrer la sortie en base de données
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            // Rediriger l'utilisateur vers la page de détails de la sortie
-            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+            $this->addFlash('success', 'Sortie créée avec succès !');
+            return $this->redirectToRoute('sortie_list');
         }
+
+        return $this->render('sortie/new.html.twig', [
+            'sortieForm' => $sortieForm->createView()
+        ]);
 
 //            if ($sortieForm->get('enregistrer')) {
 //                $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Créée']));
@@ -100,10 +105,5 @@ class SortieController extends AbstractController
 //                'id' => $sortie->getId()
 //            ]);
 
-
-
-        return $this->render('sortie/new.html.twig', [
-            'sortieForm' => $sortieForm->createView()
-        ]);
     }
 }

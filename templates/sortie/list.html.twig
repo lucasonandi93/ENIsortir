@@ -25,10 +25,10 @@
                 <th scope="row">{{ sortie.nom|capitalize }}</th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
-                <td>{{ sortie.participants|length }}/{{ sortie.nbInscriptionMax }}</td>
+                <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>
-                    {% if app.user in sortie.participants %}
+                    {% if app.user in sortie.users %}
                         X
                     {% endif %}
                 </td>
@@ -41,7 +41,7 @@
                     {% if (sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Cloturée') %}
                         <a href="{{ path('sortie_sortie', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
-                    {% if app.user in sortie.participants %}
+                    {% if app.user in sortie.users %}
                         - <a href="">Se désister</a>
                     {% else %}
                         - <a href="">S'inscrire</a>
