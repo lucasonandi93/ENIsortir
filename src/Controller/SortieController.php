@@ -29,7 +29,8 @@ class SortieController extends AbstractController
 
             $sorties =$sortieRepository-> findFiltered($filters);
         } else {
-            $sorties = $sortieRepository->findAllOrderedBySites();
+            //$sorties = $sortieRepository->findAllOrderedBySites();
+            $sorties = $sortieRepository->findByNom('');
         }
 
 
@@ -38,7 +39,7 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/sortie/{id}', name: 'sortie')]
+    #[Route('/sortie/{id}', name: 'details')]
     public function sortie(SortieRepository $sortieRepository, int $id): Response
     {
         $sortie = $sortieRepository->find($id);

@@ -10,11 +10,16 @@
 
     <div class="example-wrapper">
         <h1>Hello {{ controller_name }}! ✅</h1>
-
-        This friendly message is coming from:
-        <ul>
-            <li>Your controller at <code><a href="{{ 'D:/xampp/htdocs/sortir/src/Controller/SortieController.php'|file_link(0) }}">src/Controller/SortieController.php</a></code></li>
-            <li>Your template at <code><a href="{{ 'D:/xampp/htdocs/sortir/templates/sortie/index.html.twig'|file_link(0) }}">templates/sortie/index.html.twig</a></code></li>
-        </ul>
+        <nav>
+            <ul>
+                <li><a href="{{ path('villes') }}">Villes</a></li>
+                <li><a href="{{ path('campus') }}">Campus</a></li>
+                <li><a href="{{ path('accueil') }}">Accueil</a></li>
+                <li><a href="{{ path('mon_profil') }}">Mon profil</a></li>
+                <li><a href="{{ path('deconnexion') }}">Se déconnecter</a></li>
+            </ul>
+        </nav>
     </div>
+
+
 {% endblock %}
