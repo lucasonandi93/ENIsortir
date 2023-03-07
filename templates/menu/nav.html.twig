@@ -1,0 +1,23 @@
+<nav>
+    <ul>
+        {#  {% if app.user %}  #}
+        <li><a href="{{ path('main_home') }}">Home</a></li>
+
+
+        {#
+        {% if is_granted("ROLE_ADMIN") %}
+        <li><a href="{{ path('app_lieu_index') }}">Campus</a></li>
+        <li><a href="{{ path('app_ville_index') }}">Villes</a></li>
+        {% endif %}
+        #}
+            <li><a href="{{ path('sortie_new') }}">Ajouter une sortie</a></li>
+            <li><a href="#"> Mon profil </a></li>
+           {# <li><a href="#">Logout ({{ app.user.firstname }})</a></li> #}
+        {# {% else %} #}
+            <!-- Lien de connexion pour un utilisateur non connecté -->
+            <li><a href="{{ path('app_ville_index') }}">Login</a></li>
+
+      {#  {% endif %} #}
+
+    </ul>
+</nav>
