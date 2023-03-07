@@ -14,7 +14,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'main_home')]
     public function index(AppFixtures $appFixtures, EntityManagerInterface $entityManager): Response
     {
-        $appFixtures->load($entityManager);
+        /*$appFixtures->load($entityManager);*/
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
         ]);
