@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>profile N° {{ user.id }}</h1>
+    <div>
+        <img src="#" alt="photoProfil">
+    </div>
+    <div>
+        <p>Prénom: {{ user.prenom }}</p>
+        <p>Nom: {{ user.nom }}</p>
+        <p>Teléphone: {{ user.telephone }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Campus: {{ user.campus.nom }}</p>
+    </div>
+    <a href="{{ path('profile_list') }}"><button>return</button></a>
+{% endblock %}
+
+{% block title %}
+profile
+{% endblock %}
+
