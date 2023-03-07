@@ -8,6 +8,7 @@ use App\Form\SortieType;
 use App\Repository\EtatRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -54,7 +55,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, ParticipantRepository $participantRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository, UserRepository $userRepository): Response
     {
 
         $sortie = new Sortie();
@@ -69,7 +70,7 @@ class SortieController extends AbstractController
                 $sortie->setEtat($etatRepository->findOneBy(['libelle' => 'Publiée']));
             }
             if ($sortieForm->get('inscriptionAuto')) {
-                $sortie->setOrganisateur($participantRepository->find($this->getUser()->getId()));
+                $sortie->setUser($userRepository->find($this->getUser()->getId()));
             }
 
             $sortieRepository->add($sortie, true);
@@ -79,7 +80,7 @@ class SortieController extends AbstractController
             } elseif ($sortieForm->get('publier')) {
                 $this->addFlash('success', 'Sortie publiée');
             }
-            return $this->redirectToRoute('sortie_sortie', [
+            return $this->redirectToRoute('sortie_list', [
                 'id' => $sortie->getId()
             ]);
         }
