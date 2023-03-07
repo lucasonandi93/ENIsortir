@@ -42,7 +42,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/sortie/{id}', name: 'details')]
-    public function sortie(SortieRepository $sortieRepository, int $id): Response
+    public function details(SortieRepository $sortieRepository, int $id): Response
     {
         $sortie = $sortieRepository->find($id);
 
@@ -55,13 +55,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'details')]
-    public function details(Sortie $sortie): Response
-    {
-        return $this->render('sortie/details.html.twig', [
-            'sortie' => $sortie
-        ]);
-    }
 
     #[Route('/new', name: 'new')]
     public function new(Request $request, SortieRepository $sortieRepository): Response
