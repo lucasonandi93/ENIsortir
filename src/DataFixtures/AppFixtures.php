@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
+use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Entity\Ville;
@@ -97,6 +98,21 @@ class AppFixtures extends Fixture
 
         $this->entityManager->flush();
 
+    }
+
+    private function addLieu(int $number)
+    {
+        $villerepo = new LieuRepository($this->registry);
+        $ville = $villerepo->find(rand(1,4));
+
+        for ($i = 0; $i < $number; $i++){
+            $lieu = new Lieu();
+
+            $lieu
+                ->setNom(implode(" ", $this->faker->words(2)))
+                ->setRue(implode(" ", $this->faker->words(4)))
+                ->setVille($ville);
+        }
     }
 
 

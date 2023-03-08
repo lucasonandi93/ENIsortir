@@ -5,9 +5,7 @@
     "prefer-stable": true,
     "require": {
         "php": ">=8.0",
-        "ext-cassandra": "*",
         "ext-ctype": "*",
-        "ext-http": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.8",
@@ -38,7 +36,6 @@
         "symfony/security-bundle": "5.4.*",
         "symfony/serializer": "5.4.*",
         "symfony/string": "5.4.*",
-        "symfony/swiftmailer-bundle": "^3.5",
         "symfony/translation": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
