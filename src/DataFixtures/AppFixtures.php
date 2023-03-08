@@ -68,6 +68,36 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
+    public function addAdmin ()
+    {
+
+
+        $campus = $this->entityManager->getRepository(Campus::class)->findAll();
+
+
+        $user = new User();
+        $user
+            ->setNom('Admin')
+            ->setPrenom('Admin')
+            ->setEmail('admin@admin.admin')
+            ->setTelephone($this->faker->phoneNumber)
+            ->setUsername('adminator')
+            ->setRoles();
+
+
+
+        $user->setCampus($this->faker->randomElement($campus));
+
+        $password = $this->passwordHasher->hashPassword($user, '123');
+        $user->setPassword($password);
+
+        $this->entityManager->persist($user);
+
+        $this->entityManager->flush();
+
+    }
+
+
     public function addUser (int $number)
     {
 
@@ -177,5 +207,6 @@ class AppFixtures extends Fixture
         $this->addEtat($manager);
         $this->addUser(50);
         $this->addSortie(50);
+        //TODO ajouter la methode addAdmin
     }
 }
