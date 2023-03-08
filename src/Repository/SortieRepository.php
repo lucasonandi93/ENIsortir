@@ -70,13 +70,13 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if (isset($filters['inscrit'])) {
-            $qb->leftJoin('s.participants', 'p')
+            $qb->leftJoin('s.users', 'p')
                 ->andWhere('p.id = :inscrit')
                 ->setParameter('inscrit', $filters['inscrit']);
         }
 
         if (isset($filters['nonInscrit'])) {
-            $qb->leftJoin('s.participants', 'p')
+            $qb->leftJoin('s.users', 'p')
                 ->andWhere('p.id != :nonInscrit OR p.id IS NULL')
                 ->setParameter('nonInscrit', $filters['nonInscrit']);
         }

@@ -58,6 +58,7 @@ class SortieController extends AbstractController
     #[Route('/{id}', name: 'details')]
     public function details(Sortie $sortie): Response
     {
+        
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);
