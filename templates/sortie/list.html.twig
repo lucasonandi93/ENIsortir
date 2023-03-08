@@ -34,19 +34,19 @@
                 </td>
                 <td>
                     {# TODO penser à mettre le lien dans le href #}
-                    <a href="">{{ sortie.organisateur.nom }}</a>
+                    <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.prenom }}</a>
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
                     {% if (sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Cloturée') %}
-                        <a href="{{ path('sortie_sortie', {'id': sortie.id }) }}">Afficher</a>
+                        <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
                     {% if app.user in sortie.users %}
                         - <a href="">Se désister</a>
                     {% else %}
                         - <a href="">S'inscrire</a>
                     {% endif %}
-                    {% if app.user == sortie.organisateur %}
+                    {% if app.user == sortie.user %}
                         {% if sortie.etat == 'Créée' %}
                             <a href="">Modifier</a>
                             - <a href="">Publier</a>

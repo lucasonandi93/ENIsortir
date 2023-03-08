@@ -26,24 +26,11 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function list(Request $request, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    public function profile(SortieRepository $sortieRepository): Response
     {
-
-        $filterForm = $this->createForm(FiltreType::class, null, ['csrf_protection' => false]);
-        $filterForm->handleRequest($request);
-
-        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
-            $filters = $filterForm->getData();
-            $sorties = $sortieRepository->findFiltered($filters);
-        } else {
-            //$sorties = $sortieRepository->findAllOrderedBySites();
-            //$sorties = $sortieRepository->findByNom('');
-            $sorties = $sortieRepository->findAll();
-        }
-
+        $sortie= $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
-            'sorties' => $sorties,
-            'filterForm' => $filterForm->createView(),
+            'sorties' => $sortie
         ]);
     }
 
