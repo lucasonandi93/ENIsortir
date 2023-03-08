@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 
+use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 
 use Cassandra\Type\UserType;
@@ -22,7 +23,7 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show')]
+    #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
     public function profileshow(int $id,UserRepository $userRepository): Response
     {
         //récupération d'une série par son id
@@ -43,38 +44,15 @@ class ProfileController extends AbstractController
         $user = $userRepository->find($id);
 
         if (!$user) {
-            throw $this->createNotFoundException("Oops ! Wish not found !");
+            throw $this->createNotFoundException("Oops ! Profile not found !");
         }
 
-        $userForm = $this->createForm(UserType::class, $user);
+        $userForm = $this->createForm(RegistrationFormType::class, $user);
+
 
         return $this->render('profile/edit.html.twig', [
             'user' => $user,
             'userUpdateForm' => $userForm->createView()
         ]);
     }
-//    //1 nouvel instance user
-//$user = new User();
-//
-//
-//    //2qui prend commme valeur d'attribut les valeurs renseignés
-//
-//$form = $this->createForm(RegistrationFormType::class, $user);
-//$form->handleRequest($request);
-//
-//if ($form->isSubmitted() && $form->isValid()) {
-//    // encode the plain password
-//$user->setPassword(
-//$userPasswordHasher->hashPassword(
-//$user,
-//$form->get('plainPassword')->getData()
-//)
-//
-//
-//    //je trouve l'objet user pr afficher ces info dans le formulaire
-//
-//
-//
-//
-//    //3la nouvelle instance de user vient update celle existente de l'user en question
 }

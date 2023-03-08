@@ -13,6 +13,10 @@
         <p>Campus: {{ user.campus.nom }}</p>
     </div>
     <a href="{{ path('profile_list') }}"><button>return</button></a>
+    {% if app.user == user %}
+        <a href="{{ path('profile_update') }}">Modifier mon profil</a><br>
+
+    {% endif %}
 {% endblock %}
 
 {% block title %}
