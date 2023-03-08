@@ -180,6 +180,13 @@ class Sortie
         return $this;
     }
 
+    public function setEtat(Etat $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
     public function getEtat(): ?Etat
     {
         return $this->etat;

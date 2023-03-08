@@ -47,10 +47,20 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
-            $sortieRepository->save($sortie);
+            $etatCree = $etatRepository->findOneBy(['libelle' => 'Créée']);
+            $sortie->setEtat($etatCree);
+
+            $sortieRepository->save($sortie, true);
 
             $this->addFlash('success', 'Sortie créée avec succès !');
-            return $this->redirectToRoute('sortie_list');
+
+            // récupérer la liste de sorties actualisée
+            $sorties = $sortieRepository->findAll();
+
+            return $this->render('sortie/list.html.twig', [
+                'sorties' => $sorties,
+                'filterForm' => $this->createForm(FiltreType::class)->createView()
+            ]);
         }
 
         return $this->render('sortie/new.html.twig', [

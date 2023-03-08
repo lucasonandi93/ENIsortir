@@ -1,7 +1,0 @@
-{% extends 'emails/base.html.twig' %}
-
-{% block content %}
-    <h1>Réinitialisation de mot de passe</h1>
-    <p>Cliquez sur le lien ci-dessous pour réinitialiser votre mot de passe :</p>
-    <p><a href="{{ path('reset_password', {'token': resetToken}) }}">{{ path('reset_password', {'token': resetToken}) }}</a></p>
-{% endblock %}
