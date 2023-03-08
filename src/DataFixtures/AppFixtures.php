@@ -49,12 +49,16 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    public function addUser (ObjectManager $manager)
+    public function addUser (int $number)
     {
-        $campuses = $manager->getRepository(Campus::class)->findAll();
-        $defaultCampus = $this->registry->getRepository(Campus::class)->find(rand(1, 4));
+        $campusrepo = new CampusRepository($this->registry);
+        $campus = $campusrepo->find(rand(1, 4));
 
-        for ($i = 0; $i < 50; $i++) {
+
+        /*$campuses = $manager->getRepository(Campus::class)->findAll();
+        $defaultCampus = $this->registry->getRepository(Campus::class)->find(rand(1, 4));*/
+
+        for ($i = 0; $i < $number; $i++) {
             $user = new User();
             $user
                 ->setNom(implode(" ", $this->faker->words(3)))
@@ -63,7 +67,7 @@ class AppFixtures extends Fixture
                 ->setTelephone($this->faker->phoneNumber)
                 ->setUsername($this->faker->userName);
 
-            $campus = !empty($campuses) ? $this->faker->randomElement($campuses) : $defaultCampus;
+            /*$campus = !empty($campus) ? $this->faker->randomElement($campus) : $campus;*/
 
 
 
@@ -72,10 +76,10 @@ class AppFixtures extends Fixture
             $password = $this->passwordHasher->hashPassword($user, '123');
             $user->setPassword($password);
 
-            $manager->persist($user);
+            $this->entityManager->persist($user);
         }
 
-        $manager->flush();
+        $this->entityManager->flush();
 
     }
 
@@ -96,7 +100,7 @@ class AppFixtures extends Fixture
     }
 
 
-    private function addSortie(int $number)
+/*    private function addSortie(int $number)
     {
         $etatrepo = new EtatRepository($this->registry);
         $etat = $etatrepo->findAll();
@@ -122,13 +126,14 @@ class AppFixtures extends Fixture
         }
 
 
-    }
+    }*/
 
 
 
     public function load(ObjectManager $manager): void
     {
+        $this->addVille(4);
         $this->addCampus($manager);
-        $this->addUser($manager);
+        $this->addUser(50);
     }
 }
