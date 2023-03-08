@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\User;
@@ -36,6 +37,23 @@ class AppFixtures extends Fixture
         $this->registry = $registry;
     }
 
+
+
+
+    public function addEtat(ObjectManager $manager)
+    {
+        $etatLibelle = ['En cours', 'Ouvert', 'Fermé', 'En création'];
+
+        foreach ($etatLibelle as $name) {
+            $etat = new Etat();
+            $etat->setLibelle($name);
+
+            $manager->persist($etat);
+        }
+
+        $manager->flush();
+    }
+
     public function addCampus(ObjectManager $manager)
     {
         $campusNames = ['Rennes', 'Quimper', 'Niort', 'Nantes'];
@@ -52,12 +70,10 @@ class AppFixtures extends Fixture
 
     public function addUser (int $number)
     {
-        $campusrepo = new CampusRepository($this->registry);
-        $campus = $campusrepo->find(rand(1, 4));
 
 
-        /*$campuses = $manager->getRepository(Campus::class)->findAll();
-        $defaultCampus = $this->registry->getRepository(Campus::class)->find(rand(1, 4));*/
+        $campus = $this->entityManager->getRepository(Campus::class)->findAll();
+
 
         for ($i = 0; $i < $number; $i++) {
             $user = new User();
@@ -68,11 +84,9 @@ class AppFixtures extends Fixture
                 ->setTelephone($this->faker->phoneNumber)
                 ->setUsername($this->faker->userName);
 
-            /*$campus = !empty($campus) ? $this->faker->randomElement($campus) : $campus;*/
 
 
-
-            $user->setCampus($campus);
+            $user->setCampus($this->faker->randomElement($campus));
 
             $password = $this->passwordHasher->hashPassword($user, '123');
             $user->setPassword($password);
@@ -102,16 +116,16 @@ class AppFixtures extends Fixture
 
     private function addLieu(int $number)
     {
-        $villerepo = new LieuRepository($this->registry);
-        $ville = $villerepo->find(rand(1,4));
+        $villes = $this->entityManager->getRepository(Ville::class)->findAll();
+
 
         for ($i = 0; $i < $number; $i++){
             $lieu = new Lieu();
 
             $lieu
                 ->setNom(implode(" ", $this->faker->words(2)))
-                ->setRue(implode(" ", $this->faker->words(4)))
-                ->setVille($ville);
+                ->setRue(implode(" ", $this->faker->words(4)));
+                $lieu->setVille($this->faker->randomElement($villes));
             $this->entityManager->persist($lieu);
         }
 
@@ -119,13 +133,12 @@ class AppFixtures extends Fixture
     }
 
 
-/*    private function addSortie(int $number)
+    private function addSortie(int $number)
     {
-        $etatrepo = new EtatRepository($this->registry);
-        $etat = $etatrepo->findAll();
-
-        $lieurepo = new LieuRepository($this->registry);
-        $lieu = $lieurepo->findAll();
+        $etat = $this->entityManager->getRepository(Etat::class)->findAll();
+        $campus = $this->entityManager->getRepository(Campus::class)->findAll();
+        $lieu = $this->entityManager->getRepository(Lieu::class)->findAll();
+        $user = $this->entityManager->getRepository(User::class)->findAll();
 
         for ($i = 0; $i < $number; $i++){
 
@@ -133,27 +146,36 @@ class AppFixtures extends Fixture
 
             $sortie
                 ->setNom(implode(" ", $this->faker->words(3)))
-                ->setInfosSortie(implode(" ",$this->faker->text(40)))
+                ->setInfosSortie(implode(" ",$this->faker->words(15)))
                 ->setDuree($this->faker->numberBetween(30, 240))
                 ->setDateHeureDebut($this->faker->dateTime);
-            $date = clone  $sortie->getDateHeureDebut();
-            $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
+                $date = clone  $sortie->getDateHeureDebut();
+                $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
                 ->setNbInscriptionMax($this->faker->numberBetween(10, 50))
-                ->setLieu($this->faker->)
+                ->setCampus($this->faker->randomElement($campus))
+                ->setLieu($this->faker->randomElement($lieu));
+                $ville = clone  $sortie->getLieu();
+                $sortie->setVille($ville->getVille()->getNom())
+                ->setUser($this->faker->randomElement($user))
+                ->setEtat($this->faker->randomElement($etat));
 
-
+            $this->entityManager->persist($sortie);
         }
 
+        $this->entityManager->flush();
 
-    }*/
+    }
 
 
 
     public function load(ObjectManager $manager): void
     {
-        /*$this->addVille(4);*/
+
+        $this->addVille(4);
         $this->addLieu(10);
         $this->addCampus($manager);
+        $this->addEtat($manager);
         $this->addUser(50);
+        $this->addSortie(50);
     }
 }
