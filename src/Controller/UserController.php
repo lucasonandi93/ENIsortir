@@ -42,7 +42,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_register', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new.html.twig', [
@@ -61,7 +61,7 @@ class UserController extends AbstractController
             throw $this->createNotFoundException("Oops ! user not found !");
         }
 
-        return $this->render('profile/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'user' => $user
         ]);
     }

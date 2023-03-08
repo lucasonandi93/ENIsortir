@@ -28,7 +28,7 @@ class SortieController extends AbstractController
     #[Route('/list', name: 'list')]
     public function profile(SortieRepository $sortieRepository): Response
     {
-        $sortie= $sortieRepository->findAll();
+        $sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
             'sorties' => $sortie
         ]);
@@ -74,8 +74,16 @@ class SortieController extends AbstractController
 
 
     #[Route('/{id}', name: 'details')]
-    public function details(Sortie $sortie): Response
+    public function show(int $id, SortieRepository $sortieRepository): Response
     {
+        //récupération d'une série par son id
+        $sortie = $sortieRepository->find($id);
+
+        if (!$sortie) {
+            //lance une erreur 404 si la série n'existe pas
+            throw $this->createNotFoundException("Oops ! Serie not found !");
+        }
+
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);

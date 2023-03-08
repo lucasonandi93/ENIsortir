@@ -22,7 +22,7 @@
         <tbody>
         {% for sortie in sorties %}
             <tr>
-                <th scope="row">{{ sortie.nom|capitalize }}</th>
+                <th scope="row"><a href="{{ path('sortie_details', {'id': sortie.id}) }}">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
@@ -34,7 +34,7 @@
                 </td>
                 <td>
                     {# TODO penser à mettre le lien dans le href #}
-                    <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.prenom }}</a>
+{#                    <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.prenom }}</a>#}
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
