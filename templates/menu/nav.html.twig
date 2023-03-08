@@ -1,7 +1,7 @@
 <nav>
     <ul>
         {#  {% if app.user %}  #}
-        <li><a href="{{ path('sortie_list') }}">Home</a></li>
+        <li><a href="{{ path('main_home') }}">Home</a></li>
 
 
         {#
@@ -11,19 +11,16 @@
         {% endif %}
         #}
             <li><a href="{{ path('sortie_new') }}">Ajouter une sortie</a></li>
-        <li><a href="{{ path('app_user_index') }}">Mon profil</a></li>
-           {# <li><a href="#">Logout ({{ app.user.firstname }})</a></li> #}
-        {# {% else %} #}
+            <li><a href="#">  </a></li>
+
+
             <!-- Lien de connexion pour un utilisateur non connecté -->
-            <li><a href="{{ path('app_ville_index') }}">Login</a></li>
+            <li><a href="{{ path('app_login') }}">Login</a></li>
+        {% if app.user %}
+        <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a></li>
+            <li><a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a></li>
 
-      {#  {% endif %} #}
-
-
-
-        <li><a href="{{ path('app_ville_index') }}">Ville</a></li>
-        <li><a href="{{ path('app_lieu_index') }}">Lieu</a></li>
-        <li><a href="{{ path('app_etat_index') }}">Etat</a></li>
+        {% endif %}
 
     </ul>
 </nav>
