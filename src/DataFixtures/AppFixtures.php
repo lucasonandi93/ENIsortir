@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Campus;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Entity\Ville;
@@ -34,36 +35,47 @@ class AppFixtures extends Fixture
         $this->registry = $registry;
     }
 
-    public function load(ObjectManager $manager): void
+    public function addCampus(ObjectManager $manager)
     {
-        $this->addUsers(50);
+        $campusNames = ['Rennes', 'Quimper', 'Niort', 'Nantes'];
+
+        foreach ($campusNames as $name) {
+            $campus = new Campus();
+            $campus->setNom($name);
+
+            $manager->persist($campus);
+        }
+
+        $manager->flush();
     }
 
-
-    private function addUsers(int $number)
+    public function addUser (ObjectManager $manager)
     {
-        $campusrepo = new CampusRepository($this->registry);
-        $campus = $campusrepo->findAll();
+        $campuses = $manager->getRepository(Campus::class)->findAll();
+        $defaultCampus = $this->registry->getRepository(Campus::class)->find(rand(1, 4));
 
-        for ($i = 0; $i < $number; $i++){
-
+        for ($i = 0; $i < 50; $i++) {
             $user = new User();
-
             $user
                 ->setNom(implode(" ", $this->faker->words(3)))
                 ->setPrenom(implode(" ", $this->faker->words(3)))
                 ->setEmail($this->faker->email)
                 ->setTelephone($this->faker->phoneNumber)
-                ->setUsername($this->faker->userName)
-                ->setCampus($this->faker->randomElement($campus));
+                ->setUsername($this->faker->userName);
+
+            $campus = !empty($campuses) ? $this->faker->randomElement($campuses) : $defaultCampus;
+
+
+
+            $user->setCampus($campus);
 
             $password = $this->passwordHasher->hashPassword($user, '123');
             $user->setPassword($password);
 
-            $this->entityManager->persist($user);
+            $manager->persist($user);
         }
 
-        $this->entityManager->flush();
+        $manager->flush();
 
     }
 
@@ -83,6 +95,7 @@ class AppFixtures extends Fixture
 
     }
 
+
     private function addSortie(int $number)
     {
         $etatrepo = new EtatRepository($this->registry);
@@ -100,17 +113,10 @@ class AppFixtures extends Fixture
                 ->setInfosSortie(implode(" ",$this->faker->text(40)))
                 ->setDuree($this->faker->numberBetween(30, 240))
                 ->setDateHeureDebut($this->faker->dateTime);
-                $date = clone  $sortie->getDateHeureDebut();
-                $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
+            $date = clone  $sortie->getDateHeureDebut();
+            $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
                 ->setNbInscriptionMax($this->faker->numberBetween(10, 50))
                 ->setLieu($this->faker->)
-
-
-
-
-
-
-
 
 
         }
@@ -120,6 +126,9 @@ class AppFixtures extends Fixture
 
 
 
-
-
+    public function load(ObjectManager $manager): void
+    {
+        $this->addCampus($manager);
+        $this->addUser($manager);
+    }
 }
