@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Campus;
 use App\Entity\User;
 use App\Repository\CampusRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,15 +15,16 @@ use Faker\Generator;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
-{ private EntityManagerInterface $entityManager;
+{
+    private EntityManagerInterface $entityManager;
     private UserPasswordHasherInterface $passwordHasher;
     private Generator $faker;
     private ManagerRegistry $registry;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
+        EntityManagerInterface      $entityManager,
         UserPasswordHasherInterface $passwordHasher,
-    ManagerRegistry $registry)
+        ManagerRegistry             $registry)
     {
         $this->entityManager = $entityManager;
         $this->passwordHasher = $passwordHasher;
@@ -30,36 +32,58 @@ class AppFixtures extends Fixture
         $this->registry = $registry;
     }
 
-    public function load(ObjectManager $manager): void
+    public function addCampus(ObjectManager $manager)
     {
-        $this->addUsers(50);
+        $campusNames = ['Rennes', 'Quimper', 'Niort', 'Nantes'];
+
+        foreach ($campusNames as $name) {
+            $campus = new Campus();
+            $campus->setNom($name);
+
+            $manager->persist($campus);
+        }
+
+        $manager->flush();
     }
 
-
-    private function addUsers(int $number)
+    public function addUser (ObjectManager $manager)
     {
-        $campusrepo = new CampusRepository($this->registry);
-        $campus = $campusrepo->findAll();
+        $campuses = $manager->getRepository(Campus::class)->findAll();
+        $defaultCampus = $this->registry->getRepository(Campus::class)->find(rand(1, 4));
 
-        for ($i = 0; $i < $number; $i++){
-
+        for ($i = 0; $i < 50; $i++) {
             $user = new User();
-
             $user
                 ->setNom(implode(" ", $this->faker->words(3)))
                 ->setPrenom(implode(" ", $this->faker->words(3)))
                 ->setEmail($this->faker->email)
                 ->setTelephone($this->faker->phoneNumber)
-                ->setUsername($this->faker->userName)
-                ->setCampus($this->faker->randomElement($campus));
+                ->setUsername($this->faker->userName);
+
+            $campus = !empty($campuses) ? $this->faker->randomElement($campuses) : $defaultCampus;
+
+
+
+            $user->setCampus($campus);
 
             $password = $this->passwordHasher->hashPassword($user, '123');
             $user->setPassword($password);
 
-            $this->entityManager->persist($user);
+            $manager->persist($user);
         }
 
-        $this->entityManager->flush();
+        $manager->flush();
 
     }
+
+
+
+
+    public function load(ObjectManager $manager): void
+    {
+        $this->addCampus($manager);
+        $this->addUser($manager);
+    }
 }
+
+
