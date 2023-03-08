@@ -23,6 +23,7 @@ class SortieController extends AbstractController
     #[Route('/list', name: 'list')]
     public function list(SortieRepository $sortieRepository, Request $request): Response
     {
+
         $filterForm = $this->createForm(FiltreType::class, null, ['csrf_protection' => false]);
         $filterForm->handleRequest($request);
 
