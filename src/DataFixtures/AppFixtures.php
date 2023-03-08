@@ -112,7 +112,10 @@ class AppFixtures extends Fixture
                 ->setNom(implode(" ", $this->faker->words(2)))
                 ->setRue(implode(" ", $this->faker->words(4)))
                 ->setVille($ville);
+            $this->entityManager->persist($lieu);
         }
+
+        $this->entityManager->flush();
     }
 
 
@@ -148,7 +151,8 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $this->addVille(4);
+        /*$this->addVille(4);*/
+        $this->addLieu(10);
         $this->addCampus($manager);
         $this->addUser(50);
     }
