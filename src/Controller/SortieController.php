@@ -35,8 +35,9 @@ class SortieController extends AbstractController
             'sorties' => $sorties,
              'filterForm' => $filterForm->createView(),
         ]);
-    }
 
+
+    }
     #[Route('/new', name: 'new')]
     public function new(Request $request, SortieRepository $sortieRepository): Response
     {
@@ -57,14 +58,15 @@ class SortieController extends AbstractController
             'sortieForm' => $sortieForm->createView()
         ]);
     }
-
-    #[Route('/{id}', name: 'details')]
+        #[Route('/{id}', name: 'details')]
     public function details(Sortie $sortie): Response
     {
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);
     }
+
+
 
 
 
