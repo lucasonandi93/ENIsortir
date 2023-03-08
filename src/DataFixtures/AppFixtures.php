@@ -2,8 +2,12 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Sortie;
 use App\Entity\User;
+use App\Entity\Ville;
 use App\Repository\CampusRepository;
+use App\Repository\EtatRepository;
+use App\Repository\LieuRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -62,4 +66,60 @@ class AppFixtures extends Fixture
         $this->entityManager->flush();
 
     }
+
+    private function addVille(int $number)
+    {
+        for ($i = 0; $i < $number; $i++){
+            $ville = new Ville();
+
+            $ville
+                ->setNom(implode(" ", $this->faker->words(1)))
+                ->setCodePostal($this->faker->numberBetween(10000, 40000));
+
+            $this->entityManager->persist($ville);
+        }
+
+        $this->entityManager->flush();
+
+    }
+
+    private function addSortie(int $number)
+    {
+        $etatrepo = new EtatRepository($this->registry);
+        $etat = $etatrepo->findAll();
+
+        $lieurepo = new LieuRepository($this->registry);
+        $lieu = $lieurepo->findAll();
+
+        for ($i = 0; $i < $number; $i++){
+
+            $sortie = new Sortie();
+
+            $sortie
+                ->setNom(implode(" ", $this->faker->words(3)))
+                ->setInfosSortie(implode(" ",$this->faker->text(40)))
+                ->setDuree($this->faker->numberBetween(30, 240))
+                ->setDateHeureDebut($this->faker->dateTime);
+                $date = clone  $sortie->getDateHeureDebut();
+                $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
+                ->setNbInscriptionMax($this->faker->numberBetween(10, 50))
+                ->setLieu($this->faker->)
+
+
+
+
+
+
+
+
+
+        }
+
+
+    }
+
+
+
+
+
 }
