@@ -23,7 +23,7 @@ security:
             logout:
                 path: app_logout
                 # where to redirect after logout
-                target: sortie_list
+                target: app_login
             remember_me:
                 secret: '%kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds
