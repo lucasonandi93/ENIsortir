@@ -1,10 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block content %}
+    {% include 'nav.html.twig' %}
+{% endblock %}
+
 {% block title %}
     {{ parent() }} | Créer une sortie
 {% endblock %}
 
 {% block body %}
+
     <h2>Créer une sortie</h2>
     {{ form_start(sortieForm) }}
 

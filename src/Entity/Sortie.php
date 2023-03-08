@@ -39,7 +39,7 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    #[ORM\ManyToOne(targetEntity: Campus::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
@@ -176,6 +176,13 @@ class Sortie
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function setEtat(Etat $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
