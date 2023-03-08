@@ -39,7 +39,7 @@ class Sortie
     #[ORM\JoinColumn(nullable: false)]
     private ?Lieu $lieu = null;
 
-    #[ORM\ManyToOne(inversedBy: 'sortie')]
+    #[ORM\ManyToOne(targetEntity: Campus::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 

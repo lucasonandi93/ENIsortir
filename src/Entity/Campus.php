@@ -21,9 +21,6 @@ class Campus
     #[ORM\OneToMany(mappedBy: 'campus', targetEntity: User::class)]
     private Collection $users;
 
-
-
-
     public function __construct()
     {
         $this->campus = new ArrayCollection();
