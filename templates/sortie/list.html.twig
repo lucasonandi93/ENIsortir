@@ -27,7 +27,7 @@
             <tr>
                 <th scope="row"><a href="{{ path('sortie_details', {'id': sortie.id}) }}">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
-                <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
+                <td>{{ sortie.dateLimiteInscription|date('d/m/y H:i') }}</td>
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>
@@ -36,7 +36,7 @@
                     {% endif %}
                 </td>
                 <td>
-{#                 <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>}#}
+{#                <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>}}#}
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}

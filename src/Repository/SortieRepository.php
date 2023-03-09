@@ -43,7 +43,7 @@ class SortieRepository extends ServiceEntityRepository
 
     public function findFiltered(ModeleFiltres $filters)
     {
-        $qb = $this->createQueryBuilder('s');
+        $qb = $this->createQueryBuilder('s');;
 
         if ($filters->getCampus()) {
             $qb->andWhere('s.campus = :campus')
@@ -66,7 +66,7 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if ($filters->getSortieOrganisateur()) {
-            $qb->join('s.users', 'o')
+            $qb->join('s.user', 'o')
                 ->andWhere('o.id = :user')
                 ->setParameter('user', $filters->getSortieOrganisateur());
         }
