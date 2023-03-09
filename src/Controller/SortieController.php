@@ -75,7 +75,6 @@ class SortieController extends AbstractController
         ]);
     }
 
-
     #[Route('/{id}', name: 'details')]
     public function show(int $id, SortieRepository $sortieRepository): Response
     {
@@ -84,7 +83,7 @@ class SortieController extends AbstractController
 
         if (!$sortie) {
             //lance une erreur 404 si la série n'existe pas
-            throw $this->createNotFoundException("Oops ! Serie not found !");
+            throw $this->createNotFoundException("Oops ! Sortie not found !");
         }
 
         return $this->render('sortie/details.html.twig', [
