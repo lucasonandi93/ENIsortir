@@ -1,3 +1,8 @@
+<head>
+    <title>Barre de navigation</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/styleNav.css') }}">
+</head>
+
 <nav>
     <ul>
         {#  {% if app.user %}  #}
@@ -15,14 +20,16 @@
 
 
             <!-- Lien de connexion pour un utilisateur non connecté -->
-            <li><a href="{{ path('app_login') }}">Login</a></li>
+
         {% if app.user %}
-        <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a></li>
-        <li><a href="{{ path('sortie_listByUser') }}">Mes Sorties Organisées </a></li>
 
+{#        <li><a href="{{ path('sortie_listByUser') }}">Mes Sorties Organisées </a></li>#}
+            <li><a href="{{ path('app_lieu_new') }}">Ajouter un lieu</a></li>
         <li><a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a></li>
-        <li><a href="{{ path('app_lieu_new') }}">Ajouter un lieu</a></li>
 
+        <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a></li>
+        {% else %}
+            <li><a href="{{ path('app_login') }}">Login</a></li>
         {% endif %}
 
     </ul>

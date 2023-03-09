@@ -1,6 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleProfile.css') }}">
+{% endblock %}
+
 {% block body %}
+    <div class="container">
 <h1>profile N° {{ user.id }}</h1>
     <div>
         {% if user.photo is not null %}
@@ -14,7 +19,7 @@
         <p>Email: {{ user.email }}</p>
         <p>Campus: {{ user.campus.nom }}</p>
     </div>
-
+    </div>
     <a href="{{ path('profile_list') }}"><button>return</button></a>
     {% if app.user == user %}
         <a href="{{ path('profile_update', {'id': app.user.id}) }}">Modifier mon profil</a><br>
