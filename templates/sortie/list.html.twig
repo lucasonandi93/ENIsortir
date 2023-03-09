@@ -2,9 +2,10 @@
 
 {% block body %}
     <h2>Filtrer les sorties</h2>
+
+
     {# TODO faire les filtres de recherche #}
-
-
+    
 
     <table class="table table-striped table-hover">
         <thead>
@@ -42,7 +43,8 @@
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
                     {% if app.user in sortie.users %}
-                        - <a href="">Se désister</a>
+                        - <a href="{{ path('sortie_inscrire', {'id': sortie.id }) }}">Se désister</a>
+
                     {% else %}
                         - <a href="">S'inscrire</a>
                     {% endif %}
