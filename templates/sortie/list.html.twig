@@ -46,15 +46,11 @@
                     {% else %}
                         - <a href="">S'inscrire</a>
                     {% endif %}
-                    {% if app.user == sortie.user %}
-                        {% if sortie.etat == 'Créée' %}
-                            <a href="">Modifier</a>
-                            - <a href="">Publier</a>
-                        {% endif %}
+
                         {% if ( sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Cloturée') %}
                             - <a href="">Annuler</a>
                         {% endif %}
-                    {% endif %}
+
                 </td>
             </tr>
         {% endfor %}

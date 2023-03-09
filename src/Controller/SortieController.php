@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\EtatRepository;
 use App\Entity\Etat;
 use App\Entity\Sortie;
@@ -9,6 +10,7 @@ use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +33,15 @@ class SortieController extends AbstractController
         $sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
             'sorties' => $sortie
+        ]);
+    }
+    #[Route('/listByUser', name: 'listByUser')]
+    public function listByUser(SortieRepository $sortieRepository)
+    {
+        $sorties = $sortieRepository->findBy(['user' => $this->getUser()]);
+
+        return $this->render('user_sorties.html.twig', [
+            'sorties' => $sorties,
         ]);
     }
 
@@ -88,4 +99,32 @@ class SortieController extends AbstractController
             'sortie' => $sortie
         ]);
     }
+
+
+
+
+    #[Route('edit/{id}', name: 'edit')]
+    public function edit(Request $request, int $id, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sortieRepository->save($sortie, true);
+            $this->addFlash('success', 'Sortie modifiée avec succès.');
+
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        }
+
+        return $this->render('sortie/edit.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
 }
