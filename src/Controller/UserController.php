@@ -5,12 +5,16 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Utils\Uploader;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 #[Route('/profile', name: 'profile_')]
@@ -42,7 +46,7 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_register', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/new.html.twig', [
@@ -52,7 +56,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', requirements: ['id' => '\d+'])]
-    public function profileshow(int $id,UserRepository $userRepository): Response
+    public function show(int $id,UserRepository $userRepository): Response
     {
 
         $user = $userRepository->find($id);
@@ -61,13 +65,13 @@ class UserController extends AbstractController
             throw $this->createNotFoundException("Oops ! user not found !");
         }
 
-        return $this->render('profile/show.html.twig', [
+        return $this->render('user/show.html.twig', [
             'user' => $user
         ]);
     }
 
  #[Route('/edit/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function edit(SluggerInterface $slugger,Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader): Response
  {
      $form = $this->createForm(UserType::class, $user);
      $form->handleRequest($request);
@@ -78,10 +82,33 @@ class UserController extends AbstractController
                  $userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData())
              );
          }
+
+         /**
+          * @var UploadedFile $file
+          */
+         $file = $form->get('photo')->getData();
+         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+         $safeFileName = $slugger->slug($originalFileName);
+         $newFileName = $safeFileName.'-'.uniqid().'.'.$file->guessExtension();
+         try {
+             $file->move(
+                 $this->getParameter('upload_photo'),
+                 $newFileName
+             );
+         } catch (FileException $e){
+
+         }
+         $user->setPhoto($newFileName);
+//            $newFileName = $uploader->upload(
+//                $file,
+//                $this->getParameter('upload_photo'),
+//                $user->getNom()
+//            );
+            $user->setPhoto($newFileName);
+
              $userRepository->save($user, true);
 
              return $this->redirectToRoute('profile_list', [], Response::HTTP_SEE_OTHER);
-
      }
      return $this->renderForm('profile/edit.html.twig', [
          'user' => $user,

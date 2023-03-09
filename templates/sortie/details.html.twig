@@ -5,6 +5,29 @@
 {% endblock %}
 
 {% block body %}
+<h1>Afficher une sortie</h1>
+<div class="serie-details-infos">
+
+    <div>
+        <p>Nom de la sortie : {{ sortie.nom }}</p>
+        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date('Y-m-d') }}</p>
+        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | date('Y-m-d') }}</p>
+        <p>Nombre de places : {{ sortie.nbInscriptionMax }}</p>
+        <p>Durée : {{ sortie.duree }} minutes</p>
+        <p>Description et infos : {{ sortie.infosSortie }}</p>
+    </div>
+    <div>
+        <p>Campus : {{ sortie.campus.nom }}</p>
+        <p>Lieu: {{ sortie.lieu.nom }} , {{ sortie.lieu.ville.nom }}</p>
+        <p>Rue : {{ sortie.lieu.rue }}</p>
+        <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
+        <p>Latitude : {{ sortie.lieu.latitude }}</p>
+        <p>Longitude : {{ sortie.lieu.longitude }}</p>
+    </div>
+    <div>
+        <h2>Liste des participants inscripts : </h2>
+    </div>
+</div>
 
 {% endblock %}
 
