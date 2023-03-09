@@ -32,7 +32,7 @@
             <tr>
                 <th scope="row"><a href="{{ path('sortie_details', {'id': sortie.id}) }}">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
-                <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
+                <td>{{ sortie.dateLimiteInscription|date('d/m/y H:i') }}</td>
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>
@@ -41,11 +41,11 @@
                     {% endif %}
                 </td>
                 <td>
-{#                 <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>}#}
+    <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
-                    {% if (sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Cloturée') %}
+                    {% if (sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
                     {% if app.user in sortie.users %}
@@ -58,7 +58,7 @@
                             <a href="">Modifier</a>
                             - <a href="">Publier</a>
                         {% endif %}
-                        {% if ( sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Cloturée') %}
+                        {% if ( sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
                             - <a href="">Annuler</a>
                         {% endif %}
                     {% endif %}
