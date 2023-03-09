@@ -28,11 +28,31 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function profile(SortieRepository $sortieRepository): Response
+    public function profile(SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
     {
-        $sortie = $sortieRepository->findAll();
+        // Mettre à jour les sorties qui datent de plus de 1 mois
+
+        $date = new \DateTime();
+        $date->sub(new \DateInterval('P1M')); // soustraire 1 mois
+
+        $sorties = $sortieRepository->findOldSorties($date);
+        foreach ($sorties as $sortie) {
+            $etatHistorise = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Historisée']);
+            if (!$etatHistorise) {
+                $etatHistorise = new Etat();
+                $etatHistorise->setLibelle('Historisée');
+                $entityManager->persist($etatHistorise);
+            }
+
+            $sortie->setEtat($etatHistorise);
+            $entityManager->flush();
+        }
+
+        // Récupérer toutes les sorties
+        $sorties = $sortieRepository->findAll();
+
         return $this->render('sortie/list.html.twig', [
-            'sorties' => $sortie
+            'sorties' => $sorties,
         ]);
     }
     #[Route('/listByUser', name: 'listByUser')]
