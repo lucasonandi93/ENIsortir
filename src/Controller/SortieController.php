@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\modele\ModeleFiltres;
 use App\Repository\EtatRepository;
 use App\Entity\Etat;
 use App\Entity\Sortie;
@@ -26,11 +27,17 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function profile(SortieRepository $sortieRepository): Response
+    public function profile(SortieRepository $sortieRepository, Request $request): Response
     {
-        $sortie = $sortieRepository->findAll();
+        $filtres = new ModeleFiltres();
+        $filtreForm = $this->createForm(FiltreType::class, $filtres);
+        $filtreForm->handleRequest($request);
+
+        $sortieFiltre = $sortieRepository->findFiltered($filtres);
+
+        //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
-            'sorties' => $sortie
+           'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
         ]);
     }
 

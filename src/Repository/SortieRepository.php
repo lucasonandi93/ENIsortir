@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Sortie;
+use App\Form\FiltreType;
+use App\Form\modele\ModeleFiltres;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,49 +41,49 @@ class SortieRepository extends ServiceEntityRepository
         }
     }
 
-    public function findFiltered(array $filters)
+    public function findFiltered(ModeleFiltres $filters)
     {
         $qb = $this->createQueryBuilder('s');
 
-        if (isset($filters['campus'])) {
+        if ($filters->getCampus()) {
             $qb->andWhere('s.campus = :campus')
-                ->setParameter('campus', $filters['campus']);
+                ->setParameter('campus',$filters->getCampus());
         }
 
-        if (isset($filters['nom'])) {
+        if ($filters->getNom()) {
             $qb->andWhere('s.nom LIKE :nom')
-                ->setParameter('nom', '%' . $filters['nom'] . '%');
+                ->setParameter('nom', '%' . $filters->getNom() . '%');
         }
 
-        if (isset($filters['dateDebut'])) {
+        if ($filters->getDateSortie()) {
             $qb->andWhere('s.dateHeureDebut >= :dateDebut')
-                ->setParameter('dateDebut', $filters['dateDebut']);
+                ->setParameter('dateDebut', $filters->getDateSortie());
         }
 
-        if (isset($filters['dateFin'])) {
+        if ($filters->getDateCloture()) {
             $qb->andWhere('s.dateHeureDebut <= :dateFin')
-                ->setParameter('dateFin', $filters['dateFin']);
+                ->setParameter('dateFin', $filters->getDateCloture());
         }
 
-        if (isset($filters['organisateur'])) {
-            $qb->join('s.organisateur', 'o')
-                ->andWhere('o.id = :organisateur')
-                ->setParameter('organisateur', $filters['organisateur']);
+        if ($filters->getSortieOrganisateur()) {
+            $qb->join('s.users', 'o')
+                ->andWhere('o.id = :user')
+                ->setParameter('user', $filters->getSortieOrganisateur());
         }
 
-        if (isset($filters['inscrit'])) {
+        if ($filters->getSortieInscrit()) {
             $qb->leftJoin('s.users', 'p')
                 ->andWhere('p.id = :inscrit')
-                ->setParameter('inscrit', $filters['inscrit']);
+                ->setParameter('inscrit', $filters->getSortieInscrit());
         }
 
-        if (isset($filters['nonInscrit'])) {
+        if ($filters->getSortiePasInscrit()) {
             $qb->leftJoin('s.users', 'p')
                 ->andWhere('p.id != :nonInscrit OR p.id IS NULL')
-                ->setParameter('nonInscrit', $filters['nonInscrit']);
+                ->setParameter('nonInscrit', $filters->getSortiePasInscrit());
         }
 
-        if (isset($filters['passee'])) {
+        if ($filters->getSortiePasses()) {
             $qb->join('s.etat', 'e')
                 ->andWhere('e.libelle = :libelleEtat')
                 ->setParameter('libelleEtat', 'Passée');
