@@ -11,7 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\File;
+
 
 class UserType extends AbstractType
 {
@@ -31,26 +32,21 @@ class UserType extends AbstractType
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirmation'],
             ])
-            ->add('campus', EntityType::class,[
+            ->add('campus', EntityType::class, [
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'label' => 'Associated Campus'
             ])
             ->add('photo', FileType::class, [
-                'required' => false,
+                'label' => 'Photo',
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
-                    new Image([
-                            "maxSize" => '5000k',
-                            "mimeTypesMessage" => "Image format not allowed !",
-
-                        ]
-                    )
+                    new File ([
+                        'maxSize' => '5000k',
+                    ])
                 ]
-            ])
-
-
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
