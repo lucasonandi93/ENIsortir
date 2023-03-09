@@ -35,6 +35,7 @@ class SortieController extends AbstractController
 
         $sortieFiltre = $sortieRepository->findFiltered($filtres);
 
+//        dd($sortieFiltre);
         //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
            'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
