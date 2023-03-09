@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<h1>Afficher une sortie</h1>
+<h1>detail de la sortie</h1>
 <div class="serie-details-infos">
 
     <div>
@@ -24,6 +24,13 @@
         <p>Latitude : {{ sortie.lieu.latitude }}</p>
         <p>Longitude : {{ sortie.lieu.longitude }}</p>
     </div>
+
+    {% if app.user == sortie.user %}
+        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+        {#TODO publier#}
+        - <a href="">Publier</a>
+    {% endif %}
+
     <div>
         <h2>Liste des participants inscripts : </h2>
     </div>
