@@ -2,7 +2,10 @@
 
 {% block body %}
     <h2>Filtrer les sorties</h2>
-    {# TODO faire les filtres de recherche #}
+   {{ form_start(filtre) }}
+    {{ form_widget(filtre) }}
+    <button>Submit</button>
+    {{ form_end(filtre) }}
 
 
 
@@ -20,9 +23,9 @@
         </tr>
         </thead>
         <tbody>
-        {% for sortie in sorties %}
+        {% for sortie in sortieFiltre %}
             <tr>
-                <th scope="row">{{ sortie.nom|capitalize }}</th>
+                <th scope="row"><a href="{{ path('sortie_details', {'id': sortie.id}) }}">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription|date('d/m/Y') }}</td>
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
@@ -33,8 +36,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {# TODO penser à mettre le lien dans le href #}
-                    <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.prenom }}</a>
+{#                 <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>}#}
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
