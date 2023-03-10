@@ -3,11 +3,14 @@
 {% block title %}
     {{ parent() }} | Créer une sortie
 {% endblock %}
-
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
+{% endblock %}
 {% block body %}
 
+<div class="container">
     <h2>Créer une sortie</h2>
-    {{ form_start(sortieForm) }}
+    {{ form_start(sortieForm, { 'attr': {'class': 'container'} }) }}
 
     {{ form_row(sortieForm.nom) }}
     {{ form_row(sortieForm.dateHeureDebut) }}
@@ -20,9 +23,11 @@
     {{ form_row(sortieForm.inscriptionAuto) }}
 
     <button name="enregistrer">Enregistrer</button>
+    <br>
     <button name="publier">Publier</button>
 
     {{ form_end(sortieForm) }}
     <a href="{{ path('main_home') }}"><button>Annuler</button></a>
+</div>
 {% endblock %}
 
