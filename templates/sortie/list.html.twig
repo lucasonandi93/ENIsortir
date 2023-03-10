@@ -45,20 +45,21 @@
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
-                    {% if (sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
+                    {% if not (sortie.etat.libelle == 'Créée') %}
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
-                    {% if (app.user in sortie.users) and (sortie.etat.libelle == 'Ouvert')%}
-                        - <a href="{{ path('sortie_desinscription', {'id': sortie.id}) }}">Se désister</a>
-                    {% elseif (sortie.etat.libelle == 'Ouvert') %}
+                    {% if (sortie.etat.libelle == 'Ouverte') and  not (app.user in sortie.users) %}
                         - <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
+                    {% endif %}
+                    {% if (app.user in sortie.users) %}
+                        - <a href="{{ path('sortie_desinscription', {'id': sortie.id}) }}">Se désister</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
                         {% if sortie.etat.libelle == 'Créée' %}
                             <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
                             - <a href="">Publier</a>
                         {% endif %}
-                        {% if ( sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
+                        {% if ( sortie.etat.libelle == 'Ouverte') or (sortie.etat.libelle == 'Clôturée') %}
                             - <a href="">Annuler</a>
                         {% endif %}
                     {% endif %}
