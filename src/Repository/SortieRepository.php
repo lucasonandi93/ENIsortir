@@ -32,6 +32,20 @@ class SortieRepository extends ServiceEntityRepository
         }
     }
 
+
+    // Fonction qui permet de set ma bdd avec la date m+1
+    public function findOldSorties(\DateTime $date): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->where('s.dateLimiteInscription < :date')
+            ->andWhere('s.etat != :etat')
+            ->setParameter('date', $date)
+            ->setParameter('etat', 'Historisée')
+            ->getQuery();
+
+        return $qb->getResult();
+    }
+
     public function remove(Sortie $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
@@ -44,9 +58,8 @@ class SortieRepository extends ServiceEntityRepository
     public function findFiltered(ModeleFiltres $filters)
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->join('s.user', 'o')
+        $qb->Join('s.user', 'o')
             ->addSelect('o');
-
 
 
         if ($filters->getCampus()) {
