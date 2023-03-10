@@ -86,25 +86,28 @@ class UserController extends AbstractController
          /**
           * @var UploadedFile $file
           */
-         $file = $form->get('photo')->getData();
-         $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-         $safeFileName = $slugger->slug($originalFileName);
-         $newFileName = $safeFileName.'-'.uniqid().'.'.$file->guessExtension();
-         try {
-             $file->move(
-                 $this->getParameter('upload_photo'),
-                 $newFileName
-             );
-         } catch (FileException $e){
 
-         }
-         $user->setPhoto($newFileName);
+             $file = $form->get('photo')->getData();
+         if ($file) {
+             $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+             $safeFileName = $slugger->slug($originalFileName);
+             $newFileName = $safeFileName . '-' . uniqid() . '.' . $file->guessExtension();
+             try {
+                 $file->move(
+                     $this->getParameter('upload_photo'),
+                     $newFileName
+                 );
+             } catch (FileException $e) {
+
+             }
+             $user->setPhoto($newFileName);
 //            $newFileName = $uploader->upload(
 //                $file,
 //                $this->getParameter('upload_photo'),
 //                $user->getNom()
 //            );
-            $user->setPhoto($newFileName);
+             $user->setPhoto($newFileName);
+         }
 
              $userRepository->save($user, true);
 
