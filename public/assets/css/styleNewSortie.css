@@ -1,99 +1,99 @@
-/* Container */
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
+/*!* Container *!*/
+/*.container {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
-/* Form */
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 600px;
-    width: 100%;
-    padding: 20px;
-    background-color: #F4F4F4;
-    box-shadow: 0 4px 6px rgba(0,0,0,.1);
-    border-radius: 8px;
-    margin-top: 50px;
-}
+/*!* Form *!*/
+/*form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*    max-width: 600px;*/
+/*    width: 100%;*/
+/*    padding: 20px;*/
+/*    background-color: #F4F4F4;*/
+/*    box-shadow: 0 4px 6px rgba(0,0,0,.1);*/
+/*    border-radius: 8px;*/
+/*    margin-top: 50px;*/
+/*}*/
 
-form input[type="text"],
-form input[type="datetime-local"],
-form input[type="number"],
-form textarea {
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
+/*form input[type="text"],*/
+/*form input[type="datetime-local"],*/
+/*form input[type="number"],*/
+/*form textarea {*/
+/*    padding: 10px;*/
+/*    margin-bottom: 20px;*/
+/*    width: 100%;*/
+/*    border: 2px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    font-size: 16px;*/
+/*}*/
 
-form select {
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5L0 1h4l-2 4z' fill='%2396A1AF'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 10px auto;
-}
+/*form select {*/
+/*    padding: 10px;*/
+/*    margin-bottom: 20px;*/
+/*    width: 100%;*/
+/*    border: 2px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    font-size: 16px;*/
+/*    appearance: none;*/
+/*    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5L0 1h4l-2 4z' fill='%2396A1AF'/%3E%3C/svg%3E");*/
+/*    background-repeat: no-repeat;*/
+/*    background-position: right 10px top 50%;*/
+/*    background-size: 10px auto;*/
+/*}*/
 
-form input[type="checkbox"] {
-    margin: 10px 0 20px;
-}
+/*form input[type="checkbox"] {*/
+/*    margin: 10px 0 20px;*/
+/*}*/
 
-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
+/*form button {*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    background-color: #5DA5A4;*/
+/*    color: #fff;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.2s ease;*/
+/*}*/
 
-form button:hover {
-    background-color: #4c8f8e;
-}
+/*form button:hover {*/
+/*    background-color: #4c8f8e;*/
+/*}*/
 
-a button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ccc;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
+/*a button {*/
+/*    margin-top: 10px;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 4px;*/
+/*    background-color: #ccc;*/
+/*    color: #fff;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.2s ease;*/
+/*}*/
 
-a button:hover {
-    background-color: #b3b3b3;
-}
+/*a button:hover {*/
+/*    background-color: #b3b3b3;*/
+/*}*/
 
-@media screen and (max-width: 600px) {
-    form input[type="text"],
-    form input[type="datetime-local"],
-    form input[type="number"],
-    form textarea {
-        font-size: 14px;
-    }
+/*@media screen and (max-width: 600px) {*/
+/*    form input[type="text"],*/
+/*    form input[type="datetime-local"],*/
+/*    form input[type="number"],*/
+/*    form textarea {*/
+/*        font-size: 14px;*/
+/*    }*/
 
-    form button {
-        font-size: 14px;
-    }
+/*    form button {*/
+/*        font-size: 14px;*/
+/*    }*/
 
-    a button {
-        font-size: 14px;
-    }
-}
+/*    a button {*/
+/*        font-size: 14px;*/
+/*    }*/
+/*}*/
