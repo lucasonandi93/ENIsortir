@@ -46,7 +46,7 @@
                     {% if app.user in sortie.users %}
                         - <a href="">Se désister</a>
                     {% else %}
-                        - <a href="">S'inscrire</a>
+                        - <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
                         {% if sortie.etat == 'Créée' %}

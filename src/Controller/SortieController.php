@@ -35,15 +35,7 @@ class SortieController extends AbstractController
             'sorties' => $sortie
         ]);
     }
-    #[Route('/listByUser', name: 'listByUser')]
-    public function listByUser(SortieRepository $sortieRepository)
-    {
-        $sorties = $sortieRepository->findBy(['user' => $this->getUser()]);
 
-        return $this->render('user_sorties.html.twig', [
-            'sorties' => $sorties,
-        ]);
-    }
 
     #[Route('/new', name: 'new')]
     public function new(Request $request, SortieRepository $sortieRepository): Response
@@ -125,6 +117,40 @@ class SortieController extends AbstractController
         ]);
     }
 
+    #[Route('/inscription{id}', name: 'inscription')]
+    public function inscriptionSortie(int $id, SortieRepository $sortieRepository): Response
+    {
 
+        // Récupération de la sortie
+        $sortie = $sortieRepository->find($id);
+
+        // Récupération de l'utilisateur
+        $user = $this->getUser();
+
+        // Inscription de l'utilisateur
+        $sortie->addUser($user);
+
+
+        $sortieRepository->save($sortie);
+
+        // Retour de la réponse
+        return new Response('Utilisateur inscrit à la sortie.');
+    }
+
+    public function desinscriptionSortie(int $id, SortieRepository $sortieRepository): Response
+    {
+        // Récupération de la sortie
+        $sortie = $sortieRepository->find($id);
+
+        // Récupération de l'utilisateur
+        $user = $this->getUser();
+
+        // Désinscription de l'utilisateur
+        $sortie->removeUser($user);
+        $sortieRepository->save($sortie);
+
+        // Retour de la réponse
+        return new Response('Utilisateur désinscrit de la sortie.');
+    }
 
 }
