@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\modele\ModeleFiltres;
 use App\Repository\EtatRepository;
 use App\Entity\Etat;
 use App\Entity\Sortie;
@@ -28,7 +29,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function profile(SortieRepository $sortieRepository, EntityManagerInterface $entityManager): Response
+    public function profile(SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
     {
         // Mettre à jour les sorties qui datent de plus de 1 mois
 
@@ -36,6 +37,7 @@ class SortieController extends AbstractController
         $date->sub(new \DateInterval('P1M')); // soustraire 1 mois
 
         $sorties = $sortieRepository->findOldSorties($date);
+
         foreach ($sorties as $sortie) {
             $etatHistorise = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Historisée']);
             if (!$etatHistorise) {
@@ -48,22 +50,21 @@ class SortieController extends AbstractController
             $entityManager->flush();
         }
 
-        // Récupérer toutes les sorties
-        $sorties = $sortieRepository->findAll();
+        // Debut des filtes
 
+        $filtres = new ModeleFiltres();
+        $filtreForm = $this->createForm(FiltreType::class, $filtres);
+        $filtreForm->handleRequest($request);
+
+        $sortieFiltre = $sortieRepository->findFiltered($filtres);
+
+        //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
+            'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
             'sorties' => $sorties,
         ]);
     }
-    #[Route('/listByUser', name: 'listByUser')]
-    public function listByUser(SortieRepository $sortieRepository)
-    {
-        $sorties = $sortieRepository->findBy(['user' => $this->getUser()]);
 
-        return $this->render('user_sorties.html.twig', [
-            'sorties' => $sorties,
-        ]);
-    }
 
     #[Route('/new', name: 'new')]
     public function new(Request $request, SortieRepository $sortieRepository): Response

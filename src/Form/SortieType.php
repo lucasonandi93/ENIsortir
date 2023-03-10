@@ -43,9 +43,10 @@ class SortieType extends AbstractType
             ->add('duree', NumberType::class,[
                 'label'=> 'Durée de la sortie : '
             ])
-            ->add('dateLimiteInscription', DateType::class,[
+            ->add('dateLimiteInscription', DateTimeType::class,[
                 'label' => 'Date limite d\'inscription : ',
-                'widget'=> 'single_text',
+                'date_widget'=> 'single_text',
+                'time_widget'=> 'single_text',
                 'html5' => true
             ])
             ->add('nbInscriptionMax', NumberType::class,[
@@ -56,7 +57,8 @@ class SortieType extends AbstractType
             ])
             ->add('inscriptionAuto', CheckboxType::class, [
                 'label' => 'Voulez-vous vous inscrire à la sortie ? ',
-                'mapped'=> false
+                'mapped'=> false,
+                'required' => false
             ])
         ;
     }

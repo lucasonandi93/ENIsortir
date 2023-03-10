@@ -29,10 +29,16 @@
         <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
         {#TODO publier#}
         - <a href="">Publier</a>
+
     {% endif %}
 
     <div>
-        <h2>Liste des participants inscripts : </h2>
+        <h2>Liste des participants inscrits : </h2>
+        <ul>
+            {% for sub in sortie.users %}
+                <li><a href="{{ path('profile_show', {id: sub.id}) }}">{{ sub.prenom }} /{{ sub.nom }}</a> </li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 

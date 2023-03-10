@@ -65,7 +65,7 @@ class UserController extends AbstractController
             throw $this->createNotFoundException("Oops ! user not found !");
         }
 
-        return $this->render('user/show.html.twig', [
+        return $this->render('profile/show.html.twig', [
             'user' => $user
         ]);
     }

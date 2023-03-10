@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Campus;
+use App\Form\modele\ModeleFiltres;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -16,35 +17,43 @@ class FiltreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('site',EntityType::class,[
+            ->add('campus',EntityType::class,[
+                'required' => false,
                 'class'=> Campus::class,
                 'choice_label' => 'nom'
             ])
-            ->add('textSearch',SearchType::class,[
+            ->add('nom',SearchType::class,[
+                'required' => false,
                 'label'=> 'Le nom de la sortie contient : ',
                 'attr' => [ 'placeholder'=> 'Recherche'
                 ]
             ])
-            ->add('startDate', DateType::class,[
+            ->add('dateSortie', DateType::class,[
+                'required' => false,
                 'label'=> 'Entre le ',
                 'widget' => 'single_text',
                 'html5' => true
             ])
-            ->add('endDate', DateType::class,[
+            ->add('dateCloture', DateType::class,[
+                'required' => false,
                 'label'=> 'et le ',
                 'widget' => 'single_text',
                 'html5' => true
             ])
-            ->add('organizer', CheckboxType::class,[
+            ->add('sortieOrganisateur', CheckboxType::class,[
+                'required' => false,
                 'label' => 'Sorties dont je suis l\'organisateur.rice'
             ])
-            ->add('registered', CheckboxType::class,[
+            ->add('sortieInscrit', CheckboxType::class,[
+                'required' => false,
                 'label' => 'Sorties auxquelles je suis inscrit.e'
             ])
-            ->add('unregistered', CheckboxType::class,[
+            ->add('sortiePasInscrit', CheckboxType::class,[
+                'required' => false,
                 'label' => 'Sorties auxquelles je ne suis pas inscrit.e'
             ])
-            ->add('ended', CheckboxType::class,[
+            ->add('sortiePasses', CheckboxType::class,[
+                'required' => false,
                 'label' => 'Sorties passées'
             ])
         ;
@@ -53,7 +62,7 @@ class FiltreType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            "data_class"=> ModeleFiltres::class
         ]);
     }
 }
