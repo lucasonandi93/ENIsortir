@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 #[Route('/sortie', name: 'sortie_')]
@@ -58,6 +59,7 @@ class SortieController extends AbstractController
 
         $sortieFiltre = $sortieRepository->findFiltered($filtres);
 
+//        dd($sortieFiltre);
         //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
             'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
@@ -67,7 +69,7 @@ class SortieController extends AbstractController
 
 
     #[Route('/new', name: 'new')]
-    public function new(Request $request, SortieRepository $sortieRepository): Response
+    public function new(Request $request, SortieRepository $sortieRepository, UserInterface $user): Response
     {
         $etatRepository = $this->entityManager->getRepository(Etat::class);
 
@@ -77,6 +79,7 @@ class SortieController extends AbstractController
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
             $etatCree = $etatRepository->findOneBy(['libelle' => 'Créée']);
             if (!$etatCree) {
                 $etatCree = new Etat();
@@ -84,6 +87,8 @@ class SortieController extends AbstractController
                 $this->entityManager->persist($etatCree);
             }
             $sortie->setEtat($etatCree);
+
+            $sortie->setUser($user); // set the connected user as the organizer
 
             $sortieRepository->save($sortie, true);
 
