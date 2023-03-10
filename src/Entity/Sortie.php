@@ -231,4 +231,23 @@ class Sortie
         return $this;
     }
 
+
+    // ..
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $descriptionLongue;
+
+    public function getDescriptionLongue(): ?string
+    {
+        return $this->descriptionLongue;
+    }
+
+    public function setDescriptionLongue(?string $descriptionLongue): self
+    {
+        $this->descriptionLongue = $descriptionLongue;
+
+        return $this;
+    }
+
 }

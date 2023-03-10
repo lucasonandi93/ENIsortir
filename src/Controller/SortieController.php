@@ -146,5 +146,60 @@ class SortieController extends AbstractController
     }
 
 
+    #[Route('/cancel/{id}', name: 'cancel')]
+    public function cancel(int $id, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $sortie = $sortieRepository->find($id);
+        $organisateur = $sortie->getUser();
+        $user = $this->getUser();
+
+        // Vérifier si l'utilisateur est l'organisateur de la sortie ou un admin
+        if ($user != $organisateur && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException("Vous n'êtes pas autorisé à annuler cette sortie");
+        }
+
+        // Vérifier si la sortie est déjà annulée ou commencée
+        $etatAnnule = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Ouvert']);
+        if (!$etatAnnule) {
+            $etatAnnule = new Etat();
+            $etatAnnule->setLibelle('Annulée');
+            $entityManager->persist($etatAnnule);
+        }
+        $etatCommence = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Ouvert']);
+        if ($sortie->getEtat() == $etatAnnule) {
+            $this->addFlash('warning', 'Cette sortie est déjà annulée.');
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        } elseif ($sortie->getEtat() == $etatCommence) {
+            $this->addFlash('warning', 'Cette sortie a déjà commencé et ne peut plus être annulée.');
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        }
+
+        $sortieForm = $this->createFormBuilder()
+            ->add('motif', null, ['label' => 'Motif d\'annulation'])
+            ->getForm();
+
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
+
+            $motif = $sortieForm->get('motif')->getData();
+            $descriptionLongue = $sortie->getDescriptionLongue() . "\n\nSortie annulée : $motif";
+            $sortie->setDescriptionLongue($descriptionLongue);
+
+            $sortie->setEtat($etatAnnule);
+            $sortieRepository->save($sortie, true);
+
+            $this->addFlash('success', 'La sortie a été annulée avec succès.');
+
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        }
+
+        return $this->render('sortie/cancel.html.twig', [
+            'sortie' => $sortie,
+            'sortieForm' => $sortieForm->createView(),
+        ]);
+    }
+
+
 
 }
