@@ -89,13 +89,7 @@ class SortieController extends AbstractController
 
             $this->addFlash('success', 'Sortie créée avec succès !');
 
-            // récupérer la liste de sorties actualisée
-            $sorties = $sortieRepository->findAll();
-
-            return $this->render('sortie/list.html.twig', [
-                'sorties' => $sorties,
-                'filterForm' => $this->createForm(FiltreType::class)->createView()
-            ]);
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
         }
 
         return $this->render('sortie/new.html.twig', [
