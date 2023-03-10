@@ -50,7 +50,7 @@
                     {% endif %}
                     {% if app.user in sortie.users %}
                         - <a href="">Se désister</a>
-                    {% else %}
+                    {% elseif (sortie.etat.libelle == 'Ouvert') %}
                         - <a href="">S'inscrire</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
