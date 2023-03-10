@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\modele\ModeleFiltres;
+use App\Entity\User;
 use App\Repository\EtatRepository;
 use App\Entity\Etat;
 use App\Entity\Sortie;
@@ -10,6 +10,7 @@ use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,18 +28,20 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function profile(SortieRepository $sortieRepository, Request $request): Response
+    public function profile(SortieRepository $sortieRepository): Response
     {
-        $filtres = new ModeleFiltres();
-        $filtreForm = $this->createForm(FiltreType::class, $filtres);
-        $filtreForm->handleRequest($request);
-
-        $sortieFiltre = $sortieRepository->findFiltered($filtres);
-
-//        dd($sortieFiltre);
-        //$sortie = $sortieRepository->findAll();
+        $sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
-           'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
+            'sorties' => $sortie
+        ]);
+    }
+    #[Route('/listByUser', name: 'listByUser')]
+    public function listByUser(SortieRepository $sortieRepository)
+    {
+        $sorties = $sortieRepository->findBy(['user' => $this->getUser()]);
+
+        return $this->render('user_sorties.html.twig', [
+            'sorties' => $sorties,
         ]);
     }
 
@@ -65,16 +68,21 @@ class SortieController extends AbstractController
 
             $this->addFlash('success', 'Sortie créée avec succès !');
 
-            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+            // récupérer la liste de sorties actualisée
+            $sorties = $sortieRepository->findAll();
 
-
-
+            return $this->render('sortie/list.html.twig', [
+                'sorties' => $sorties,
+                'filterForm' => $this->createForm(FiltreType::class)->createView()
+            ]);
         }
+
         return $this->render('sortie/new.html.twig', [
             'sortie' => $sortie,
             'sortieForm' => $sortieForm->createView()
         ]);
     }
+
 
     #[Route('/{id}', name: 'details')]
     public function show(int $id, SortieRepository $sortieRepository): Response
@@ -84,11 +92,39 @@ class SortieController extends AbstractController
 
         if (!$sortie) {
             //lance une erreur 404 si la série n'existe pas
-            throw $this->createNotFoundException("Oops ! Sortie not found !");
+            throw $this->createNotFoundException("Oops ! Serie not found !");
         }
 
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);
     }
+
+
+
+
+    #[Route('edit/{id}', name: 'edit')]
+    public function edit(Request $request, int $id, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sortieRepository->save($sortie, true);
+            $this->addFlash('success', 'Sortie modifiée avec succès.');
+
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        }
+
+        return $this->render('sortie/edit.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
 }
