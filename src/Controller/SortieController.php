@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Form\modele\ModeleFiltres;
 use App\Repository\EtatRepository;
 use App\Entity\Etat;
@@ -10,6 +11,7 @@ use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +39,7 @@ class SortieController extends AbstractController
 
         //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
-           'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
+            'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
         ]);
     }
 
@@ -79,6 +81,7 @@ class SortieController extends AbstractController
         ]);
     }
 
+
     #[Route('/{id}', name: 'details')]
     public function show(int $id, SortieRepository $sortieRepository): Response
     {
@@ -87,11 +90,39 @@ class SortieController extends AbstractController
 
         if (!$sortie) {
             //lance une erreur 404 si la série n'existe pas
-            throw $this->createNotFoundException("Oops ! Sortie not found !");
+            throw $this->createNotFoundException("Oops ! Serie not found !");
         }
 
         return $this->render('sortie/details.html.twig', [
             'sortie' => $sortie
         ]);
     }
+
+
+
+
+    #[Route('edit/{id}', name: 'edit')]
+    public function edit(Request $request, int $id, SortieRepository $sortieRepository): Response
+    {
+        $sortie = $sortieRepository->find($id);
+
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $sortieRepository->save($sortie, true);
+            $this->addFlash('success', 'Sortie modifiée avec succès.');
+
+            return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+        }
+
+        return $this->render('sortie/edit.html.twig', [
+            'sortie' => $sortie,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
 }
