@@ -44,9 +44,8 @@ class SortieRepository extends ServiceEntityRepository
     public function findFiltered(ModeleFiltres $filters)
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->join('s.user', 'o')
+        $qb->Join('s.user', 'o')
             ->addSelect('o');
-
 
 
         if ($filters->getCampus()) {

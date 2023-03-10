@@ -31,9 +31,9 @@
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
                 <td>{{ sortie.etat.libelle }}</td>
                 <td>
-                    {% if app.user in sortie.users %}
-                        X
-                    {% endif %}
+{#                    {% if app.user.id in sortie.users %}#}
+{#                        X#}
+{#                    {% endif %}#}
                 </td>
                 <td>
     <a href="{{ path('profile_show', {'id': sortie.user.id}) }}">{{ sortie.user.nom }}</a>
