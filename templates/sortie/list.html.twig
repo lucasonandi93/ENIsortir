@@ -49,7 +49,7 @@
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
                     {% if app.user in sortie.users %}
-                        - <a href="">Se désister</a>
+                        - <a href="{{ path('sortie_desinscription', {'id': sortie.id}) }}">Se désister</a>
                     {% else %}
                         - <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                     {% endif %}

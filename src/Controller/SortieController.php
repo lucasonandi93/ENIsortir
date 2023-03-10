@@ -145,7 +145,7 @@ class SortieController extends AbstractController
         ]);
     }
 
-    #[Route('/inscription{id}', name: 'inscription')]
+    #[Route('/inscription/{id}', name: 'inscription')]
     public function inscriptionSortie(int $id, SortieRepository $sortieRepository): Response
     {
 
@@ -159,12 +159,15 @@ class SortieController extends AbstractController
         $sortie->addUser($user);
 
 
-        $sortieRepository->save($sortie);
+        $sortieRepository->save($sortie, true);
 
-        // Retour de la réponse
-        return new Response('Utilisateur inscrit à la sortie.');
+        // Retour de la réponse/la route
+
+        return $this->redirectToRoute('sortie_list');
+        /*return new Response('Utilisateur inscrit');*/
     }
 
+    #[Route('/desinscription/{id}', name: 'desinscription')]
     public function desinscriptionSortie(int $id, SortieRepository $sortieRepository): Response
     {
         // Récupération de la sortie
@@ -175,10 +178,10 @@ class SortieController extends AbstractController
 
         // Désinscription de l'utilisateur
         $sortie->removeUser($user);
-        $sortieRepository->save($sortie);
+        $sortieRepository->save($sortie, true);
 
         // Retour de la réponse
-        return new Response('Utilisateur désinscrit de la sortie.');
+        return $this->redirectToRoute('sortie_list');
     }
 
 }
