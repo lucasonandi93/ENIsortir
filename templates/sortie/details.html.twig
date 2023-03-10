@@ -34,7 +34,7 @@
 
 
     {% if sortie.user == app.user %}
-        <a href="{{ path('cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler</a>
+        <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler</a>
     {% endif %}
 
     <div>

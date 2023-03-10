@@ -180,7 +180,7 @@ class Sortie
         return $this;
     }
 
-    public function setEtat(Etat $etat): self
+    public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
 
@@ -231,23 +231,5 @@ class Sortie
         return $this;
     }
 
-
-    // ..
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $descriptionLongue;
-
-    public function getDescriptionLongue(): ?string
-    {
-        return $this->descriptionLongue;
-    }
-
-    public function setDescriptionLongue(?string $descriptionLongue): self
-    {
-        $this->descriptionLongue = $descriptionLongue;
-
-        return $this;
-    }
 
 }
