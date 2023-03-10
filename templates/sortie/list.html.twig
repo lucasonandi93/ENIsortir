@@ -30,7 +30,7 @@
         <tbody>
         {% for sortie in sortieFiltre %}
             <tr>
-                <th scope="row"><a href="{{ path('sortie_details', {'id': sortie.id}) }}">{{ sortie.nom|capitalize }}</a></th>
+                <th scope="row">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription|date('d/m/y H:i') }}</td>
                 <td>{{ sortie.users|length }}/{{ sortie.nbInscriptionMax }}</td>
@@ -54,8 +54,8 @@
                         - <a href="">S'inscrire</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
-                        {% if sortie.etat == 'Créée' %}
-                            <a href="">Modifier</a>
+                        {% if sortie.etat.libelle == 'Créée' %}
+                            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
                             - <a href="">Publier</a>
                         {% endif %}
                         {% if ( sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
