@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
 
     public function addEtat(ObjectManager $manager)
     {
-        $etatLibelle = ['En cours', 'Ouvert', 'Fermé', 'En création'];
+        $etatLibelle = ['En cours', 'Ouverte', 'Clôturée', 'Créée', 'Passée', 'Annulée'];
 
         foreach ($etatLibelle as $name) {
             $etat = new Etat();
@@ -108,8 +108,8 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < $number; $i++) {
             $user = new User();
             $user
-                ->setNom(implode(" ", $this->faker->words(3)))
-                ->setPrenom(implode(" ", $this->faker->words(3)))
+                ->setNom($this->faker->name)
+                ->setPrenom($this->faker->name)
                 ->setEmail($this->faker->email)
                 ->setTelephone($this->faker->phoneNumber)
                 ->setUsername($this->faker->userName);
@@ -134,8 +134,8 @@ class AppFixtures extends Fixture
             $ville = new Ville();
 
             $ville
-                ->setNom(implode(" ", $this->faker->words(1)))
-                ->setCodePostal($this->faker->numberBetween(10000, 40000));
+                ->setNom($this->faker->city)
+                ->setCodePostal($this->faker->postcode);
 
             $this->entityManager->persist($ville);
         }
@@ -153,8 +153,8 @@ class AppFixtures extends Fixture
             $lieu = new Lieu();
 
             $lieu
-                ->setNom(implode(" ", $this->faker->words(2)))
-                ->setRue(implode(" ", $this->faker->words(4)));
+                ->setNom( $this->faker->address)
+                ->setRue( $this->faker->streetName);
                 $lieu->setVille($this->faker->randomElement($villes));
             $this->entityManager->persist($lieu);
         }
@@ -178,7 +178,7 @@ class AppFixtures extends Fixture
                 ->setNom(implode(" ", $this->faker->words(3)))
                 ->setInfosSortie(implode(" ",$this->faker->words(15)))
                 ->setDuree($this->faker->numberBetween(30, 240))
-                ->setDateHeureDebut($this->faker->dateTime);
+                ->setDateHeureDebut($this->faker->dateTimeBetween('now','+1 month'));
                 $date = clone  $sortie->getDateHeureDebut();
                 $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
                 ->setNbInscriptionMax($this->faker->numberBetween(10, 50))

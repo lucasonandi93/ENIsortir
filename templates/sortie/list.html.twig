@@ -48,9 +48,9 @@
                     {% if (sortie.etat.libelle == 'Ouvert') or (sortie.etat.libelle == 'Fermé') %}
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
-                    {% if app.user in sortie.users %}
+                    {% if (app.user in sortie.users) and (sortie.etat.libelle == 'Ouvert')%}
                         - <a href="{{ path('sortie_desinscription', {'id': sortie.id}) }}">Se désister</a>
-                    {% else %}
+                    {% elseif (sortie.etat.libelle == 'Ouvert') %}
                         - <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
