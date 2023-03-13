@@ -2,26 +2,26 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    /* ajouter pour centrer horizontalement les éléments enfants */
 }
 
 /* Profile image */
 img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 2px;
     margin: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
 }
+
+
 
 /* Profile details */
 div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 div p {
@@ -47,6 +47,7 @@ a button:hover {
     background-color: #4c8f8e;
 }
 
+
 /* Centrer verticalement les boutons */
 .container > a {
     display: flex;
@@ -67,7 +68,26 @@ a button:hover {
 }
 
 
-@media screen and (max-width: 600px) {
+/* Smartphones */
+@media only screen and (max-width: 480px) {
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    div p {
+        font-size: 12px;
+    }
+    a button {
+        font-size: 12px;
+    }
+    .profile-image-container {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+/* Tablettes */
+@media only screen and (min-width: 481px) and (max-width: 768px) {
     img {
         width: 150px;
         height: 150px;
@@ -75,8 +95,11 @@ a button:hover {
     div p {
         font-size: 14px;
     }
-
     a button {
         font-size: 14px;
+    }
+    .profile-image-container {
+        width: 120px;
+        height: 120px;
     }
 }
