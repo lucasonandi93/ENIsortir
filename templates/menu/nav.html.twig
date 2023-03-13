@@ -1,36 +1,41 @@
 <head>
     <title>Barre de navigation</title>
     <link rel="stylesheet" href="{{ asset('assets/css/styleNav.css') }}">
+    <script src=".js" defer=""> </script>
 </head>
 
-<nav>
-    <ul>
-        {#  {% if app.user %}  #}
-        <li><a href="{{ path('main_home') }}">Home</a></li>
+<div class="nav">
+    <input type="checkbox" id="nav-check">
+
+    <div class="nav-header">
+        <div class="nav-title">
+            Sortir | E.N.I
+        </div>
+    </div>
 
 
-        {#
-        {% if is_granted("ROLE_ADMIN") %}
-        <li><a href="{{ path('app_lieu_index') }}">Campus</a></li>
-        <li><a href="{{ path('app_ville_index') }}">Villes</a></li>
-        {% endif %}
-        #}
-            <li><a href="{{ path('sortie_new') }}">Ajouter une sortie</a></li>
-        <li><a href="{{ path('sortie_list') }}">Liste des sorties</a></li>
 
+    <div class="nav-btn">
+        <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+    </div>
 
-            <!-- Lien de connexion pour un utilisateur non connecté -->
-
+    <div class="nav-links">
+        <a href="{{ path('main_home') }}">Home</a>
         {% if app.user %}
-
-{#        <li><a href="{{ path('sortie_listByUser') }}">Mes Sorties Organisées </a></li>#}
-            <li><a href="{{ path('app_lieu_new') }}">Ajouter un lieu</a></li>
-        <li><a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a></li>
-
-        <li><a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a></li>
+            {# Liens pour un utilisateur connecté #}
+            <a href="{{ path('sortie_new') }}">Ajouter une sortie</a>
+            <a href="{{ path('sortie_list') }}">Liste des sorties</a>
+            <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
+            <a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a>
         {% else %}
-            <li><a href="{{ path('app_login') }}">Login</a></li>
+            {# Lien de connexion pour un utilisateur non connecté #}
+            <a href="{{ path('app_login') }}">Login</a>
         {% endif %}
+    </div>
+</div>
 
-    </ul>
-</nav>
+

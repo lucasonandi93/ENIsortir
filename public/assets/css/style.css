@@ -1,3 +1,4 @@
+
 /* Tableau responsive */
 table {
     width: 100%;
@@ -99,8 +100,4 @@ th:last-child {
 
 .table-gradient tbody tr:hover {
     background-color: #f9f9f9;
-}
-
-body{
-    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
 }

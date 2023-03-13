@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+{% block head %}
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
@@ -8,20 +9,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
-    <link rel="icon" href="{{ asset('img/icon.png') }}">
     <title>{% block title %}Sortie !{% endblock %}</title>
+{% endblock %}
 </head>
 <body>
  <header>
-        <h1>
-            <a href="{{ path('main_home') }}">
-                <img src="{{ asset('img/logo.svg') }}" alt="Sortir | Home">
-            </a>
-        </h1>
         {% include 'menu/nav.html.twig' %}
-    </header>
+ </header>
 
  {% block body %} {% endblock %}
+
+ <footer>
+     {% include 'menu/footer.html.twig' %}
+ </footer>
 
 </body>
 </html>
