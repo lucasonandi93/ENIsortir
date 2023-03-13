@@ -111,7 +111,8 @@ class UserController extends AbstractController
 
              $userRepository->save($user, true);
 
-             return $this->redirectToRoute('profile_list', [], Response::HTTP_SEE_OTHER);
+
+         return $this->redirectToRoute('profile_show', ['id' => $user->getId()]);
      }
      return $this->renderForm('profile/edit.html.twig', [
          'user' => $user,

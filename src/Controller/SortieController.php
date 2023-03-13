@@ -9,10 +9,12 @@ use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\FiltreType;
 use App\Form\SortieType;
+use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -101,6 +103,27 @@ class SortieController extends AbstractController
             'sortie' => $sortie,
             'sortieForm' => $sortieForm->createView()
         ]);
+    }
+    #[Route('/lieu_by_ville', name: 'lieux_by_ville', methods: ['GET', 'POST'])]
+    public function getLieuxByVille(Request $request, LieuRepository $lieuRepository)
+    {
+        $villeId = $request->request->get('ville_id');
+
+        $lieux = $lieuRepository->findBy(['ville' => $villeId]);
+
+        $lieuxArray = array();
+        foreach ($lieux as $lieu) {
+            $lieuData = array(
+                'id' => $lieu->getId(),
+                'nom' => $lieu->getNom()
+            );
+            array_push($lieuxArray, $lieuData);
+        }
+
+        $response = new JsonResponse();
+        $response->setData($lieuxArray);
+
+        return $response;
     }
 
 
