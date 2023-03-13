@@ -65,9 +65,9 @@ class SortieRepository extends ServiceEntityRepository
             ->addSelect('o')
             ->leftJoin('s.etat', 'etat')
             ->addSelect('etat')
-        ->leftJoin('s.users', 'ins')
+            ->leftJoin('s.users', 'ins')
             ->addSelect('ins')
-        ->leftJoin('s.lieu', 'lieu')
+            ->leftJoin('s.lieu', 'lieu')
             ->addSelect('lieu');
 
 
