@@ -11,3 +11,10 @@ body {
 
 }
 
+.test {
+    height: 1200px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 90px;
+}
