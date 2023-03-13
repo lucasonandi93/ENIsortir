@@ -41,7 +41,6 @@ class SortieController extends AbstractController
 
         foreach ($sorties as $sortie) {
             $etatHistorise = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Historisée']);
-
             if (!$etatHistorise) {
                 $etatHistorise = new Etat();
                 $etatHistorise->setLibelle('Historisée');
@@ -64,7 +63,7 @@ class SortieController extends AbstractController
         //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
             'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
-
+            'sorties' => $sorties,
         ]);
     }
 
@@ -146,6 +145,23 @@ class SortieController extends AbstractController
         ]);
     }
 
+    #[Route('/desinscription/{id}', name: 'desinscription')]
+    public function desinscriptionSortie(int $id, SortieRepository $sortieRepository): Response
+    {
+        // Récupération de la sortie
+        $sortie = $sortieRepository->find($id);
+
+        // Récupération de l'utilisateur
+        $user = $this->getUser();
+
+        // Désinscription de l'utilisateur
+        $sortie->removeUser($user);
+        $sortieRepository->save($sortie, true);
+
+        // Retour de la réponse
+        return $this->redirectToRoute('sortie_list');
+    }
+
     #[Route('/inscription/{id}', name: 'inscription')]
     public function inscriptionSortie(int $id, SortieRepository $sortieRepository): Response
     {
@@ -168,26 +184,21 @@ class SortieController extends AbstractController
         /*return new Response('Utilisateur inscrit');*/
     }
 
-    #[Route('cancel/{id}', name: 'cancel')]
+    #[Route('cancel/{id}', name: 'cancel');
     public function cancelSortie(int $id, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
     {
         // Récupération de la sortie
         $sortie = $sortieRepository->find($id);
 
 
-        $etat = $etatRepository->findOneBy(["libelle" => "Annulée"]);
-
-
-
-        $sortie->setEtat($etat);
+        $etat =
+        // Désinscription de l'utilisateur
+        $sortie->setEtat($etatRepository->);
 
         $sortieRepository->save($sortie, true);
 
-
         // Retour de la réponse
-        return $this->render('sortie/details.html.twig', [
-            'sortie' => $sortie
-        ]);
+        return $this->redirectToRoute('sortie_list');
     }
 
 
