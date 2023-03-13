@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <fieldset class="container">
 <h1>profile N° {{ user.id }}</h1>
         <div class="profile-image-container">
         {% if user.photo is not null %}
-            <img src="{{ asset('img/' ~ user.photo) }}" alt="{{ user.nom }}" width="250" height="250">
+            <img src="{{ asset('img/' ~ user.photo) }}" alt="{{ user.nom }}" width="300" height="300">
         {% endif %}
     </div>
     <div>
@@ -21,9 +21,10 @@
         <p>Campus: {{ user.campus.nom }}</p>
     </div>
         <a href="{{ path('profile_list') }}"><button>return</button></a>
-
         {% if app.user == user %}
-        <a href="{{ path('profile_update', {'id': app.user.id}) }}">Modifier mon profil</a><br>
+            <a href="{{ path('profile_update', {'id': app.user.id}) }}">Modifier mon profil</a><br>
+            </fieldset>
+
     {% endif %}
 {% endblock %}
 

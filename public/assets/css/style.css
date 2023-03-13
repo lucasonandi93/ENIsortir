@@ -1,4 +1,3 @@
-
 /* Tableau responsive */
 table {
     width: 100%;
@@ -100,4 +99,26 @@ th:last-child {
 
 .table-gradient tbody tr:hover {
     background-color: #f9f9f9;
+}
+
+body{
+    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+}
+
+h1{
+    text-align:center ;
+}
+
+/* Crée une animation qui fait onduler le texte comme des vagues */
+@keyframes onduler {
+    0% { transform: skewY(0deg) translateX(-10%); }
+    25% { transform: skewY(5deg) translateX(-5%); }
+    50% { transform: skewY(0deg) translateX(0%); }
+    75% { transform: skewY(-5deg) translateX(5%); }
+    100% { transform: skewY(0deg) translateX(10%); }
+}
+
+/* Applique l'animation à la phrase */
+.phrase {
+    animation: onduler 2s ease-in-out infinite;
 }
