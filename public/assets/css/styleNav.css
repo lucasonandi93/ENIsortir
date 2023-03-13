@@ -1,11 +1,11 @@
 * {
     box-sizing: border-box;
+
 }
 
 body {
     margin: 0px;
     font-family: 'segoe ui';
-
 }
 
 .nav {
@@ -13,7 +13,7 @@ body {
     height: 76px;
     width: 100%;
     background-color: #4d4d4d;
-    position: absolute;
+    position: relative;
 
 }
 
@@ -49,6 +49,7 @@ body {
     color: #efefef;
 }
 
+
 .nav > .nav-links > a:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -56,6 +57,7 @@ body {
 .nav > #nav-check {
     display: none;
 }
+
 
 @media (max-width:600px) {
     .nav > .nav-btn {
