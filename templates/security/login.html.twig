@@ -22,25 +22,25 @@
         <div class="wrapper fadeInDown">
             <div id="formContent">
                 <!-- Tabs Titles -->
-                <h2 class="active"> Sign In </h2>
-                <h2 class="inactive underlineHover"> Sign Up </h2>
+                <h2 class="active"> Se connecter </h2>
+
 
                 <!-- Login Form -->
                 <form>
-                    <input type="text" value="{{ last_username }}" placeholder="email" name="email" id="login" class="fadeIn second" autocomplete="email" required autofocus>
-                    <input type="password" placeholder="Password" name="password" id="password" class="fadeIn third" autocomplete="current-password" required>
-                    <input type="submit" class="fadeIn fourth" value="Log In">
+                    <input type="text" value="{{ last_username }}" placeholder="Adresse email" name="email" id="login" class="fadeIn second" autocomplete="email" required autofocus>
+                    <input type="password" placeholder="Mot de passe" name="password" id="password" class="fadeIn third" autocomplete="current-password" required>
+                    <input type="submit" class="fadeIn fourth" value="Identification">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 </form>
 
                 <!-- Remind Passowrd -->
                 <div id="formFooter">
-                    <a class="underlineHover" href="#">Forgot Password?</a>
+                    <a class="underlineHover" href="#">Mot de passe oublié ?</a>
                 </div>
 
                 <div class="checkbox mb-3">
                     <label>
-                        <input type="checkbox" name="_remember_me"> Remember me
+                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
                     </label>
                 </div>
             </div>
