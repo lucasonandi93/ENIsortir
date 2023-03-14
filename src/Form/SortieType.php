@@ -48,16 +48,16 @@ class SortieType extends AbstractType
 
             ])
             ->add('dateHeureDebut',DateTimeType::class,[
-                'label' => 'Date et heure de la sortie : ',
+                'label' => 'Dâte et heure de la sortie : ',
                 'date_widget'=> 'single_text',
                 'time_widget'=> 'single_text',
                 'html5' => true
             ])
             ->add('duree', NumberType::class,[
-                'label'=> 'Durée de la sortie : '
+                'label'=> 'Durée de la sortie : (en minutes)'
             ])
             ->add('dateLimiteInscription', DateTimeType::class,[
-                'label' => 'Date limite d\'inscription : ',
+                'label' => 'Dâte limite d\'inscription : ',
                 'date_widget'=> 'single_text',
                 'time_widget'=> 'single_text',
                 'html5' => true
@@ -72,10 +72,8 @@ class SortieType extends AbstractType
                 'label' => 'Voulez-vous vous inscrire à la sortie ? ',
                 'mapped'=> false,
                 'required' => false
-            ])
-        ;
+            ]);
     }
-
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
