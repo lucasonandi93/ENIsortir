@@ -8,7 +8,7 @@ html {
 
 body {
     font-family: "Poppins", sans-serif;
-    height: 100vh;
+    height: 800px;
 }
 
 a {
@@ -40,6 +40,8 @@ h2 {
     width: 100%;
     min-height: 100%;
     padding: 20px;
+    margin-top: 8%;
+    margin-bottom: 8%;
 }
 
 #formContent {
@@ -262,4 +264,25 @@ input[type=text]::placeholder {
 
 * {
     box-sizing: border-box;
+
+}
+
+@media (max-width:600px){
+    .footer{
+        text-align:left;
+        padding:5%;
+        height: 100%;
+    }
+    .footer .row ul li{
+        display:block;
+        margin:10px 0px;
+        text-align:left;
+    }
+    .footer .row a i{
+        margin:0% 3%;
+    }
+
+    body {
+        height: 100%;
+    }
 }
