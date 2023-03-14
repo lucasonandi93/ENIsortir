@@ -6,11 +6,35 @@
 {% endblock %}
 
 {% block nav %}
+    <nav id="main-menu">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Store</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
 
+    <input type="checkbox" id="hamburger-input" class="burger-shower" />
+    <label id="hamburger-menu" for="hamburger-input">
+        <nav id="sidebar-menu">
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Store</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </label>
+
+    <div class="overlay"></div>
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container1">
     <h2>Filtrer les sorties</h2>
    {{ form_start(filtre) }}
     {{ form_widget(filtre) }}
@@ -18,7 +42,8 @@
     {{ form_end(filtre) }}
     </div>
 <br>
-<div class="container">
+
+<div class="container2">
     <table class="table table-striped table-hover table-gradient">
         <thead>
         <tr>

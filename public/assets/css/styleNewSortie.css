@@ -1,116 +1,148 @@
-.navbar-global {
-    background-color: indigo;
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+
+body {
+    padding: 0px;
+    margin: 0px;
+    font-size: 20px;
+    min-height: 200vh;
+    font-family: 'Cabin', Sans-serif;
 }
 
-.navbar-global .navbar-brand {
-    color: white;
-}
-
-.navbar-global .navbar-user > li > a
-{
-    color: white;
-}
-
-.navbar-primary {
-    background-color: #333;
-    bottom: 0px;
-    left: 0px;
-    position: absolute;
-    top: 51px;
-    width: 200px;
-    z-index: 8;
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .35s, visibility .35s, height .35s;
     overflow: hidden;
-    -webkit-transition: all 0.1s ease-in-out;
-    -moz-transition: all 0.1s ease-in-out;
-    transition: all 0.1s ease-in-out;
+    background: black;
+    z-index: -1;
 }
 
-.navbar-primary.collapsed {
-    width: 60px;
+
+
+#main-menu {
+    display: none;
+    height: 100px;
+    width: 100%;
+    background: #3D0E61;
+    margin: 0px;
+    z-index: 9;
 }
 
-.navbar-primary.collapsed .glyphicon {
-    font-size: 22px;
+#main-menu ul {
+    max-width: 800px;
+    width: 100%;
+    height: 100%;
+    margin: 0px auto;
+    padding: 0px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    z-index: 9;
 }
 
-.navbar-primary.collapsed .nav-label {
+#main-menu li {
+    list-style-type: none;
+    font-size: 2rem;
+}
+
+#main-menu a {
+    color: #B9FAF8;
+    font-size: 1.5rem;
+    text-decoration: none;
+}
+
+#main-menu a:hover {
+    text-decoration: underline;
+}
+
+#hamburger-input{
     display: none;
 }
 
-.btn-expand-collapse {
-    position: absolute;
-    display: block;
-    left: 0px;
-    bottom:0;
-    width: 100%;
-    padding: 8px 0;
-    border-top:solid 1px #666;
-    color: grey;
-    font-size: 20px;
-    text-align: center;
+#hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    display: inline;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Cabin', Sans-serif;
+    background: linear-gradient(
+            to bottom,
+            #3D0E61, #3D0E61 20%,
+            white 20%, white 40%,
+            #3D0E61 40%, #3D0E61 60%,
+            white 60%, white 80%,
+            #3D0E61 80%, #3D0E61 100%
+    );
 }
 
-.btn-expand-collapse:hover,
-.btn-expand-collapse:focus {
-    background-color: #222;
-    color: white;
+#hamburger-menu #sidebar-menu {
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 200px;
+    height: 100%;
+    background-color: #3D0E61;
+    transition: 0.3s;
+    padding: 0px 10px;
+    box-sizing: border-box;
 }
 
-.btn-expand-collapse:active {
-    background-color: #111;
+#hamburger-menu h3 {
+    color: #B9FAF8;
+    font-size: 2.2rem;
 }
 
-.navbar-primary-menu,
-.navbar-primary-menu li {
-    margin:0; padding:0;
-    list-style: none;
+#hamburger-menu ul {
+    padding-left: 0px;
 }
 
-.navbar-primary-menu li a {
-    display: block;
-    padding: 10px 18px;
-    text-align: left;
-    border-bottom:solid 1px #444;
-    color: #ccc;
+#hamburger-menu li {
+    list-style-type: none;
+    line-height: 3rem;
 }
 
-.navbar-primary-menu li a:hover {
-    background-color: #000;
+#hamburger-menu a {
+    color: #B9FAF8;
+    font-size: 1.3rem;
     text-decoration: none;
-    color: white;
 }
 
-.navbar-primary-menu li a .glyphicon {
-    margin-right: 6px;
+#hamburger-menu a:hover {
+    text-decoration: underline;
 }
 
-.navbar-primary-menu li a:hover .glyphicon {
-    color: orchid;
+#hamburger-input:checked + #hamburger-menu #sidebar-menu {
+    visibility: visible;
+    left: 0;
+}
+#hamburger-input:checked ~ .overlay{
+    visibility: visible;
+    opacity: 0.4;
 }
 
-.main-content {
-    margin-top: 60px;
-    margin-left: 200px;
-    padding: 20px;
-}
 
-.collapsed + .main-content {
-    margin-left: 60px;
+.container1 {
+    margin-left: 17%;
 }
-
-/* Container */
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.container2 {
+    margin-left: 17%;
 }
 
 /* Form */
 form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     max-width: 600px;
     width: 100%;
     padding: 20px;
@@ -195,4 +227,6 @@ a button:hover {
     a button {
         font-size: 14px;
     }
+
+
 }
