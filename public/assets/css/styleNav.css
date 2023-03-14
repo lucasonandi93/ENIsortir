@@ -1,3 +1,4 @@
+
 * {
     box-sizing: border-box;
 
@@ -59,6 +60,7 @@ body {
 }
 
 
+/*Responsive */
 @media (max-width:600px) {
     .nav > .nav-btn {
         display: inline-block;
