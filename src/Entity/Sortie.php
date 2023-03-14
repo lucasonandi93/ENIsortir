@@ -180,7 +180,7 @@ class Sortie
         return $this;
     }
 
-    public function setEtat(Etat $etat): self
+    public function setEtat(?Etat $etat): self
     {
         $this->etat = $etat;
 
@@ -230,5 +230,6 @@ class Sortie
 
         return $this;
     }
+
 
 }

@@ -1,106 +1,124 @@
-/*!* Tableau responsive *!*/
-/*table {*/
-/*    width: 100%;*/
-/*    border-collapse: collapse;*/
-/*}*/
+/* Tableau responsive */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-/*thead {*/
-/*    display: none;*/
-/*}*/
+thead {
+    display: none;
+}
 
-/*tr {*/
-/*    border-bottom: 1px solid #ccc;*/
-/*}*/
+tr {
+    border-bottom: 1px solid #ccc;
+}
 
-/*th,*/
-/*td {*/
-/*    padding: 0.5rem;*/
-/*}*/
+th,
+td {
+    padding: 0.5rem;
+}
 
-/*td:first-child,*/
-/*th:first-child {*/
-/*    padding-left: 0;*/
-/*}*/
+td:first-child,
+th:first-child {
+    padding-left: 0;
+}
 
-/*td:last-child,*/
-/*th:last-child {*/
-/*    padding-right: 0;*/
-/*}*/
+td:last-child,
+th:last-child {
+    padding-right: 0;
+}
 
-/*!* Styles pour les petits écrans *!*/
-/*@media screen and (max-width: 767px) {*/
-/*    thead {*/
-/*        display: block;*/
-/*    }*/
+/* Styles pour les petits écrans */
+@media screen and (max-width: 767px) {
+    thead {
+        display: block;
+    }
 
-/*    th {*/
-/*        display: block;*/
-/*        text-align: left;*/
-/*    }*/
+    th {
+        display: block;
+        text-align: left;
+    }
 
-/*    td {*/
-/*        display: block;*/
-/*        text-align: right;*/
-/*        border-bottom: none;*/
-/*        position: relative;*/
-/*        padding-left: 50%;*/
-/*        white-space: normal;*/
-/*    }*/
+    td {
+        display: block;
+        text-align: right;
+        border-bottom: none;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal;
+    }
 
-/*    td:before {*/
-/*        content: attr(data-label);*/
-/*        position: absolute;*/
-/*        left: 0;*/
-/*        width: 50%;*/
-/*        padding-left: 0.5rem;*/
-/*        font-weight: bold;*/
-/*    }*/
-/*}*/
-/*.table {*/
-/*    width: 100%;*/
-/*    max-width: 100%;*/
-/*    margin-bottom: 1rem;*/
-/*    background-color: #fff;*/
-/*    border-collapse: collapse;*/
-/*}*/
+    td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 0.5rem;
+        font-weight: bold;
+    }
+}
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #fff;
+    border-collapse: collapse;
+}
 
-/*.table td,*/
-/*.table th {*/
-/*    padding: 0.75rem;*/
-/*    vertical-align: top;*/
-/*    border-top: 1px solid #dee2e6;*/
-/*}*/
+.table td,
+.table th {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
 
-/*.table thead th {*/
-/*    vertical-align: bottom;*/
-/*    border-bottom: 2px solid #dee2e6;*/
-/*}*/
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
 
-/*.table tbody + tbody {*/
-/*    border-top: 2px solid #dee2e6;*/
-/*}*/
+.table tbody + tbody {
+    border-top: 2px solid #dee2e6;
+}
 
-/*.table-striped tbody tr:nth-of-type(odd) {*/
-/*    background-color: rgba(0, 0, 0, 0.05);*/
-/*}*/
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
 
-/*.table-hover tbody tr:hover {*/
-/*    background-color: rgba(0, 0, 0, 0.075);*/
-/*}*/
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.075);
+}
 
-/*.table-gradient {*/
-/*    background: linear-gradient(to bottom, #ffffff, #f2f2f2);*/
-/*}*/
+.table-gradient {
+    background: linear-gradient(to bottom, #ffffff, #f2f2f2);
+}
 
-/*.table-gradient tbody tr {*/
-/*    background-color: #ffffff;*/
-/*    transition: background-color 0.2s ease-in-out;*/
-/*}*/
+.table-gradient tbody tr {
+    background-color: #ffffff;
+    transition: background-color 0.2s ease-in-out;
+}
 
-/*.table-gradient tbody tr:hover {*/
-/*    background-color: #f9f9f9;*/
-/*}*/
+.table-gradient tbody tr:hover {
+    background-color: #f9f9f9;
+}
 
-/*body{*/
-/*    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);*/
-/*}*/
+body{
+    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
+}
+
+h1{
+    text-align:center ;
+}
+
+/* Crée une animation qui fait onduler le texte comme des vagues */
+@keyframes onduler {
+    0% { transform: skewY(0deg) translateX(-10%); }
+    25% { transform: skewY(5deg) translateX(-5%); }
+    50% { transform: skewY(0deg) translateX(0%); }
+    75% { transform: skewY(-5deg) translateX(5%); }
+    100% { transform: skewY(0deg) translateX(10%); }
+}
+
+/* Applique l'animation à la phrase */
+.phrase {
+    animation: onduler 2s ease-in-out infinite;
+}

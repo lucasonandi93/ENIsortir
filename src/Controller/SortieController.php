@@ -43,6 +43,7 @@ class SortieController extends AbstractController
 
         foreach ($sorties as $sortie) {
             $etatHistorise = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Historisée']);
+
             if (!$etatHistorise) {
                 $etatHistorise = new Etat();
                 $etatHistorise->setLibelle('Historisée');
@@ -65,7 +66,7 @@ class SortieController extends AbstractController
         //$sortie = $sortieRepository->findAll();
         return $this->render('sortie/list.html.twig', [
             'sortieFiltre'=>$sortieFiltre, 'filtre' => $filtreForm->createView(),
-            'sorties' => $sorties,
+
         ]);
     }
 
@@ -194,17 +195,37 @@ class SortieController extends AbstractController
     public function desinscriptionSortie(int $id, SortieRepository $sortieRepository): Response
     {
         // Récupération de la sortie
+        $sortie = $sortieRepository->find($id); // Récupération de l'utilisateur
+        $user = $this->getUser(); // Désinscription de l'utilisateur
+        $sortie->removeUser($user);
+        $sortieRepository->save($sortie, true); // Retour de la réponse
+    return $this->redirectToRoute('sortie_list');
+    }
+
+
+    #[Route('cancel/{id}', name: 'cancel')]
+    public function cancelSortie(int $id, SortieRepository $sortieRepository, EtatRepository $etatRepository): Response
+    {
+        // Récupération de la sortie
         $sortie = $sortieRepository->find($id);
 
-        // Récupération de l'utilisateur
-        $user = $this->getUser();
 
-        // Désinscription de l'utilisateur
-        $sortie->removeUser($user);
+        $etat = $etatRepository->findOneBy(["libelle" => "Annulée"]);
+
+
+
+        $sortie->setEtat($etat);
+
         $sortieRepository->save($sortie, true);
 
+
         // Retour de la réponse
-        return $this->redirectToRoute('sortie_list');
+        return $this->render('sortie/details.html.twig', [
+            'sortie' => $sortie
+        ]);
     }
+
+
+
 
 }

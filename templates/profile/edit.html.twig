@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block body %}
+<div class="container">
 {{ form_start(userUpdateForm) }}
 {{ form_widget(userUpdateForm) }}
 <button type="submit">update</button>
 {{ form_end(userUpdateForm) }}
+</div>
 {% endblock %}

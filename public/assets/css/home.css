@@ -1,0 +1,20 @@
+html {
+    margin: 0px;
+}
+
+body {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: top;
+
+
+
+}
+
+.test {
+    height: 1200px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    padding-top: 90px;
+}

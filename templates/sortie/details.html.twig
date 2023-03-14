@@ -32,6 +32,11 @@
 
     {% endif %}
 
+
+    {% if sortie.user == app.user %}
+        <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler</a>
+    {% endif %}
+
     <div>
         <h2>Liste des participants inscrits : </h2>
         <ul>
