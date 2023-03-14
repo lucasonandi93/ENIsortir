@@ -10,12 +10,13 @@ body {
 }
 
 .nav {
-    margin-top: 15px;
     height: 76px;
     width: 100%;
     background-color: #4d4d4d;
-    position: relative;
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
 }
 
 .nav > .nav-header {
@@ -61,7 +62,7 @@ body {
 
 
 /*Responsive */
-@media (max-width:600px) {
+@media (max-width:800px) {
     .nav > .nav-btn {
         display: inline-block;
         position: absolute;
