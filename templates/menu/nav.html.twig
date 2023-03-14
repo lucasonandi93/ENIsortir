@@ -23,16 +23,16 @@
     </div>
 
     <div class="nav-links">
-        <a href="{{ path('main_home') }}">Home</a>
+        <a href="{{ path('main_home') }}">Accueil</a>
         {% if app.user %}
             {# Liens pour un utilisateur connecté #}
             <a href="{{ path('sortie_new') }}">Ajouter une sortie</a>
             <a href="{{ path('sortie_list') }}">Liste des sorties</a>
             <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
-            <a href="{{ path('app_logout') }}">Logout ({{ app.user.nom }})</a>
+            <a href="{{ path('app_logout') }}">Se déconnecter ({{ app.user.nom }})</a>
         {% else %}
             {# Lien de connexion pour un utilisateur non connecté #}
-            <a href="{{ path('app_login') }}">Login</a>
+            <a href="{{ path('app_login') }}">Se connecter</a>
         {% endif %}
     </div>
 </div>
