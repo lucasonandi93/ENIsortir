@@ -65,7 +65,7 @@ class Sortie
         return $this->ville;
     }
 
-    public function setVille(string $ville): self
+    public function setVille(Ville $ville): self
     {
         $this->ville = $ville;
 
