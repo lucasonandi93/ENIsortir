@@ -4,10 +4,6 @@ table {
     border-collapse: collapse;
 }
 
-thead {
-    display: none;
-}
-
 tr {
     border-bottom: 1px solid #ccc;
 }
@@ -66,7 +62,7 @@ th:last-child {
 
 .table td,
 .table th {
-    padding: 0.75rem;
+    padding: 1rem;
     vertical-align: top;
     border-top: 1px solid #dee2e6;
 }
