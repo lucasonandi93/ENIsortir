@@ -11,6 +11,7 @@ use App\Form\FiltreType;
 use App\Form\SortieType;
 use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
+use App\Utils\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +33,7 @@ class SortieController extends AbstractController
     }
 
     #[Route('/list', name: 'list')]
-    public function profile(SortieRepository $sortieRepository, EntityManagerInterface $entityManager, Request $request): Response
+    public function profile(EntityManagerInterface $entityManager, EtatRepository $etatRepository, Uploader $etatSorties, SortieRepository $sortieRepository, Request $request): Response
     {
         // Mettre à jour les sorties qui datent de plus de 1 mois
 
@@ -59,8 +60,15 @@ class SortieController extends AbstractController
         $filtres = new ModeleFiltres();
         $filtreForm = $this->createForm(FiltreType::class, $filtres);
         $filtreForm->handleRequest($request);
+        if ($filtreForm->isSubmitted() && $filtreForm->isValid()) {
+            $sortieFiltre = $sortieRepository->findFiltered($filtres);
+        } else {
+            $etatSorties->majEtat($etatRepository, $sortieRepository, $filtres, $this->getUser(), $entityManager);
+            $sortieFiltre = $sortieRepository->findFiltered($filtres);
+        }
 
-        $sortieFiltre = $sortieRepository->findFiltered($filtres);
+
+
 
 //        dd($sortieFiltre);
         //$sortie = $sortieRepository->findAll();
