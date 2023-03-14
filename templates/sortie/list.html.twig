@@ -55,7 +55,7 @@
                     {% if (sortie.etat.libelle == 'Ouverte') and  not (app.user in sortie.users) %}
                         - <a href="{{ path('sortie_inscription', {'id': sortie.id}) }}">S'inscrire</a>
                     {% endif %}
-                    {% if (app.user in sortie.users) %}
+                    {% if (app.user in sortie.users) and (sortie.etat.libelle == 'Ouverte') %}
                         - <a href="{{ path('sortie_desinscription', {'id': sortie.id}) }}">Se désister</a>
                     {% endif %}
                     {% if app.user == sortie.user %}
