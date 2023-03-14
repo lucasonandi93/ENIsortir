@@ -181,22 +181,34 @@ class SortieController extends AbstractController
     public function inscriptionSortie(int $id, SortieRepository $sortieRepository): Response
     {
 
+
         // Récupération de la sortie
         $sortie = $sortieRepository->find($id);
 
-        // Récupération de l'utilisateur
+        // Vérification si la sortie est complète
+        if ($sortie->getUsers()->count() >= $sortie->getNbInscriptionMax()) {
+            $this->addFlash('error', 'La sortie est complète.');
+            return $this->redirectToRoute('sortie_list');
+        }
+        if (!($sortie->getEtat()->getLibelle() == "Ouverte")) {
+            $this->addFlash('error', "L'inscription n'est pas possible.");
+            return $this->redirectToRoute('sortie_list');
+        }
+
+        // Vérification si l'utilisateur est déjà inscrit
         $user = $this->getUser();
+        if ($sortie->getUsers()->contains($user)) {
+            $this->addFlash('error', 'Vous êtes déjà inscrit à cette sortie.');
+            return $this->redirectToRoute('sortie_list');
+        }
 
         // Inscription de l'utilisateur
         $sortie->addUser($user);
 
-
         $sortieRepository->save($sortie, true);
 
         // Retour de la réponse/la route
-
         return $this->redirectToRoute('sortie_list');
-        /*return new Response('Utilisateur inscrit');*/
     }
 
     #[Route('/desinscription/{id}', name: 'desinscription')]
