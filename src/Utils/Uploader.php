@@ -26,6 +26,7 @@ class Uploader
     {
         $sorties = $sortieRepository->findFiltered($filtres);
 
+
         $enCours = $etatRepository->findOneByLibelle("En cours");
         $termine = $etatRepository->findOneByLibelle("Terminée");
         $archive = $etatRepository->findOneByLibelle("Archivée");
@@ -47,10 +48,12 @@ class Uploader
                     $sortie->setEtat($termine);
                 } elseif ($dateAuj > $dateHeureDebut) {
                     $sortie->setEtat($enCours);
+
+                } elseif ( $sortie->getUsers()->count() == $sortie->getNbInscriptionMax()) {
+                    $sortie->setEtat($complet);
                 } else {
                     $sortie->setEtat($ouverte);
                 }
-
                 $entityManager->persist($sortie);
             }
         }
