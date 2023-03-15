@@ -13,7 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -71,52 +73,71 @@ class UserController extends AbstractController
     }
 
  #[Route('/edit/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function edit(SluggerInterface $slugger,Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader): Response
+ public function edit(SluggerInterface $slugger, Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader, TokenStorageInterface $tokenStorage): Response
  {
+     // Récupère l'utilisateur authentifié
+     $authenticatedUser = $tokenStorage->getToken()->getUser();
+
+     // Vérifie si l'utilisateur authentifié est le même que celui qui tente de mettre à jour le profil
+     if ($authenticatedUser->getId() !== $user->getId()) {
+         $this->addFlash('error', 'Vous n\'avez pas la permission de mettre à jour ce profil');
+         return $this->redirectToRoute('sortie_list');
+         // Redirige l'utilisateur vers une page d'erreur ou refuse l'accès
+
+     }
+
+     // Crée le formulaire de mise à jour de profil pour l'utilisateur
      $form = $this->createForm(UserType::class, $user);
      $form->handleRequest($request);
 
+     // Vérifie si le formulaire a été soumis et s'il est valide
      if ($form->isSubmitted() && $form->isValid()) {
-         if ($form->get('plainPassword')->getData() !== null) {
+         // Récupère le mot de passe en clair entré par l'utilisateur
+         $plainPassword = $form->get('plainPassword')->getData();
+
+         if ($plainPassword !== null) {
+             // Hache le mot de passe en clair avant de le stocker dans la base de données
              $user->setPassword(
-                 $userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData())
+                 $userPasswordHasher->hashPassword($user, $plainPassword)
              );
          }
 
-         /**
-          * @var UploadedFile $file
-          */
+         // Récupère le fichier photo téléchargé par l'utilisateur
+         $file = $form->get('photo')->getData();
 
-             $file = $form->get('photo')->getData();
          if ($file) {
+             // Récupère le nom de fichier d'origine sans l'extension
              $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+             // Génère un nom de fichier sûr à partir du nom de fichier d'origine
              $safeFileName = $slugger->slug($originalFileName);
+             // Ajoute un identifiant unique pour éviter les collisions de noms de fichiers
              $newFileName = $safeFileName . '-' . uniqid() . '.' . $file->guessExtension();
+
              try {
+                 // Déplace le fichier téléchargé vers le dossier de téléchargement spécifié
                  $file->move(
                      $this->getParameter('upload_photo'),
                      $newFileName
                  );
              } catch (FileException $e) {
-
+                 // Gère l'exception si le téléchargement de fichier échoue
              }
-             $user->setPhoto($newFileName);
-//            $newFileName = $uploader->upload(
-//                $file,
-//                $this->getParameter('upload_photo'),
-//                $user->getNom()
-//            );
+
+             // Met à jour le nom du fichier photo de l'utilisateur avec le nouveau nom de fichier généré
              $user->setPhoto($newFileName);
          }
 
-             $userRepository->save($user, true);
+         // Sauvegarde les modifications apportées à l'utilisateur dans la base de données
+         $userRepository->save($user, true);
 
-
+         // Redirige l'utilisateur vers la page de profil mise à jour
          return $this->redirectToRoute('profile_show', ['id' => $user->getId()]);
      }
-     return $this->renderForm('profile/edit.html.twig', [
+
+     // Affiche le formulaire de mise à jour de profil pour l'utilisateur
+     return $this->render('user/edit.html.twig', [
+         'userUpdateForm' => $form->createView(),
          'user' => $user,
-         'userUpdateForm' => $form,
      ]);
  }
 

@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
 
     public function addEtat(ObjectManager $manager)
     {
-        $etatLibelle = ['En cours', 'Ouverte', 'Clôturée', 'Créée', 'Passée', 'Annulée'];
+        $etatLibelle = ['En cours', 'Ouverte', 'Archivée', 'Créée', 'Terminée', 'Annulée', 'Complet'];
 
         foreach ($etatLibelle as $name) {
             $etat = new Etat();
@@ -178,14 +178,14 @@ class AppFixtures extends Fixture
                 ->setNom(implode(" ", $this->faker->words(3)))
                 ->setInfosSortie(implode(" ",$this->faker->words(15)))
                 ->setDuree($this->faker->numberBetween(30, 240))
-                ->setDateHeureDebut($this->faker->dateTimeBetween('now','+1 month'));
-                $date = clone  $sortie->getDateHeureDebut();
-                $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($date->modify('-1 week'), ($date->modify('+4 day'))))
+                ->setDateHeureDebut($this->faker->dateTimeBetween('-3 month','+1 month'));
+                $dateHeureDebut = clone  $sortie->getDateHeureDebut();
+                $sortie->setDateLimiteInscription($this->faker->dateTimeBetween($dateHeureDebut->modify('-1 week'), $dateHeureDebut))
                 ->setNbInscriptionMax($this->faker->numberBetween(10, 50))
                 ->setCampus($this->faker->randomElement($campus))
                 ->setLieu($this->faker->randomElement($lieu));
                 $ville = clone  $sortie->getLieu();
-                $sortie->setVille($ville->getVille()->getNom())
+                $sortie->setVille($ville->getVille())
                 ->setUser($this->faker->randomElement($user))
                 ->setEtat($this->faker->randomElement($etat));
 

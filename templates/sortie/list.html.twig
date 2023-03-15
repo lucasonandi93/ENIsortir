@@ -3,29 +3,52 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
 {% endblock %}
 
 {% block nav %}
-    <nav id="main-menu">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Store</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
 
     <input type="checkbox" id="hamburger-input" class="burger-shower" />
     <label id="hamburger-menu" for="hamburger-input">
         <nav id="sidebar-menu">
             <h3>Menu</h3>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Store</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                {% if app.user %}
+                    {# Ajout de l'encadré avec la photo de l'utilisateur #}
+                    <li class="navbar-item">
+                        {% if app.user.photo is not null %}
+                            <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
+                        {% endif %}
+                        <span>{{ app.user.nom }}</span>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/home.svg') }}">
+                        <a href="#">Accueil</a>
+                    </li>
+                    <br>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/user.svg') }}">
+                        <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
+                        <a href="{{ path('sortie_new') }}">Créer une sortie</a>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/bulleted-list.svg') }}">
+                        <a href="{{ path('sortie_list') }}">Liste des sorties</a>
+                    </li>
+
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/sign-out.svg') }}">
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                {% else %}
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_connect.png') }}">
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
     </label>
@@ -107,7 +130,9 @@
         </tr>
         </thead>
         <tbody>
+
         {% for sortie in sortieFiltre %}
+
             <tr>
                 <th scope="row">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>

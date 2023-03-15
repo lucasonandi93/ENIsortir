@@ -33,21 +33,6 @@ class SortieRepository extends ServiceEntityRepository
     }
 
 
-    // Fonction qui permet de set ma bdd avec la date m+1
-    public function findOldSorties($dates): array
-    {
-        $qb = $this->createQueryBuilder('s');
-        $qb
-            ->leftJoin('s.etat', 'etat')
-            ->addSelect('etat')
-            ->andWhere($qb->expr()->in('s.dateLimiteInscription', ':dates'))
-            ->andWhere('s.etat != :etat')
-            ->setParameter('dates', $dates)
-            ->setParameter('etat', 'Historisée');
-
-        return $qb->getQuery()->getResult();
-    }
-
 
     public function remove(Sortie $entity, bool $flush = false): void
     {
@@ -61,18 +46,16 @@ class SortieRepository extends ServiceEntityRepository
     public function findFiltered(ModeleFiltres $filters)
     {
         $qb = $this->createQueryBuilder('s');
-        $qb->Join('s.user', 'o')
-            ->addSelect('o')
+        $qb->select('s', 'o', 'etat', 'ins', 'lieu')
+            ->join('s.user', 'o')
             ->leftJoin('s.etat', 'etat')
-            ->addSelect('etat')
             ->leftJoin('s.users', 'ins')
-            ->addSelect('ins')
-            ->leftJoin('s.lieu', 'lieu')
-            ->addSelect('lieu');
+            ->leftJoin('s.lieu', 'lieu');
+
 
         if ($filters->getCampus()) {
             $qb->andWhere('s.campus = :campus')
-                ->setParameter('campus',$filters->getCampus());
+                ->setParameter('campus', $filters->getCampus());
         }
 
         if ($filters->getNom()) {
@@ -91,8 +74,7 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if ($filters->getSortieOrganisateur()) {
-            $qb->join('s.user', 'u')
-                ->andWhere('u.id = :user')
+            $qb->andWhere('o.id = :user')
                 ->setParameter('user', $filters->getSortieOrganisateur());
         }
 
@@ -109,14 +91,15 @@ class SortieRepository extends ServiceEntityRepository
         }
 
         if ($filters->getSortiePasses()) {
-            $qb->join('s.etat', 'e')
-                ->andWhere('e.libelle = :libelleEtat')
+            $qb->andWhere('etat.libelle = :libelleEtat')
                 ->setParameter('libelleEtat', 'Passée');
         } else {
-            $qb->join('s.etat', 'e')
-                ->andWhere('e.libelle != :libelleEtat')
+            $qb->andWhere('etat.libelle != :libelleEtat')
                 ->setParameter('libelleEtat', 'Passée');
         }
+
+        $qb->andWhere('etat.libelle != :libelleArchive')
+            ->setParameter('libelleArchive', 'Archivée');
 
         return $qb->getQuery()->getResult();
     }

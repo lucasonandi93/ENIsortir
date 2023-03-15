@@ -241,6 +241,9 @@ form {
     padding: 20px;
     margin-top: 50px;
 }
+.alert-danger{
+    background-color: orangered;
+}
 
 form input[type="text"],
 form input[type="datetime-local"],
