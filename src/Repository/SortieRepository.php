@@ -52,6 +52,7 @@ class SortieRepository extends ServiceEntityRepository
             ->leftJoin('s.users', 'ins')
             ->leftJoin('s.lieu', 'lieu');
 
+
         if ($filters->getCampus()) {
             $qb->andWhere('s.campus = :campus')
                 ->setParameter('campus', $filters->getCampus());

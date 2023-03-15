@@ -12,7 +12,7 @@
 }
 
 .navbar-miniature {
-    width: 30px;
+    width: 45px;
     height: auto;
     margin-right: 8px;
     vertical-align: middle;
@@ -23,8 +23,8 @@
 }
 
 .user-photo {
-    width: 90px; /* Ajustez la taille de la photo de profil */
-    height: 90px;
+    width: 120px; /* Ajustez la taille de la photo de profil */
+    height: auto;
     border-radius: 50%;
     margin-right: 8px;
     vertical-align: middle;
