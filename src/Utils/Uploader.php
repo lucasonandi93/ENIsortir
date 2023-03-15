@@ -32,7 +32,7 @@ class Uploader
         $ouverte = $etatRepository->findOneByLibelle("Ouverte");
 
         foreach ($sorties as $sortie) {
-            if ($sortie->getEtat()->getLibelle() !== 'Créee') {
+            if ($sortie->getEtat()->getLibelle() !== 'Créee' && $sortie->getEtat()->getLibelle() !== 'Annulée') {
                 $dateHeureDebut = clone $sortie->getDateHeureDebut();
                 $limiteAnt = clone $dateHeureDebut;
                 $limiteAnt->modify('+' . $sortie->getDuree() . 'minute');

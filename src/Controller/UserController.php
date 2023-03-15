@@ -75,59 +75,68 @@ class UserController extends AbstractController
  #[Route('/edit/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
  public function edit(SluggerInterface $slugger, Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader, TokenStorageInterface $tokenStorage): Response
  {
+     // Récupère l'utilisateur authentifié
      $authenticatedUser = $tokenStorage->getToken()->getUser();
 
-     // Verifica si el usuario autenticado es el mismo que intenta actualizar el perfil
+     // Vérifie si l'utilisateur authentifié est le même que celui qui tente de mettre à jour le profil
      if ($authenticatedUser->getId() !== $user->getId()) {
-         // Redirige al usuario a una página de error o niega el acceso
-         throw new AccessDeniedException('No tienes permiso para actualizar este perfil');
+         $this->addFlash('error', 'Vous n\'avez pas la permission de mettre à jour ce profil');
+         return $this->redirectToRoute('sortie_list');
+         // Redirige l'utilisateur vers une page d'erreur ou refuse l'accès
+
      }
 
+     // Crée le formulaire de mise à jour de profil pour l'utilisateur
      $form = $this->createForm(UserType::class, $user);
      $form->handleRequest($request);
 
+     // Vérifie si le formulaire a été soumis et s'il est valide
      if ($form->isSubmitted() && $form->isValid()) {
+         // Récupère le mot de passe en clair entré par l'utilisateur
          $plainPassword = $form->get('plainPassword')->getData();
 
          if ($plainPassword !== null) {
+             // Hache le mot de passe en clair avant de le stocker dans la base de données
              $user->setPassword(
                  $userPasswordHasher->hashPassword($user, $plainPassword)
              );
          }
 
+         // Récupère le fichier photo téléchargé par l'utilisateur
          $file = $form->get('photo')->getData();
 
          if ($file) {
+             // Récupère le nom de fichier d'origine sans l'extension
              $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-             // Genera un nombre de archivo seguro a partir del nombre de archivo original
+             // Génère un nom de fichier sûr à partir du nom de fichier d'origine
              $safeFileName = $slugger->slug($originalFileName);
-             // Agrega un identificador único para evitar colisiones de nombres de archivo
+             // Ajoute un identifiant unique pour éviter les collisions de noms de fichiers
              $newFileName = $safeFileName . '-' . uniqid() . '.' . $file->guessExtension();
 
              try {
-                 // Mueve el archivo cargado al directorio de carga especificado
+                 // Déplace le fichier téléchargé vers le dossier de téléchargement spécifié
                  $file->move(
                      $this->getParameter('upload_photo'),
                      $newFileName
                  );
              } catch (FileException $e) {
-                 // Maneja la excepción si falla la carga del archivo
+                 // Gère l'exception si le téléchargement de fichier échoue
              }
 
-             // Actualiza el nombre del archivo de foto del usuario con el nuevo nombre de archivo generado
+             // Met à jour le nom du fichier photo de l'utilisateur avec le nouveau nom de fichier généré
              $user->setPhoto($newFileName);
          }
 
-         // Guarda los cambios realizados en el usuario en la base de datos
+         // Sauvegarde les modifications apportées à l'utilisateur dans la base de données
          $userRepository->save($user, true);
 
-         // Redirige al usuario a la página de perfil actualizada
+         // Redirige l'utilisateur vers la page de profil mise à jour
          return $this->redirectToRoute('profile_show', ['id' => $user->getId()]);
      }
 
-     // Muestra el formulario de actualización de perfil para el usuario
+     // Affiche le formulaire de mise à jour de profil pour l'utilisateur
      return $this->render('user/edit.html.twig', [
-         'form' => $form->createView(),
+         'userUpdateForm' => $form->createView(),
          'user' => $user,
      ]);
  }
