@@ -1,0 +1,19 @@
+/* navbar.css */
+
+.navbar-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-item img {
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar-miniature {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
