@@ -13,7 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -71,52 +73,62 @@ class UserController extends AbstractController
     }
 
  #[Route('/edit/{id}', name: 'update', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
-    public function edit(SluggerInterface $slugger,Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader): Response
+ public function edit(SluggerInterface $slugger, Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, Uploader $uploader, TokenStorageInterface $tokenStorage): Response
  {
+     $authenticatedUser = $tokenStorage->getToken()->getUser();
+
+     // Verifica si el usuario autenticado es el mismo que intenta actualizar el perfil
+     if ($authenticatedUser->getId() !== $user->getId()) {
+         // Redirige al usuario a una página de error o niega el acceso
+         throw new AccessDeniedException('No tienes permiso para actualizar este perfil');
+     }
+
      $form = $this->createForm(UserType::class, $user);
      $form->handleRequest($request);
 
      if ($form->isSubmitted() && $form->isValid()) {
-         if ($form->get('plainPassword')->getData() !== null) {
+         $plainPassword = $form->get('plainPassword')->getData();
+
+         if ($plainPassword !== null) {
              $user->setPassword(
-                 $userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData())
+                 $userPasswordHasher->hashPassword($user, $plainPassword)
              );
          }
 
-         /**
-          * @var UploadedFile $file
-          */
+         $file = $form->get('photo')->getData();
 
-             $file = $form->get('photo')->getData();
          if ($file) {
              $originalFileName = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+             // Genera un nombre de archivo seguro a partir del nombre de archivo original
              $safeFileName = $slugger->slug($originalFileName);
+             // Agrega un identificador único para evitar colisiones de nombres de archivo
              $newFileName = $safeFileName . '-' . uniqid() . '.' . $file->guessExtension();
+
              try {
+                 // Mueve el archivo cargado al directorio de carga especificado
                  $file->move(
                      $this->getParameter('upload_photo'),
                      $newFileName
                  );
              } catch (FileException $e) {
-
+                 // Maneja la excepción si falla la carga del archivo
              }
-             $user->setPhoto($newFileName);
-//            $newFileName = $uploader->upload(
-//                $file,
-//                $this->getParameter('upload_photo'),
-//                $user->getNom()
-//            );
+
+             // Actualiza el nombre del archivo de foto del usuario con el nuevo nombre de archivo generado
              $user->setPhoto($newFileName);
          }
 
-             $userRepository->save($user, true);
+         // Guarda los cambios realizados en el usuario en la base de datos
+         $userRepository->save($user, true);
 
-
+         // Redirige al usuario a la página de perfil actualizada
          return $this->redirectToRoute('profile_show', ['id' => $user->getId()]);
      }
-     return $this->renderForm('profile/edit.html.twig', [
+
+     // Muestra el formulario de actualización de perfil para el usuario
+     return $this->render('user/edit.html.twig', [
+         'form' => $form->createView(),
          'user' => $user,
-         'userUpdateForm' => $form,
      ]);
  }
 
