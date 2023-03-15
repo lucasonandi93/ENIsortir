@@ -5,7 +5,38 @@ body {
     margin: 0px;
     font-size: 20px;
     min-height: 200vh;
-    font-family: 'Cabin', Sans-serif;
+    line-height: 1.6;
+    font-family: 'Cabin', 'Arial', Sans-serif;
+}
+
+.modifB {
+    margin-right: 3%;
+}
+
+.container2bis {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexer {
+    display: flex;
+    padding-left: 35%;
+
+}
+
+.submitB {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 47%;
+
+}
+
+.flexerCol {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+    text-align: center;
 }
 
 .overlay{
@@ -132,22 +163,82 @@ body {
 }
 
 
+/* Styles pour le container 1 */
 .container1 {
-    margin-left: 17%;
-}
-.container2 {
-    margin-left: 17%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left: 0%;
 }
 
+.container2 {
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+/* Styles pour le titre */
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le formulaire */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Styles pour les champs de formulaire */
+label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+select, input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Styles pour le bouton */
+button {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #5DA5A4;
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+
+button:hover {
+    background-color: #3e8e41;
+}
+
+
+
 /* Form */
+container {
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    border-radius: 8px;
+}
+
 form {
     display: flex;
     flex-direction: column;
     max-width: 600px;
     width: 100%;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0,0,0,.1);
-    border-radius: 8px;
     margin-top: 50px;
 }
 
@@ -212,7 +303,131 @@ a button:hover {
     background-color: #b3b3b3;
 }
 
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: #5a98d6;
+}
+
+/* Tableau */
+.table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    font-size: 0.9em;
+}
+/* Ajouter cette classe pour rendre le tableau défilant */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table thead th {
+    background-color: #5a98d6;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+}
+
+.table tbody td {
+    border-top: 1px solid #dddddd;
+    padding: 10px;
+}
+
+.table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table tbody tr:hover {
+    background-color: #dddddd;
+}
+
+.table-gradient {
+    background-image: linear-gradient(to right, #5a98d6 0%, #f3f3f3 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 20px;
+}
+
+.addBouton {
+    margin-left: 45%;
+    margin-bottom: 25px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #5DA5A4;
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+
 @media screen and (max-width: 600px) {
+
+    .flexer {
+        display: flex;
+        padding-left: 10%;
+
+    }
+
+    .submitB {
+        margin-left: 37%;
+    }
+
+    .container1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .container2 {
+        margin-left: 0%;
+        margin-right: 0%;
+
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+
+    /* styles pour le menu hamburger */
+    #hamburger-menu {
+        display: inline;
+    }
+
+    #main-menu {
+        height: auto;
+        display: none;
+        background: none;
+    }
+
+    #main-menu ul {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #main-menu li {
+        font-size: 1.5rem;
+        margin: 10px 0;
+    }
+
+    #hamburger-input:checked + #hamburger-menu #sidebar-menu {
+        left: 0;
+    }
+
+    /* styles pour le formulaire */
+    form {
+        max-width: 100%;
+    }
+
     form input[type="text"],
     form input[type="datetime-local"],
     form input[type="number"],
@@ -228,5 +443,39 @@ a button:hover {
         font-size: 14px;
     }
 
+    .table thead {
+        display: none;
+    }
 
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table tr {
+        margin-bottom: 15px;
+    }
+
+    .table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        text-align: center;
+    }
+
+    .table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        padding-left: 10px;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.8em;
+
+    }
+
+    .table td:last-child {
+        border-bottom: 1px solid #dddddd;
+    }
 }
+
