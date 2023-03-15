@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annuler une sortie{% endblock %}
+
+{% block body %}
+    <h1>Annuler la sortie "{{ sortie.nom }}"</h1>
+
+    {% if sortie.dateHeureDebut >= "now"|date %}
+        {{ form_start(form) }}
+        {{ form_row(form.motif) }}
+        {{ form_row(form.annuler) }}
+        {{ form_end(form) }}
+    {% else %}
+        <p>Impossible d'annuler une sortie déjà commencée</p>
+    {% endif %}
+{% endblock %}
