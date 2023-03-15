@@ -1,4 +1,5 @@
 
+
 #hamburger-input{
     display: none;
 }
@@ -8,6 +9,7 @@
     top: 20px;
     left: 20px;
     width: 50px;
+    z-index: 999;
     height: 50px;
     display: inline;
     border: none;
@@ -17,11 +19,12 @@
     background: linear-gradient(
             to bottom,
             #3D0E61, #3D0E61 20%,
-            white 20%, white 40%,
+            transparent 20%, transparent 40%,
             #3D0E61 40%, #3D0E61 60%,
-            white 60%, white 80%,
+            transparent 60%, transparent 80%,
             #3D0E61 80%, #3D0E61 100%
     );
+
 }
 
 #hamburger-menu #sidebar-menu {
