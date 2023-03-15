@@ -2,10 +2,9 @@
 
 
 {% block header %}
-    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleList.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
-    <script src="{{ asset('assets/JS/deroulant.js') }}" defer></script>
 {% endblock %}
 
 {% block nav %}
@@ -58,10 +57,8 @@
     <div class="overlay"></div>
 {% endblock %}
 
-
 {% block body %}
-<div class="allContainer">
- <div class="container">
+ <div class="containter">
     <div class="container1">
         {{ form_start(filtre) }}
 
@@ -84,8 +81,8 @@
         {{ form_widget(filtre.dateCloture) }}
 
         </div>
-    </div>
 
+    </div>
 
     <div class="container2bis">
         <div class="flexer">
@@ -113,6 +110,8 @@
             {{ form_widget(filtre.sortiePasses) }}
             </div>
              {{ form_label(filtre.sortiePasses) }}
+
+
         </div>
     </div>
     </div>
@@ -122,7 +121,6 @@
  </div>
 
     <br>
-
 <div class="container2">
     <div class="table-responsive">
     <table class="table table-striped table-hover table-gradient table-wrapper">
@@ -191,7 +189,5 @@
 {% block title %}
     {{ parent() }} | Liste des sorties
 {% endblock %}
-
-
 
 
