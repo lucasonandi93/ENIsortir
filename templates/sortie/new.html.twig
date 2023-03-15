@@ -10,68 +10,46 @@
 
 {% endblock %}
 
-{% block nav %}
-
-    <input type="checkbox" id="hamburger-input" class="burger-shower" />
-    <label id="hamburger-menu" for="hamburger-input">
-        <nav id="sidebar-menu">
-            <h3>Menu</h3>
-            <ul>
-                {% if app.user %}
-                    {# Ajout de l'encadré avec la photo de l'utilisateur #}
-                    <li class="navbar-item">
-                        {% if app.user.photo is not null %}
-                            <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
-                        {% endif %}
-                        <span>{{ app.user.nom }}</span>
-                    </li>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/home.svg') }}">
-                        <a href="{{ path('sortie_list') }}"">Accueil</a>
-                    </li>
-                    <br>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/user.svg') }}">
-                        <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
-                    </li>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
-                        <a href="{{ path('sortie_new') }}">Créer une sortie</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/sign-out.svg') }}">
-                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </li>
-                {% else %}
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_connect.png') }}">
-                        <a href="{{ path('app_login') }}">Se connecter</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </label>
-
-    <div class="overlay"></div>
-{% endblock %}
-
 {% block body %}
 
 <div class="container">
     <h2>Créer une sortie</h2>
     {{ form_start(sortieForm, { 'attr': {'class': 'container'} }) }}
 
+    <fieldset>
+        <div class="margin-top">
     {{ form_row(sortieForm.nom) }}
+        </div>
+        <div class="margin-top">
     {{ form_row(sortieForm.dateHeureDebut) }}
+        </div>
+            <div class="margin-top">
     {{ form_row(sortieForm.dateLimiteInscription) }}
+            </div>
+                <div class="margin-top">
     {{ form_row(sortieForm.nbInscriptionMax) }}
+                </div>
+                    <div class="margin-top">
     {{ form_row(sortieForm.duree) }}
+                    </div>
+                        <div class="margin-top">
     {{ form_row(sortieForm.infosSortie) }}
+                        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Localisation</legend>
+        <div class="margin-top">
     {{ form_row(sortieForm.campus) }}
+        </div>
+            <div class="margin-top">
     {{ form_row(sortieForm.ville) }}
+            </div>
+                <div class="margin-top">
     {{ form_row(sortieForm.lieu) }} <a href="{{ path('app_lieu_new') }}">+</a>
-    <script>
+                </div>
+    </fieldset>
+        <script>
         // Recupera el elemento select con id "sortie_ville"
         let selectVille = document.getElementById('sortie_ville');
 
