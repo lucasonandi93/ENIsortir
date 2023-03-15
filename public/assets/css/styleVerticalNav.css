@@ -3,17 +3,29 @@
 .navbar-item {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .navbar-item img {
     margin-right: 10px;
-    width: 30px;
-    height: 30px;
     border-radius: 50%;
 }
 
 .navbar-miniature {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: auto;
     margin-right: 8px;
+    vertical-align: middle;
+}
+
+.navbar-item:hover {
+    background-color: rgba(0, 0, 0, 0.1); /* Ajout d'un effet hover à la navbar */
+}
+
+.user-photo {
+    width: 90px; /* Ajustez la taille de la photo de profil */
+    height: 90px;
+    border-radius: 50%;
+    margin-right: 8px;
+    vertical-align: middle;
 }
