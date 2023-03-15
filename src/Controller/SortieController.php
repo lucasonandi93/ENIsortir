@@ -35,25 +35,7 @@ class SortieController extends AbstractController
     #[Route('/list', name: 'list')]
     public function profile(EntityManagerInterface $entityManager, EtatRepository $etatRepository, Uploader $etatSorties, SortieRepository $sortieRepository, Request $request): Response
     {
-        // Mettre à jour les sorties qui datent de plus de 1 mois
 
-        $date = new \DateTime();
-        $date->sub(new \DateInterval('P1M')); // soustraire 1 mois
-
-        $sorties = $sortieRepository->findOldSorties($date);
-
-        foreach ($sorties as $sortie) {
-            $etatHistorise = $entityManager->getRepository(Etat::class)->findOneBy(['libelle' => 'Historisée']);
-
-            if (!$etatHistorise) {
-                $etatHistorise = new Etat();
-                $etatHistorise->setLibelle('Historisée');
-                $entityManager->persist($etatHistorise);
-            }
-
-            $sortie->setEtat($etatHistorise);
-            $entityManager->flush();
-        }
 
         // Debut des filtes
 

@@ -27,9 +27,10 @@ class Uploader
         $sorties = $sortieRepository->findFiltered($filtres);
 
         $enCours = $etatRepository->findOneByLibelle("En cours");
-        $passee = $etatRepository->findOneByLibelle("Passée");
-        $cloturee = $etatRepository->findOneByLibelle("Clôturée");
+        $termine = $etatRepository->findOneByLibelle("Terminée");
+        $archive = $etatRepository->findOneByLibelle("Archivée");
         $ouverte = $etatRepository->findOneByLibelle("Ouverte");
+        $complet = $etatRepository->findOneByLibelle("Complet");
 
         foreach ($sorties as $sortie) {
             if ($sortie->getEtat()->getLibelle() !== 'Créee') {
@@ -41,9 +42,9 @@ class Uploader
                 $dateAuj = new \DateTime();
 
                 if ($dateAuj > $limitePost) {
-                    $sortie->setEtat($cloturee);
+                    $sortie->setEtat($archive);
                 } elseif ($dateAuj > $limiteAnt) {
-                    $sortie->setEtat($passee);
+                    $sortie->setEtat($termine);
                 } elseif ($dateAuj > $dateHeureDebut) {
                     $sortie->setEtat($enCours);
                 } else {

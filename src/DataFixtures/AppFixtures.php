@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
 
     public function addEtat(ObjectManager $manager)
     {
-        $etatLibelle = ['En cours', 'Ouverte', 'Clôturée', 'Créée', 'Passée', 'Annulée'];
+        $etatLibelle = ['En cours', 'Ouverte', 'Archivée', 'Créée', 'Terminée', 'Annulée', 'Complet'];
 
         foreach ($etatLibelle as $name) {
             $etat = new Etat();
