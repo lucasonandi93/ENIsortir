@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Initialisez la carte et la vue...
-// ...
+
 
 // Ajoutez un marqueur à la carte et mettez à jour les champs de formulaire
 // avec les coordonnées du marqueur et l'adresse complète
