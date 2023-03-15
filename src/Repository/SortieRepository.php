@@ -52,6 +52,9 @@ class SortieRepository extends ServiceEntityRepository
             ->leftJoin('s.users', 'ins')
             ->leftJoin('s.lieu', 'lieu');
 
+        $libellesEtat = ['En cours', 'Terminée','Créée','Annulée', 'Ouverte', 'Complet'];
+        $qb->andWhere('etat.libelle IN (:libellesEtat)')
+            ->setParameter('libellesEtat', $libellesEtat);
 
         if ($filters->getCampus()) {
             $qb->andWhere('s.campus = :campus')
@@ -97,9 +100,6 @@ class SortieRepository extends ServiceEntityRepository
             $qb->andWhere('etat.libelle != :libelleEtat')
                 ->setParameter('libelleEtat', 'Passée');
         }
-
-        $qb->andWhere('etat.libelle != :libelleArchive')
-            ->setParameter('libelleArchive', 'Archivée');
 
         return $qb->getQuery()->getResult();
     }

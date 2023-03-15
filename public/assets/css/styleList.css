@@ -4,9 +4,30 @@ body {
     padding: 0px;
     margin: 0px;
     font-size: 20px;
-    min-height: 200vh;
     line-height: 1.6;
     font-family: 'Cabin', 'Arial', Sans-serif;
+
+}
+
+.table-wrapper thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* changez la couleur de fond selon vos besoins */
+    z-index: 990;
+}
+
+
+.flexerContainer {
+    display: flex;
+}
+
+.allContainer {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: bottom 10px right 10px;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
 }
 
 .modifB {
@@ -123,6 +144,7 @@ button:hover {
 container {
     box-shadow: 0 4px 6px rgba(0,0,0,.1);
     border-radius: 8px;
+    display: flex;
 }
 
 form {
@@ -211,18 +233,16 @@ a:hover {
 .table {
     width: 100%;
     margin-top: 20px;
+    background-color: white;
     border-collapse: collapse;
     font-size: 0.9em;
+    color: black;
 }
 /* Ajouter cette classe pour rendre le tableau défilant */
-.table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
 
 .table thead th {
     background-color: #5a98d6;
-    color: #ffffff;
+    color: #f3f3f3;
     text-align: left;
     padding: 10px;
 }
@@ -230,6 +250,7 @@ a:hover {
 .table tbody td {
     border-top: 1px solid #dddddd;
     padding: 10px;
+    color: black;
 }
 
 .table tbody tr:nth-of-type(even) {
@@ -257,6 +278,13 @@ a:hover {
     background-color: #5DA5A4;
     color: #fff;
     transition: background-color 0.2s ease;
+}
+
+.table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-height: 370px;
+    margin-bottom: 5%;
 }
 
 @media screen and (max-width: 600px) {
@@ -290,6 +318,7 @@ a:hover {
     .table-responsive {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
+        max-height: 200px;
     }
 
 

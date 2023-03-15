@@ -2,7 +2,7 @@
 
 
 {% block header %}
-    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleList.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
 {% endblock %}
@@ -65,6 +65,11 @@
         {{ form_label(filtre.campus) }}
         {{ form_widget(filtre.campus) }}
 
+
+
+
+<div class="flexerContainer">
+    <div class="container3">
         <div class="flexerCol">
         {{ form_label(filtre.nom) }}
         {{ form_widget(filtre.nom) }}
@@ -109,6 +114,7 @@
 
         </div>
     </div>
+    </div>
         <button class="submitB">Rechercher</button>
 
         {{ form_end(filtre) }}
@@ -134,7 +140,7 @@
 
         {% for sortie in sortieFiltre %}
 
-            <tr>
+            <tr data-index="{{ loop.index }}" >
                 <th scope="row">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
                 <td>{{ sortie.dateLimiteInscription|date('d/m/y H:i') }}</td>
@@ -175,6 +181,7 @@
     </table>
     {# TODO penser à mettre le lien dans le href #}
     <a href="{{ path('sortie_new') }}"><button class="addBouton">Créer une sortie</button></a>
+</div>
 </div>
 </div>
     {% endblock %}
