@@ -79,7 +79,9 @@
         </tr>
         </thead>
         <tbody>
+
         {% for sortie in sortieFiltre %}
+
             <tr>
                 <th scope="row">{{ sortie.nom|capitalize }}</a></th>
                 <td>{{ sortie.dateHeureDebut|date('d/m/Y h:i') }}</td>
