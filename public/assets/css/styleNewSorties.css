@@ -1,381 +1,97 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
+/* Reset des marges et des paddings */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
+/* Style général */
 body {
-    padding: 0px;
-    margin: 0px;
-    font-size: 20px;
-    line-height: 1.6;
-    font-family: 'Cabin', 'Arial', Sans-serif;
-
-}
-
-.table-wrapper thead th {
-    position: sticky;
-    top: 0;
-    background-color: #fff; /* changez la couleur de fond selon vos besoins */
-    z-index: 990;
-}
-
-
-.flexerContainer {
-    display: flex;
-}
-
-.allContainer {
-    background-image: url("../img/background/background-home.png");
-    background-repeat: no-repeat;
-    background-position: bottom 10px right 10px;
-    height: 100%;
-    width: 100%;
-    background-size: cover;
-}
-
-.modifB {
-    margin-right: 3%;
-}
-
-.container2bis {
-    display: flex;
-    flex-direction: column;
-}
-
-.flexer {
-    display: flex;
-    padding-left: 35%;
-
-}
-
-.submitB {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 47%;
-
-}
-
-.flexerCol {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 5%;
-    text-align: center;
-}
-
-.overlay{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity .35s, visibility .35s, height .35s;
-    overflow: hidden;
-    background: black;
-    z-index: -1;
+    font-family: Arial, sans-serif;
 }
 
 
 
-/* Styles pour le container 1 */
-.container1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-left: 0%;
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.container2 {
-    margin-left: 5%;
-    margin-right: 5%;
-
-}
-
-/* Styles pour le titre */
 h2 {
-    font-size: 24px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Style du fieldset */
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+/* Espacement des éléments du formulaire */
+form.container .form-group {
+    margin-bottom: 30px;
+}
+
+
+/* Centrer le formulaire */
+form.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style des éléments de formulaire */
+form.container .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
     margin-bottom: 20px;
 }
 
-/* Styles pour le formulaire */
-form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Styles pour les champs de formulaire */
-label {
-    display: block;
-    font-size: 16px;
+form.container label {
     margin-bottom: 10px;
 }
 
-select, input[type="text"], input[type="number"] {
+form.container input, form.container select {
     width: 100%;
     padding: 10px;
-    border: none;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 16px;
-    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-/* Styles pour le bouton */
+/* Style des boutons */
 button {
-    border: none;
     padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    border: none;
     border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    transition: background-color 0.2s ease;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 button:hover {
-    background-color: #3e8e41;
+    background-color: #45a049;
 }
 
-
-
-/* Form */
-container {
-    box-shadow: 0 4px 6px rgba(0,0,0,.1);
-    border-radius: 8px;
-    display: flex;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    width: 100%;
-    padding: 20px;
-    margin-top: 50px;
-}
-.alert-danger{
-    background-color: orangered;
-}
-
-form input[type="text"],
-form input[type="datetime-local"],
-form input[type="number"],
-form textarea {
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-}
-
-form select {
-    padding: 10px;
-    margin-bottom: 20px;
-    width: 100%;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 4 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2 5L0 1h4l-2 4z' fill='%2396A1AF'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px top 50%;
-    background-size: 10px auto;
-}
-
-form input[type="checkbox"] {
-    margin: 10px 0 20px;
-}
-
-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-form button:hover {
-    background-color: #4c8f8e;
-}
-
-a button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ccc;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-a button:hover {
-    background-color: #b3b3b3;
-}
-
-a {
-    text-decoration: none;
-    color: #333;
-}
-
-a:hover {
-    color: #5a98d6;
-}
-
-/* Tableau */
-.table {
-    width: 100%;
-    margin-top: 20px;
-    background-color: white;
-    border-collapse: collapse;
-    font-size: 0.9em;
-    color: black;
-}
-/* Ajouter cette classe pour rendre le tableau défilant */
-
-.table thead th {
-    background-color: #5a98d6;
-    color: #f3f3f3;
-    text-align: left;
-    padding: 10px;
-}
-
-.table tbody td {
-    border-top: 1px solid #dddddd;
-    padding: 10px;
-    color: black;
-}
-
-.table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
-.table tbody tr:hover {
-    background-color: #dddddd;
-}
-
-.table-gradient {
-    background-image: linear-gradient(to right, #5a98d6 0%, #f3f3f3 100%);
-    background-repeat: no-repeat;
-    background-size: 100% 20px;
-}
-
-.addBouton {
-    margin-left: 45%;
-    margin-bottom: 25px;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    transition: background-color 0.2s ease;
-}
-
-.table-responsive {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    max-height: 370px;
-    margin-bottom: 5%;
-}
-
-@media screen and (max-width: 600px) {
-
-    .flexer {
-        display: flex;
-        padding-left: 10%;
-
-    }
-
-    .submitB {
-        margin-left: 37%;
-    }
-
-    .container1 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .container2 {
-        margin-left: 0%;
-        margin-right: 0%;
-
-    }
-
-    body {
-        font-size: 16px;
-    }
-
-    .table-responsive {
-        overflow-x: auto !important;
-        -webkit-overflow-scrolling: touch;
-        max-height: 200px;
-    }
-
-
-
-    /* styles pour le formulaire */
-    form {
-        max-width: 100%;
-    }
-
-    form input[type="text"],
-    form input[type="datetime-local"],
-    form input[type="number"],
-    form textarea {
-        font-size: 14px;
-    }
-
-    form button {
-        font-size: 14px;
-    }
-
-    a button {
-        font-size: 14px;
-    }
-
-    .table thead {
-        display: none;
-    }
-
-    .table, .table tbody, .table tr, .table td {
-        display: block;
-        width: 100%;
-    }
-
-    .table tr {
-        margin-bottom: 15px;
-    }
-
-    .table td {
-        text-align: right;
-        padding-left: 50%;
-        position: relative;
-        text-align: center;
-    }
-
-    .table td::before {
-        content: attr(data-label);
-        position: absolute;
-        left: 0;
-        padding-left: 10px;
-        font-weight: bold;
-        text-transform: uppercase;
-        font-size: 0.8em;
-
-    }
-
-    .table td:last-child {
-        border-bottom: 1px solid #dddddd;
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
     }
 }
-
