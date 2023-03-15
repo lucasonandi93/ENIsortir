@@ -82,7 +82,7 @@ class AppFixtures extends Fixture
             ->setEmail('admin@admin.admin')
             ->setTelephone($this->faker->phoneNumber)
             ->setUsername('adminator')
-            ->setRoles();
+            ->setRoles(['ROLE_ADMIN']);
 
 
 
@@ -112,7 +112,8 @@ class AppFixtures extends Fixture
                 ->setPrenom($this->faker->name)
                 ->setEmail($this->faker->email)
                 ->setTelephone($this->faker->phoneNumber)
-                ->setUsername($this->faker->userName);
+                ->setUsername($this->faker->userName)
+                ->setRoles(['ROLE_USER']);
 
 
 
@@ -207,6 +208,6 @@ class AppFixtures extends Fixture
         $this->addEtat($manager);
         $this->addUser(50);
         $this->addSortie(50);
-        //TODO ajouter la methode addAdmin
+        $this->addAdmin();
     }
 }

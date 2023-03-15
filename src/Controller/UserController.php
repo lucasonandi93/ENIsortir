@@ -135,7 +135,7 @@ class UserController extends AbstractController
      }
 
      // Affiche le formulaire de mise à jour de profil pour l'utilisateur
-     return $this->render('user/edit.html.twig', [
+     return $this->render('profile/edit.html.twig', [
          'userUpdateForm' => $form->createView(),
          'user' => $user,
      ]);
