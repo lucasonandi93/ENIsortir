@@ -1,3 +1,12 @@
+body {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: bottom 10px right 10px;
+    height: 100%;
+    width: 100%;
+
+}
+
 /* Tableau responsive */
 table {
     width: 100%;
@@ -97,9 +106,7 @@ th:last-child {
     background-color: #f9f9f9;
 }
 
-body{
-    background-image: linear-gradient(to right, #243949 0%, #517fa4 100%);
-}
+
 
 h1{
     text-align:center ;

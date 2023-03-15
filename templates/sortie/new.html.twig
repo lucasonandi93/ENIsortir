@@ -3,25 +3,53 @@
 {% block title %}
     {{ parent() }} | Créer une sortie
 {% endblock %}
-{% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSortie.css') }}">
+{% block header %}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSorties.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+
 {% endblock %}
+
 {% block body %}
 
 <div class="container">
     <h2>Créer une sortie</h2>
     {{ form_start(sortieForm, { 'attr': {'class': 'container'} }) }}
 
+    <fieldset>
+        <div class="margin-top">
     {{ form_row(sortieForm.nom) }}
+        </div>
+        <div class="margin-top">
     {{ form_row(sortieForm.dateHeureDebut) }}
+        </div>
+            <div class="margin-top">
     {{ form_row(sortieForm.dateLimiteInscription) }}
+            </div>
+                <div class="margin-top">
     {{ form_row(sortieForm.nbInscriptionMax) }}
+                </div>
+                    <div class="margin-top">
     {{ form_row(sortieForm.duree) }}
+                    </div>
+                        <div class="margin-top">
     {{ form_row(sortieForm.infosSortie) }}
+                        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Localisation</legend>
+        <div class="margin-top">
     {{ form_row(sortieForm.campus) }}
+        </div>
+            <div class="margin-top">
     {{ form_row(sortieForm.ville) }}
+            </div>
+                <div class="margin-top">
     {{ form_row(sortieForm.lieu) }} <a href="{{ path('app_lieu_new') }}">+</a>
-    <script>
+                </div>
+    </fieldset>
+        <script>
         // Recupera el elemento select con id "sortie_ville"
         let selectVille = document.getElementById('sortie_ville');
 

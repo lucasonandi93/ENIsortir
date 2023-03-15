@@ -4,9 +4,30 @@ body {
     padding: 0px;
     margin: 0px;
     font-size: 20px;
-    min-height: 200vh;
     line-height: 1.6;
     font-family: 'Cabin', 'Arial', Sans-serif;
+
+}
+
+.table-wrapper thead th {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* changez la couleur de fond selon vos besoins */
+    z-index: 990;
+}
+
+
+.flexerContainer {
+    display: flex;
+}
+
+.allContainer {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: bottom 10px right 10px;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
 }
 
 .modifB {
@@ -53,114 +74,6 @@ body {
     z-index: -1;
 }
 
-
-
-#main-menu {
-    display: none;
-    height: 100px;
-    width: 100%;
-    background: #3D0E61;
-    margin: 0px;
-    z-index: 9;
-}
-
-#main-menu ul {
-    max-width: 800px;
-    width: 100%;
-    height: 100%;
-    margin: 0px auto;
-    padding: 0px;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    z-index: 9;
-}
-
-#main-menu li {
-    list-style-type: none;
-    font-size: 2rem;
-}
-
-#main-menu a {
-    color: #B9FAF8;
-    font-size: 1.5rem;
-    text-decoration: none;
-}
-
-#main-menu a:hover {
-    text-decoration: underline;
-}
-
-#hamburger-input{
-    display: none;
-}
-
-#hamburger-menu {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    display: inline;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Cabin', Sans-serif;
-    background: linear-gradient(
-            to bottom,
-            #3D0E61, #3D0E61 20%,
-            white 20%, white 40%,
-            #3D0E61 40%, #3D0E61 60%,
-            white 60%, white 80%,
-            #3D0E61 80%, #3D0E61 100%
-    );
-}
-
-#hamburger-menu #sidebar-menu {
-    visibility: hidden;
-    position: fixed;
-    top: 0;
-    left: -250px;
-    width: 200px;
-    height: 100%;
-    background-color: #3D0E61;
-    transition: 0.3s;
-    padding: 0px 10px;
-    box-sizing: border-box;
-}
-
-#hamburger-menu h3 {
-    color: #B9FAF8;
-    font-size: 2.2rem;
-}
-
-#hamburger-menu ul {
-    padding-left: 0px;
-}
-
-#hamburger-menu li {
-    list-style-type: none;
-    line-height: 3rem;
-}
-
-#hamburger-menu a {
-    color: #B9FAF8;
-    font-size: 1.3rem;
-    text-decoration: none;
-}
-
-#hamburger-menu a:hover {
-    text-decoration: underline;
-}
-
-#hamburger-input:checked + #hamburger-menu #sidebar-menu {
-    visibility: visible;
-    left: 0;
-}
-#hamburger-input:checked ~ .overlay{
-    visibility: visible;
-    opacity: 0.4;
-}
 
 
 /* Styles pour le container 1 */
@@ -231,6 +144,7 @@ button:hover {
 container {
     box-shadow: 0 4px 6px rgba(0,0,0,.1);
     border-radius: 8px;
+    display: flex;
 }
 
 form {
@@ -319,18 +233,16 @@ a:hover {
 .table {
     width: 100%;
     margin-top: 20px;
+    background-color: white;
     border-collapse: collapse;
     font-size: 0.9em;
+    color: black;
 }
 /* Ajouter cette classe pour rendre le tableau défilant */
-.table-responsive {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
 
 .table thead th {
     background-color: #5a98d6;
-    color: #ffffff;
+    color: #f3f3f3;
     text-align: left;
     padding: 10px;
 }
@@ -338,6 +250,7 @@ a:hover {
 .table tbody td {
     border-top: 1px solid #dddddd;
     padding: 10px;
+    color: black;
 }
 
 .table tbody tr:nth-of-type(even) {
@@ -365,6 +278,13 @@ a:hover {
     background-color: #5DA5A4;
     color: #fff;
     transition: background-color 0.2s ease;
+}
+
+.table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-height: 370px;
+    margin-bottom: 5%;
 }
 
 @media screen and (max-width: 600px) {
@@ -398,33 +318,10 @@ a:hover {
     .table-responsive {
         overflow-x: auto !important;
         -webkit-overflow-scrolling: touch;
+        max-height: 200px;
     }
 
 
-    /* styles pour le menu hamburger */
-    #hamburger-menu {
-        display: inline;
-    }
-
-    #main-menu {
-        height: auto;
-        display: none;
-        background: none;
-    }
-
-    #main-menu ul {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #main-menu li {
-        font-size: 1.5rem;
-        margin: 10px 0;
-    }
-
-    #hamburger-input:checked + #hamburger-menu #sidebar-menu {
-        left: 0;
-    }
 
     /* styles pour le formulaire */
     form {
