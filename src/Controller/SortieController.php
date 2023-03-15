@@ -123,6 +123,7 @@ class SortieController extends AbstractController
     }
 
 
+
     #[Route('/{id}', name: 'details')]
     public function show(int $id, SortieRepository $sortieRepository): Response
     {
@@ -162,6 +163,21 @@ class SortieController extends AbstractController
             'sortie' => $sortie,
             'form' => $form->createView(),
         ]);
+    }
+
+    #[Route('/publier/{id}', name: 'publier')]
+    public function Publier(int $id, SortieRepository $sortieRepository, EtatRepository $etatRepository)
+    {
+        $sortie = $sortieRepository->find($id);
+
+        $etat = $etatRepository->findOneBy(['libelle' => 'Ouverte']);
+
+        $sortie->setEtat($etat);
+
+        $sortieRepository->save($sortie, true);
+
+        return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
+
     }
 
     #[Route('/inscription/{id}', name: 'inscription')]

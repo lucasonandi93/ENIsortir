@@ -150,7 +150,7 @@
                 </td>
                 <td>
                     {# TODO penser à mettre les liens dans les href #}
-                    {% if not (sortie.etat.libelle == 'Créée') %}
+                    {% if not (sortie.etat.libelle == '') %}
                         <a href="{{ path('sortie_details', {'id': sortie.id }) }}">Afficher</a>
                     {% endif %}
                     {% if (sortie.etat.libelle == 'Ouverte') and  not (app.user in sortie.users) %}

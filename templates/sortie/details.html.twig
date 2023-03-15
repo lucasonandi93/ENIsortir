@@ -81,10 +81,13 @@
 
     {% if app.user == sortie.user %}
         <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-        {#TODO publier#}
-        - <a href="">Publier</a>
+        {% if sortie.etat.libelle == "Créée" %}
+            <a href="{{ path('sortie_publier', {'id': sortie.id}) }}">Publier</a>
+        {% endif %}
 
     {% endif %}
+
+
 
 
     {% if sortie.user == app.user %}
