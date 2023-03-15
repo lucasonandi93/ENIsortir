@@ -22,25 +22,25 @@
                         <span>{{ app.user.nom }}</span>
                     </li>
                     <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_home.jpg') }}">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/home.svg') }}">
                         <a href="#">Accueil</a>
                     </li>
                     <br>
                     <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_profile.png') }}">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/user.svg') }}">
                         <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
                     </li>
                     <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_creerSortie.png') }}">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
                         <a href="{{ path('sortie_new') }}">Créer une sortie</a>
                     </li>
                     <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_list.png') }}">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/bulleted-list.svg') }}">
                         <a href="{{ path('sortie_list') }}">Liste des sorties</a>
                     </li>
 
                     <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_deconnect.png') }}">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/sign-out.svg') }}">
                         <a href="{{ path('app_logout') }}">Se déconnecter</a>
                     </li>
                 {% else %}
