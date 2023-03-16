@@ -12,7 +12,7 @@ body {
 }
 
 fieldset {
-    border: 6px solid darkslategrey;
+    border: 2px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
