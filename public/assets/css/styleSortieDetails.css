@@ -8,8 +8,6 @@ body {
     background-image: url("../img/background/background-home.png");
     background-repeat: no-repeat;
     background-position: bottom 10px right 10px;
-    width: 100%;
-
 }
 
 a {
@@ -27,18 +25,12 @@ img {
     height: auto;
 }
 
-/* Navbar styles */
-.burger-shower,
-.overlay {
-    display: none;
-}
 .serie-details-infos div {
     background-color: darkslategrey;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
-
 
 .encadre-1 {
     flex-basis: 100%;
@@ -91,6 +83,7 @@ img {
     margin-left: 240px;
     padding: 20px;
     width: 50px ;
+    height: 100vh;
 }
 
 .save-button {
@@ -117,6 +110,10 @@ fieldset {
     border: 2px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 legend {
@@ -180,14 +177,6 @@ legend {
         left: -240px;
     }
 
-    .burger-shower:checked ~ #sidebar-menu {
-        left: 0;
-    }
-
-    .burger-shower:checked ~ .overlay {
-        display: block;
-    }
-
     .overlay {
         background-color: rgba(0, 0, 0, 0.7);
         position: fixed;
@@ -198,41 +187,5 @@ legend {
         z-index: 50;
     }
 
-    .burger-shower,
-    .overlay {
-        display: none;
-    }
 
-    #hamburger-menu {
-        display: block;
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        width: 40px;
-        height: 40px;
-        background-color: #333;
-        cursor: pointer;
-    }
-
-    #hamburger-menu::before,
-    #hamburger-menu::after {
-        content: '';
-        position: absolute;
-        left: 10px;
-        width: 20px;
-        height: 2px;
-        background-color: #fff;
-    }
-
-    #hamburger-menu::before {
-        top: 14px;
-    }
-
-    #hamburger-menu::after {
-        top: 24px;
-    }
-
-    .container {
-        margin-left: 0;
-    }
 }

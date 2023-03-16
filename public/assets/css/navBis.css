@@ -34,7 +34,7 @@
     left: -250px;
     width: 200px;
     height: 100%;
-    background-color: #3D0E61;
+    background-color: dimgrey;
     transition: 0.3s;
     padding: 0px 10px;
     box-sizing: border-box;
@@ -78,7 +78,7 @@
     display: none;
     height: 100px;
     width: 100%;
-    background: #3D0E61;
+    background: steelblue;
     margin: 0px;
     z-index: 9;
 }
