@@ -7,8 +7,9 @@ body {
     line-height: 1.6;
     height: 100vh;
     font-family: 'Cabin', 'Arial', Sans-serif;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(25px);
     background-image: url("../img/background/background-home.png");
+    background-position: bottom ;
 
 }
 
