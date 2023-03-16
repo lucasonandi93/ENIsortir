@@ -1,95 +1,175 @@
-
-
-/* Profile image */
-img {
-    width: 200px;
-    height: 200px;
-    border-radius: 2px;
-    margin: 20px;
-    box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+html {
+    margin: 0px;
+    height: 100vh;
 }
 
-/* Profile details */
-div {
+body {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: bottom 10px right 10px;
+    width: 100%;
+
+}
+
+fieldset {
+    border: 6px solid darkslategrey;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+legend {
+    padding: 0 10px;
+    font-weight: bold;
+}
+
+/* Espacement des éléments du formulaire */
+form.container .form-group {
+    margin-bottom: 30px;
+}
+
+/* Centrer le formulaire */
+form.container {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-div p {
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.5;
+/* Style des éléments de formulaire */
+form.container .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-/* Buttons */
-a button {
-    padding: 10px 20px;
-    border: none;
+
+form.container input, form.container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
+    font-size: 14px;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.img1 {
+    width: 300px;
+    height: 200px;
+}
+
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Ajout de nouveaux styles */
+.profile-content {
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 70%;
+    margin-top: 6%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    height: 70vh;
+}
+
+.profile-details p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
     font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-    margin-right: 10px;
+    border-radius: 5px;
 }
 
-a button:hover {
-    background-color: #4c8f8e;
+
+button:hover {
+    background-color: #2980b9;
 }
 
-/* Centrer verticalement les boutons */
-.container > a {
+.profile-actions {
+    margin-top: 1rem;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.profile-image-container {
-    width: 150px;
-    height: 150px;
-    overflow: hidden;
-    border-radius: 50%;
+.profile-actions a {
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
-.profile-image-container img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-}
 
-/* Smartphones */
-@media only screen and (max-width: 480px) {
-    img {
-        width: 100px;
-        height: 100px;
-    }
-    div p {
-        font-size: 12px;
-    }
-    a button {
-        font-size: 12px;
-    }
-    .profile-image-container {
-        width: 100px;
-        height: 100px;
-    }
-}
 
-/* Tablettes */
-@media only screen and (min-width: 481px) and (max-width: 768px) {
-    img {
-        width: 150px;
-        height: 150px;
+@media screen and (max-width: 600px) {
+    .img1 {
+        width: 200px;
+        height: 133px;
     }
-    div p {
+
+    .container1 {
+        padding-top: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .profile-details p {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 8px 16px;
         font-size: 14px;
     }
-    a button {
-        font-size: 14px;
+
+    .profile-actions a {
+        padding: 6px 12px;
+        font-size: 12px;
     }
-    .profile-image-container {
-        width: 120px;
-        height: 120px;
+
+    /* Ajout de nouveaux styles */
+    .profile-content {
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 80%;
+        margin: 16% auto 10%;
+        height: 50vh;
     }
 }

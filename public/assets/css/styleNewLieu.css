@@ -1,0 +1,94 @@
+/* style.css */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+.save-button {
+    background-color: #FFC107; /* Couleur d'arrière-plan jaune */
+}
+
+.save-button:hover {
+    background-color: #E0A800; /* Couleur d'arrière-plan jaune foncé au survol */
+}
+
+.cancel-button {
+    background-color: #FF3B30; /* Couleur d'arrière-plan rouge */
+}
+
+.cancel-button:hover {
+    background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+    padding: 20px 0;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ccc;
+}
+
+fieldset {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+legend {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 5px 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+
+button {
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #666;
+}
