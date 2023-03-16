@@ -33,6 +33,10 @@
                     </li>
                     <li class="navbar-item">
                         <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
+                        <a href="{{ path('app_lieu_new') }}">Créer un lieu</a>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
                         <a href="{{ path('sortie_new') }}">Créer une sortie</a>
                     </li>
                     <li class="navbar-item">
@@ -184,7 +188,10 @@
 </div>
 </div>
 </div>
-    {% endblock %}
+
+
+
+{% endblock %}
 
 {% block title %}
     {{ parent() }} | Liste des sorties
