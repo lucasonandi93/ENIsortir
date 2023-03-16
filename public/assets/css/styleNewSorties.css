@@ -10,6 +10,33 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.cancel-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.save-button {
+    background-color: #FFC107; /* Couleur d'arrière-plan jaune */
+}
+
+.save-button:hover {
+    background-color: #E0A800; /* Couleur d'arrière-plan jaune foncé au survol */
+}
+
+.cancel-button {
+    background-color: #FF3B30; /* Couleur d'arrière-plan rouge */
+}
+
+.cancel-button:hover {
+    background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
+}
 
 
 .container {
