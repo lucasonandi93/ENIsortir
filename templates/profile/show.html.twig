@@ -57,27 +57,28 @@
 {% endblock %}
 
 {% block body %}
-    <fieldset class="container">
-<h1>profile N° {{ user.id }}</h1>
+<fieldset class="container1 profile-content">
     <div>
         {% if user.photo is not null %}
-            <img src="{{ asset('img/' ~ user.photo) }}" alt="{{ user.nom }}">
+            <img class="img1" src="{{ asset('img/' ~ user.photo) }}" alt="{{ user.nom }}">
         {% endif %}
     </div>
-    <div>
+    <div class="profile-details">
         <p>Prénom: {{ user.prenom }}</p>
         <p>Nom: {{ user.nom }}</p>
-        <p>Teléphone: {{ user.telephone }}</p>
+        <p>Téléphone: {{ user.telephone }}</p>
         <p>Email: {{ user.email }}</p>
         <p>Campus: {{ user.campus.nom }}</p>
     </div>
+    <div class="profile-actions">
+        <a href="{{ path('sortie_list') }}"><button class="margR">Annuler</button></a>
+        <br>
+        {% if app.user == user %}
+            <a href="{{ path('profile_update', {'id': app.user.id}) }}"><button> Modifier mon profil</button></a>
+        {% endif %}
+    </div>
+</fieldset>
 
-    <a href="{{ path('sortie_list') }}"><button>Annuler</button></a>
-    <br>
-    {% if app.user == user %}
-        <a href="{{ path('profile_update', {'id': app.user.id}) }}">Modifier mon profil</a><br>
-        </fieldset>
-    {% endif %}
 {% endblock %}
 
 {% block title %}
