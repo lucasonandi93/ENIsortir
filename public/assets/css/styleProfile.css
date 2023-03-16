@@ -1,18 +1,22 @@
 html {
     margin: 0px;
-    height: 100vh;
 }
 
 body {
+    margin: 0px;
     background-image: url("../img/background/background-home.png");
     background-repeat: no-repeat;
+    background-size: cover;
     background-position: bottom 10px right 10px;
-    width: 100%;
+    width: 100vw;
 
 }
 
+.profile-details {
+    width: 50%;
+}
+
 fieldset {
-    border: 6px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
@@ -82,15 +86,11 @@ form.container input, form.container select {
 /* Ajout de nouveaux styles */
 .profile-content {
     background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 10px;
+    border-radius: 120px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 70%;
-    margin-top: 6%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5%;
-    height: 70vh;
+    width: 40%;
+    margin: 6% auto 5%;
 }
 
 .profile-details p {
@@ -132,12 +132,95 @@ button:hover {
     font-size: 14px;
 }
 
+.table {
+    width: 100%;
+    margin-top: 5%;
+    font-size: 30px;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+.table th {
+    font-weight: bold;
+}
+
+.profile-details {
+    margin-bottom: 1rem;
+}
+
+.flexer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.flexer h2 {
+    margin-right: 1rem;
+    width: 25%;
+    text-align: right;
+    text-transform : capitalize;
+}
+
+.flexer p {
+    margin: 0;
+    width: 75%;
+}
+
+.profile-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
 
 
 @media screen and (max-width: 600px) {
     .img1 {
         width: 200px;
         height: 133px;
+    }
+
+    .flexer {
+        display: block;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 5%;
+        font-size: 20px;
+        margin-bottom: 1rem;
+        border-collapse: collapse;
+    }
+
+    .flexer h2 {
+        width: auto;
+        text-align: left;
+        margin-right: 0;
+        margin-bottom: 0.25rem;
+        text-transform : uppercase;
+    }
+
+    .flexer p {
+        width: auto;
+    }
+
+    .profile-actions {
+        flex-wrap: wrap;
+    }
+
+    .profile-actions a {
+        flex-basis: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .margR {
+        margin-right: 0.5rem;
     }
 
     .container1 {
@@ -172,4 +255,5 @@ button:hover {
         margin: 16% auto 10%;
         height: 50vh;
     }
+
 }

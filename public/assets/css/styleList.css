@@ -5,10 +5,16 @@ body {
     margin: 0px;
     font-size: 20px;
     line-height: 1.6;
+    height: 100vh;
     font-family: 'Cabin', 'Arial', Sans-serif;
+    backdrop-filter: blur(10px);
+    background-image: url("../img/background/background-home.png");
 
 }
 
+.container {
+    height: 100%;
+}
 .table-wrapper thead th {
     position: sticky;
     top: 0;
@@ -81,7 +87,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
     margin-left: 0%;
 }
 
@@ -103,6 +108,10 @@ form {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
 }
 
 /* Styles pour les champs de formulaire */
@@ -283,7 +292,7 @@ a:hover {
 .table-responsive {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch;
-    max-height: 370px;
+    max-height: 400px;
     margin-bottom: 5%;
 }
 
@@ -326,6 +335,9 @@ a:hover {
     /* styles pour le formulaire */
     form {
         max-width: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     form input[type="text"],
@@ -376,6 +388,14 @@ a:hover {
 
     .table td:last-child {
         border-bottom: 1px solid #dddddd;
+    }
+
+
+    .table-responsive {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        max-height: 390px;
+        margin-bottom: 5%;
     }
 }
 

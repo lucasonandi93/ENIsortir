@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block nav %}
-
     <input type="checkbox" id="hamburger-input" class="burger-shower" />
     <label id="hamburger-menu" for="hamburger-input">
         <nav id="sidebar-menu">
@@ -54,31 +53,52 @@
     </label>
 
     <div class="overlay"></div>
+
 {% endblock %}
 
 {% block body %}
-<fieldset class="container1 profile-content">
+<fieldset class="profile-content">
     <div>
         {% if user.photo is not null %}
             <img class="img1" src="{{ asset('img/' ~ user.photo) }}" alt="{{ user.nom }}">
         {% endif %}
     </div>
-    <div class="profile-details">
-        <p> Prénom: {{ user.prenom }}</p>
-        <p> Nom: {{ user.nom }}</p>
-        <p> Téléphone: {{ user.telephone }}</p>
-        <p> Email: {{ user.email }}</p>
-        <p> Campus: {{ user.campus.nom }}</p>
+    <div class="table-responsive">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Prénom:</th>
+                <td>{{ user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nom:</th>
+                <td>{{ user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Téléphone:</th>
+                <td>{{ user.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Email:</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Campus:</th>
+                <td>{{ user.campus.nom }}</td>
+            </tr>
+            </tbody>
+        </table>
     </div>
+
     <div class="profile-actions">
         <a href="{{ path('sortie_list') }}"><button class="margR">Annuler</button></a>
         <br>
         {% if app.user == user %}
-            <a href="{{ path('profile_update', {'id': app.user.id}) }}"><button> Modifier mon profil</button></a>
+            <a href="{{ path('profile_update', {'id': app.user.id}) }}"><button>Modifier mon profil</button></a>
         {% endif %}
     </div>
-</fieldset>
 
+</fieldset>
 {% endblock %}
 
 {% block title %}
