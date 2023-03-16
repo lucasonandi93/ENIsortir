@@ -38,7 +38,6 @@ body {
     background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
 }
 
-
 .container {
     max-width: 800px;
     margin: 0 auto;
@@ -52,7 +51,7 @@ h2 {
 
 /* Style du fieldset */
 fieldset {
-    border: 1px solid #ccc;
+    border: 6px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
