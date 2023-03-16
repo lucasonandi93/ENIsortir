@@ -229,7 +229,11 @@ class SortieController extends AbstractController
 
 
     #[Route('cancel/{id}', name: 'cancel')]
-    public function annulerSortie(int $id, Request $request, SortieRepository $sortieRepository, EntityManagerInterface $entityManager, UserInterface $user): Response
+    public function annulerSortie(int $id,
+                                  Request $request,
+                                  SortieRepository $sortieRepository,
+                                  EntityManagerInterface $entityManager,
+                                  UserInterface $user): Response
     {
         $sortie = $sortieRepository->find($id);
 
@@ -245,6 +249,7 @@ class SortieController extends AbstractController
             throw new \Exception("Impossible d'annuler une sortie déjà commencée");
         }
 
+        //création du formulaire d'ajout de motif d'annulation + boutton annuler
         $form = $this->createFormBuilder()
             ->add('motif', TextareaType::class, [
                 'label' => "Motif d'annulation",
@@ -263,6 +268,7 @@ class SortieController extends AbstractController
 
         $form->handleRequest($request);
 
+        //récupération données du formaulaire
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
