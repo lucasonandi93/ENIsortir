@@ -1,9 +1,64 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Annuler une sortie{% endblock %}
+{% block header %}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleSortieDetails.css') }}">
+{% endblock %}
+{% block nav %}
+<div class="container">
+<fieldset>
+    <input type="checkbox" id="hamburger-input" class="burger-shower" />
+    <label id="hamburger-menu" for="hamburger-input">
+        <nav id="sidebar-menu">
+            <h3>Menu</h3>
+            <ul>
+                {% if app.user %}
+                    {# Ajout de l'encadré avec la photo de l'utilisateur #}
+                    <li class="navbar-item">
+                        {% if app.user.photo is not null %}
+                            <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
+                        {% endif %}
+                        <span>{{ app.user.nom }}</span>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/home.svg') }}">
+                        <a href="#">Accueil</a>
+                    </li>
+                    <br>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/user.svg') }}">
+                        <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
+                        <a href="{{ path('sortie_new') }}">Créer une sortie</a>
+                    </li>
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/bulleted-list.svg') }}">
+                        <a href="{{ path('sortie_list') }}">Liste des sorties</a>
+                    </li>
 
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/sign-out.svg') }}">
+                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
+                    </li>
+                {% else %}
+                    <li class="navbar-item">
+                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_connect.png') }}">
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </label>
+
+    <div class="overlay"></div>
+{% endblock %}
 {% block body %}
-    <h1>Annuler la sortie "{{ sortie.nom }}"</h1>
+
+    <legend>Annuler la sortie "{{ sortie.nom }}"</legend>
 
     {% if sortie.dateHeureDebut >= "now"|date %}
         {{ form_start(form) }}
@@ -13,4 +68,6 @@
     {% else %}
         <p>Impossible d'annuler une sortie déjà commencée</p>
     {% endif %}
+</fieldset>
+</div>
 {% endblock %}

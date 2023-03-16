@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block header %}
+    <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleSortieDetails.css') }}">
 {% endblock %}
 
 {% block nav %}
@@ -59,9 +61,10 @@
 {% endblock %}
 
 {% block body %}
-<h1>detail de la sortie</h1>
-<div class="serie-details-infos">
 
+
+<div class="serie-details-infos">
+<fieldset><legend>Détails de la sortie</legend>
     <div>
         <p>Nom de la sortie : {{ sortie.nom }}</p>
         <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date('Y-m-d') }}</p>
@@ -70,6 +73,9 @@
         <p>Durée : {{ sortie.duree }} minutes</p>
         <p>Description et infos : {{ sortie.infosSortie }}</p>
     </div>
+
+<div class="flexer">
+
     <div>
         <p>Campus : {{ sortie.campus.nom }}</p>
         <p>Lieu: {{ sortie.lieu.nom }} , {{ sortie.lieu.ville.nom }}</p>
@@ -78,23 +84,12 @@
         <p>Latitude : {{ sortie.lieu.latitude }}</p>
         <p>Longitude : {{ sortie.lieu.longitude }}</p>
     </div>
-
-    {% if app.user == sortie.user %}
-        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-        {% if sortie.etat.libelle == "Créée" %}
-            <a href="{{ path('sortie_publier', {'id': sortie.id}) }}">Publier</a>
-        {% endif %}
-
-    {% endif %}
+</fieldset>
 
 
-
-
-    {% if sortie.user == app.user %}
-        <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler</a>
-    {% endif %}
-
+    <fieldset>
     <div>
+
         <h2>Liste des participants inscrits : </h2>
         <ul>
             {% for sub in sortie.users %}
@@ -102,7 +97,20 @@
             {% endfor %}
         </ul>
     </div>
+    </fieldset>
+    {% if app.user == sortie.user %}
+        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="save-button">Modifier</a>
+        {% if sortie.etat.libelle == "Créée" %}
+            <a href="{{ path('sortie_publier', {'id': sortie.id}) }}" class="btn">Publier</a>
+
+
+        {% endif %}
+    {% endif %}
+    {% if sortie.user == app.user %}
+        <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler la sortie</a>
+    {% endif %}
 </div>
+
 
 {% endblock %}
 

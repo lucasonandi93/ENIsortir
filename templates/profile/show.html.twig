@@ -91,7 +91,7 @@
     </div>
 
     <div class="profile-actions">
-        <a href="{{ path('sortie_list') }}"><button class="margR">Annuler</button></a>
+        <a href="{{ path('sortie_list') }}"><button class="cancel-button">Retour</button></a>
         <br>
         {% if app.user == user %}
             <a href="{{ path('profile_update', {'id': app.user.id}) }}"><button>Modifier mon profil</button></a>

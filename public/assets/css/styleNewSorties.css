@@ -10,6 +10,13 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.user-photo {
+    width: 80px; /* Set the width of the photo */
+    height: 80px; /* Set the height of the photo */
+    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
+    border-radius: 50%; /* You can add this property to make the photo circular */
+}
+
 .cancel-button-container {
     display: flex;
     justify-content: center;
@@ -51,7 +58,7 @@ h2 {
 
 /* Style du fieldset */
 fieldset {
-    border: 6px solid darkslategrey;
+    border: 2px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;

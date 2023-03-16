@@ -1,5 +1,6 @@
 html {
     margin: 0px;
+    height: 100vh;
 }
 
 body {
@@ -8,7 +9,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom 10px right 10px;
-    width: 100vw;
+    width: 100%;
 
 }
 
@@ -17,6 +18,7 @@ body {
 }
 
 fieldset {
+    border: 6px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 30px;
@@ -25,6 +27,14 @@ fieldset {
 .margin-top{
     margin-top: 15px;
 }
+
+.user-photo {
+    width: 80px; /* Set the width of the photo */
+    height: 80px; /* Set the height of the photo */
+    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
+    border-radius: 50%; /* You can add this property to make the photo circular */
+}
+
 
 legend {
     padding: 0 10px;
@@ -71,8 +81,16 @@ form.container input, form.container select {
     min-height: 70vh;
 }
 
+.cancel-button {
+    background-color: #FF3B30; /* Couleur d'arrière-plan rouge */
+}
+
+.cancel-button:hover {
+    background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
+}
+
 .img1 {
-    width: 300px;
+    width: 200px;
     height: 200px;
 }
 
@@ -184,43 +202,6 @@ button:hover {
     .img1 {
         width: 200px;
         height: 133px;
-    }
-
-    .flexer {
-        display: block;
-    }
-
-    .table {
-        width: 100%;
-        margin-top: 5%;
-        font-size: 20px;
-        margin-bottom: 1rem;
-        border-collapse: collapse;
-    }
-
-    .flexer h2 {
-        width: auto;
-        text-align: left;
-        margin-right: 0;
-        margin-bottom: 0.25rem;
-        text-transform : uppercase;
-    }
-
-    .flexer p {
-        width: auto;
-    }
-
-    .profile-actions {
-        flex-wrap: wrap;
-    }
-
-    .profile-actions a {
-        flex-basis: 100%;
-        margin-bottom: 0.5rem;
-    }
-
-    .margR {
-        margin-right: 0.5rem;
     }
 
     .container1 {
