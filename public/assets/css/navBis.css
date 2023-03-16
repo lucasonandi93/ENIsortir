@@ -18,11 +18,11 @@
     font-family: 'Cabin', Sans-serif;
     background: linear-gradient(
             to bottom,
-            #3D0E61, #3D0E61 20%,
+            white, white 20%,
             transparent 20%, transparent 40%,
-            #3D0E61 40%, #3D0E61 60%,
+            white 40%, white 60%,
             transparent 60%, transparent 80%,
-            #3D0E61 80%, #3D0E61 100%
+            white 80%, white 100%
     );
 
 }
@@ -32,12 +32,14 @@
     position: fixed;
     top: 0;
     left: -250px;
-    width: 200px;
+    width: 300px;
     height: 100%;
-    background-color: dimgrey;
+    background-color: rgba(0,0,0,68);
+    opacity: 90%;
     transition: 0.3s;
     padding: 0px 10px;
     box-sizing: border-box;
+    backdrop-filter: blur(10px);
 }
 
 #hamburger-menu h3 {
@@ -58,6 +60,7 @@
     color: #B9FAF8;
     font-size: 1.3rem;
     text-decoration: none;
+    margin-top: 15%;
 }
 
 #hamburger-menu a:hover {
