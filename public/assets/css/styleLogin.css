@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
-
-html {
-    background-color: darkslategrey;
-}
-
 body {
+    background-image: url("../img/background/background-home.png");
+    background-repeat: no-repeat;
+    background-position: bottom 10px right 10px;
+    height: 100%;
+    width: 100%;
     font-family: "Poppins", sans-serif;
-    height: 800px;
+    backdrop-filter: blur(5px);
+
 }
 
 a {
