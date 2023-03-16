@@ -33,7 +33,7 @@ th:last-child {
 }
 
 /* Styles pour les petits écrans */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 600px) {
     thead {
         display: block;
     }
