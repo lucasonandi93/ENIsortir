@@ -64,6 +64,13 @@ fieldset {
     margin: 20px 0;
 }
 
+.user-photo {
+    width: 80px; /* Set the width of the photo */
+    height: 80px; /* Set the height of the photo */
+    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
+    border-radius: 50%; /* You can add this property to make the photo circular */
+}
+
 legend {
     font-size: 18px;
     font-weight: bold;

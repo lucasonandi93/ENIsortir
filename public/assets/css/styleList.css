@@ -53,6 +53,13 @@ body {
 
 }
 
+.user-photo {
+    width: 80px; /* Set the width of the photo */
+    height: 80px; /* Set the height of the photo */
+    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
+    border-radius: 50%; /* You can add this property to make the photo circular */
+}
+
 .flexerCol {
     display: flex;
     flex-direction: column;
@@ -124,12 +131,13 @@ select, input[type="text"], input[type="number"] {
 
 /* Styles pour le bouton */
 button {
+
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 4px;
-    background-color: #5DA5A4;
+    background-color: #3498db;
     color: #fff;
     transition: background-color 0.2s ease;
 }
