@@ -150,7 +150,10 @@ class SortieController extends AbstractController
 
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
-
+        if ($sortie->getEtat()->getLibelle()=== "Annulée"){
+            $this->addFlash('error', "Impossible modifiée une sortie déjà Annulée");
+            return $this->redirectToRoute('sortie_list');
+        }
         if ($form->isSubmitted() && $form->isValid()) {
 
             $sortieRepository->save($sortie, true);
@@ -176,8 +179,8 @@ class SortieController extends AbstractController
 
         $sortieRepository->save($sortie, true);
 
-        return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
-
+        $this->addFlash('success', 'Sortie publiées avec succès.');
+        return $this->redirectToRoute('sortie_list');
     }
 
     #[Route('/inscription/{id}', name: 'inscription')]
@@ -211,7 +214,8 @@ class SortieController extends AbstractController
         $sortieRepository->save($sortie, true);
 
         // Retour de la réponse/la route
-        return $this->redirectToRoute('sortie_list');
+        $this->addFlash('success', 'Vous etes bien inscrit a cette sortie.');
+        return $this->redirectToRoute('sortie_details', ['id' => $sortie->getId()]);
     }
 
     #[Route('/desinscription/{id}', name: 'desinscription')]
@@ -247,6 +251,9 @@ class SortieController extends AbstractController
         $dateAuj = new \DateTime();
         if ($dateAuj >= $dateHeureDebut) {
             throw new \Exception("Impossible d'annuler une sortie déjà commencée");
+        }
+        if ($sortie->getEtat()->getLibelle()=== "Annulée"){
+            throw new \Exception("Impossible d'annuler une sortie déjà Annulée");
         }
 
         //création du formulaire d'ajout de motif d'annulation + boutton annuler

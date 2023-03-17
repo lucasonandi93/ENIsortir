@@ -17,6 +17,7 @@ body {
     width: 50%;
 }
 
+
 fieldset {
     border: 6px solid darkslategrey;
     border-radius: 5px;
@@ -87,6 +88,24 @@ form.container input, form.container select {
 
 .cancel-button:hover {
     background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
+}
+.alert-error {
+    display: flex;
+    background-color: orangered;
+    width: 100%;
+    height: 34px;
+    padding-top: 1%;
+    justify-content: center;
+    color: white;
+}
+.alert-success {
+    display: flex;
+    background-color: green;
+    width: 100%;
+    height: 34px;
+    padding-top: 1%;
+    justify-content: center;
+    color: white;
 }
 
 .img1 {

@@ -89,7 +89,15 @@
             </tbody>
         </table>
     </div>
-
+    <div>
+        {% for label, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
     <div class="profile-actions">
         <a href="{{ path('sortie_list') }}"><button class="cancel-button">Retour</button></a>
         <br>
