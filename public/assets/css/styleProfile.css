@@ -6,6 +6,7 @@ html {
 body {
     margin: 0px;
     background-image: url("../img/background/background-home.png");
+    backdrop-filter: blur(25px);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom 10px right 10px;
