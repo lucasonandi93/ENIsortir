@@ -129,14 +129,15 @@
 
         <div class="ajust">
             <div class="buttons-container">
-                <a href="{{ path('sortie_new') }}"><button class="save-button" name="enregistrer">Enregistrer</button></a>
+                <button class="save-button" name="enregistrer">Enregistrer</button>
 
 
 
             {{ form_end(sortieForm) }}
+                <a href="{{ path('sortie_list') }}"><button type="button" class="cancel-button">Annuler</button></a>
 
-                <a href="{{ path('main_home') }}"><button class="cancel-button">Annuler</button></a>
             </div>
+
 
                 <script>
                     // Recupera el elemento select con id "sortie_ville"
