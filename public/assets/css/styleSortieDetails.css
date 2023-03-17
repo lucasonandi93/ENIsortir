@@ -5,19 +5,74 @@
     box-sizing: border-box;
 }
 
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+    background-color: rgba(3, 159, 255, 0.66);
+    color: white;
+    height: 60%;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+}
+
+.btn {
+    border-radius: 4px;
+    border: none;
+    background-color: #5DA5A4;
+    color: #fff;
+    transition: background-color 0.2s ease;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 10px 20px;
+}
+
+.btn-danger {
+    background-color: #e50d0d;
+}
+
+.save-button {
+    margin-left: 45%;
+    margin-bottom: 25px;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #5DA5A4;
+    color: #fff;
+    transition: background-color 0.2s ease;
+}
+
+
 /* Style général */
-body {
+back {
     font-family: 'Cabin', 'Arial', Sans-serif;
     background-repeat: no-repeat;
     background-size: cover;
+    background-image: url("../img/background/background-home.png");
     font-family: Arial, sans-serif;
+
+}
+
+.containerPrinc {
+    background-repeat: no-repeat;
+    background-size: cover;
     background-image: url("../img/background/background-home.png");
 }
 
 .fieldset1 {
     width: 100%;
     margin-right: 5%;
-    height: 60%;
+    height: 65%;
     font-size: 20px;
     background-color: rgba(11, 143, 232, 0.29);
     color: black;

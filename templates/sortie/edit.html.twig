@@ -5,12 +5,18 @@
 
 {% block header %}
     <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/containerPrinc.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleNewSorties.css') }}">
 {% endblock %}
 
 {% block body %}
-    <h1>Edit sortie</h1>
-
+    <div class="back">
+<div class="containerPrinc">
+    <div class="flexerMID ez form">
     {{ include('sortie/_form.html.twig', {'button_label': 'Update'}) }}
+    </div>
+</div>
+    </div>
 
 
 
