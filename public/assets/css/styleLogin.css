@@ -1,15 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins');
 
-/* BASIC */
-body {
-    background-image: url("../img/background/background-home.png");
-    background-repeat: no-repeat;
-    background-position: bottom 10px right 10px;
-    height: 100%;
-    width: 100%;
-    font-family: "Poppins", sans-serif;
-    backdrop-filter: blur(5px);
+html {
+    pading: 0px;
+    margin: 0px;
+}
 
+body {
+    font-family: 'Cabin', 'Arial', Sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img/background/background-home.png");
 }
 
 a {
@@ -36,11 +36,8 @@ h2 {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
-    min-height: 100%;
-    padding: 20px;
-    margin-top: 8%;
-    margin-bottom: 8%;
+    padding-top: 12%;
+    margin: auto;
 }
 
 #formContent {
@@ -241,6 +238,7 @@ input[type=text]::placeholder {
     -webkit-animation-delay: 1s;
     -moz-animation-delay: 1s;
     animation-delay: 1s;
+
 }
 
 /* Simple CSS3 Fade-in Animation */
@@ -279,6 +277,7 @@ input[type=text]::placeholder {
 }
 
 @media (max-width:600px){
+
     .footer{
         text-align:left;
         padding:5%;
@@ -304,8 +303,15 @@ input[type=text]::placeholder {
         justify-content: center;
         width: 100%;
         min-height: 100%;
-        padding: 20px;
+        padding: 100px;
         margin-top: 20%;
         margin-bottom: 8%;
+    }
+
+    .fadeIn.fourth {
+        -webkit-animation-delay: 1s;
+        -moz-animation-delay: 1s;
+        animation-delay: 1s;
+
     }
 }

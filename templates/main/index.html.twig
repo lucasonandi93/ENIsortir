@@ -2,19 +2,24 @@
 
 {% block header %}
 <head>
-    <title>Barre de navigation</title>
+    <title> Home !</title>
     <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/containerPrinc.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
 </head>
 {% endblock %}
 
-{% block title %}Hello MainController!{% endblock %}
+{% block title %} Hello MainController! {% endblock %}
 
 {% block body %}
 
-<div class="test">
+    <div class="containerPrinc">
+        <div class="test">
 
-    <h1 class="title">Organiser vos Sorties !</h1>
+            <h1 class="title">Organiser vos Sorties !</h1>
+            <img src="" alt="">
 
-</div>
+        </div>
+    </div>
 
 {% endblock %}
