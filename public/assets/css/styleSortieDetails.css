@@ -1,103 +1,102 @@
-/* General styles */
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
+/* Reset des marges et des paddings */
+* {
     margin: 0;
     padding: 0;
-    background-image: url("../img/background/background-home.png");
-    background-repeat: no-repeat;
-    background-position: bottom 10px right 10px;
+    box-sizing: border-box;
 }
 
-a {
-    color: #333;
-    text-decoration: none;
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    margin-top: 0;
+.fieldset1 {
+    width: 100%;
+    margin-right: 5%;
+    height: 60%;
+    font-size: 20px;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+.bref {
+    text-align: center;
 }
 
-.serie-details-infos div {
-    background-color: darkslategrey;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+.fieldset2 {
+    width: 100%;
+    height: 50%;
 }
 
-.encadre-1 {
-    flex-basis: 100%;
-    margin-bottom: 1rem;
-}
-
-.encadre-2,
-.encadre-3 {
-    flex-grow: 1;
-    margin-right: 1rem;
-}
-
-.encadre-2{
-    margin-right: 100px;
-    border-style: solid;
-}
-
-.encadre-3 {
-    margin-right: 0;
-}
-
-.flexer{
-    display: flex;
-}
-
-.navbar-item {
-    display: flex;
+.ez {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     align-items: center;
-    margin-bottom: 10px;
+    width: 80%;
+    height: 100%;
+    color: white;
 }
 
-.navbar-item a {
-    color: #fff;
+.btn-plus {
+    background-color: #4CAF50; /* couleur de fond */
+    border: none; /* pas de bordure */
+    color: white; /* couleur du texte */
+    padding: 10px 20px; /* espacement intérieur */
+    text-align: center; /* alignement du texte */
+    text-decoration: none; /* pas de soulignement */
+    display: inline-block; /* afficher comme bloc en ligne */
+    font-size: 16px; /* taille de la police */
+    margin: 10px; /* marge autour du bouton */
+    margin-top: 15%;
+    margin-left: 45%;
+    cursor: pointer; /* curseur de la souris */
+    border-radius: 50%; /* arrondi */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* ombre */
 }
 
-.navbar-item img {
-    margin-right: 10px;
+.btn-plus:hover {
+    background-color: #3e8e41; /* couleur de fond au survol */
 }
+
 
 .user-photo {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-right: 10px;
+    width: 80px; /* Set the width of the photo */
+    height: 80px; /* Set the height of the photo */
+    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
+    border-radius: 50%; /* You can add this property to make the photo circular */
 }
 
-/* Main content styles */
-.container {
-    margin-left: 240px;
-    padding: 20px;
-    width: 50px ;
-    height: 100vh;
+.cancel-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+select {
+    width: 100%;
+    height: 30px;
+    margin-top: 3%;
+}
+
+
+input[type="text" i] {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 2%;
+}
+
+input[type="date" i] {
+    width: 70%;
+    height: 30px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .save-button {
-    display: inline-block;
-
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    margin: 10px 0;
-
     background-color: #FFC107; /* Couleur d'arrière-plan jaune */
 }
 
@@ -105,15 +104,50 @@ img {
     background-color: #E0A800; /* Couleur d'arrière-plan jaune foncé au survol */
 }
 
+.cancel-button {
+    background-color: #FF3B30; /* Couleur d'arrière-plan rouge */
+}
+
+.cancel-button:hover {
+    background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Style du fieldset */
 fieldset {
-    Background-color: white;
     border: 2px solid darkslategrey;
     border-radius: 5px;
     padding: 20px;
+    margin-bottom: 30px;
+    width: 30%;
+}
+
+.ajust {
     display: flex;
-    width: 100%;
     justify-content: center;
+    text-align: center;
     align-items: center;
+    position: absolute;
+    top: 85%;
+    left: 70%;
+    right: 20%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 10%;
+
+}
+.margin-top{
+    margin-top: 15px;
 }
 
 legend {
@@ -121,71 +155,60 @@ legend {
     font-weight: bold;
 }
 
-.serie-details-infos {
+/* Espacement des éléments du formulaire */
+form.container .form-group {
+    margin-bottom: 30px;
+}
+
+
+/* Centrer le formulaire */
+form.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
 }
 
-.sub-container {
+/* Style des éléments de formulaire */
+form.container .form-group {
     display: flex;
+    flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-.serie-details-infos div {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+form.container label {
+    margin-bottom: 10px;
 }
 
-.serie-details-infos p {
-    margin: 0.5rem 0;
+
+form.container input, form.container select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
 }
 
-/* Buttons */
-.btn {
-    display: inline-block;
-    background-color: #333;
-    color: #fff;
+/* Style des boutons */
+button {
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 14px;
     cursor: pointer;
-    text-align: center;
-    font-size: 16px;
-    margin: 10px 0;
+    margin-top: 3%;
 }
 
-.btn:hover {
-    background-color: #666;
+button:hover {
+    background-color: #45a049;
 }
 
-.btn-danger {
-    background-color: #e74c3c;
-}
-
-.btn-danger:hover {
-    background-color: #c0392b;
-}
-
-/* Responsive styles */
-@media screen and (max-width: 800px) {
-    #sidebar-menu {
-        left: -240px;
+/* Responsive design */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
     }
-
-    .overlay {
-        background-color: rgba(0, 0, 0, 0.7);
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 50;
-    }
-
-
 }

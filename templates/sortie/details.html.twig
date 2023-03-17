@@ -5,112 +5,55 @@
 {% endblock %}
 
 {% block header %}
-    <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/containerPrinc.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/styleSortieDetails.css') }}">
 {% endblock %}
 
-{% block nav %}
 
-    <input type="checkbox" id="hamburger-input" class="burger-shower" />
-    <label id="hamburger-menu" for="hamburger-input">
-        <nav id="sidebar-menu">
-            <h3>Menu</h3>
-            <ul>
-                {% if app.user %}
-                    {# Ajout de l'encadré avec la photo de l'utilisateur #}
-                    <li class="navbar-item">
-                        {% if app.user.photo is not null %}
-                            <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
-                        {% endif %}
-                        <span>{{ app.user.nom }}</span>
-                    </li>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/home.svg') }}">
-                        <a href="#">Accueil</a>
-                    </li>
-                    <br>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/user.svg') }}">
-                        <a href="{{ path('profile_show', {'id': app.user.id}) }}">Mon profil</a>
-                    </li>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/plus.svg') }}">
-                        <a href="{{ path('sortie_new') }}">Créer une sortie</a>
-                    </li>
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/bulleted-list.svg') }}">
-                        <a href="{{ path('sortie_list') }}">Liste des sorties</a>
-                    </li>
-
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/sign-out.svg') }}">
-                        <a href="{{ path('app_logout') }}">Se déconnecter</a>
-                    </li>
-                {% else %}
-                    <li class="navbar-item">
-                        <img class="navbar-miniature" src="{{ asset('assets/img/logo_connect.png') }}">
-                        <a href="{{ path('app_login') }}">Se connecter</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-    </label>
-
-    <div class="overlay"></div>
-{% endblock %}
 
 {% block body %}
 
+    <div class="containerPrinc">
+        <div class="ez flexerMID">
+            <fieldset class="fieldset1">
+                <legend>Détails de la sortie</legend>
+                    <p>Nom de la sortie : {{ sortie.nom }}</p>
+                    <p class="margT">Date et heure de la sortie : {{ sortie.dateHeureDebut | date('Y-m-d') }}</p>
+                    <p class="margT">Date limite d'inscription : {{ sortie.dateLimiteInscription | date('Y-m-d') }}</p>
+                    <p class="margT">Nombre de places : {{ sortie.nbInscriptionMax }}</p>
+                    <p class="margT">Durée : {{ sortie.duree }} minutes</p>
+                    <p class="margT">Description et infos : {{ sortie.infosSortie }}</p>
 
-<div class="serie-details-infos">
-<fieldset><legend>Détails de la sortie</legend>
-    <div>
-        <p>Nom de la sortie : {{ sortie.nom }}</p>
-        <p>Date et heure de la sortie : {{ sortie.dateHeureDebut | date('Y-m-d') }}</p>
-        <p>Date limite d'inscription : {{ sortie.dateLimiteInscription | date('Y-m-d') }}</p>
-        <p>Nombre de places : {{ sortie.nbInscriptionMax }}</p>
-        <p>Durée : {{ sortie.duree }} minutes</p>
-        <p>Description et infos : {{ sortie.infosSortie }}</p>
-    </div>
-
-<div class="flexer">
-
-    <div>
-        <p>Campus : {{ sortie.campus.nom }}</p>
-        <p>Lieu: {{ sortie.lieu.nom }} , {{ sortie.lieu.ville.nom }}</p>
-        <p>Rue : {{ sortie.lieu.rue }}</p>
-        <p>Code postal : {{ sortie.lieu.ville.codePostal }}</p>
-        <p>Latitude : {{ sortie.lieu.latitude }}</p>
-        <p>Longitude : {{ sortie.lieu.longitude }}</p>
-    </div>
-</fieldset>
+                    <p class="margT">Campus : {{ sortie.campus.nom }}</p>
+                    <p class="margT">Lieu: {{ sortie.lieu.nom }} , {{ sortie.lieu.ville.nom }}</p>
+                    <p class="margT">Rue : {{ sortie.lieu.rue }}</p>
+                    <p class="margT">Code postal : {{ sortie.lieu.ville.codePostal }}</p>
+                    <p class="margT">Latitude : {{ sortie.lieu.latitude }}</p>
+                    <p class="margT">Longitude : {{ sortie.lieu.longitude }}</p>
 
 
-    <fieldset>
-    <div>
 
-        <h2>Liste des participants inscrits : </h2>
-        <ul>
             {% for sub in sortie.users %}
                 <li><a href="{{ path('profile_show', {id: sub.id}) }}">{{ sub.prenom }} /{{ sub.nom }}</a> </li>
             {% endfor %}
-        </ul>
-    </div>
-    </fieldset>
+
+
+
+
     {% if app.user == sortie.user %}
-        <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="save-button">Modifier</a>
+            <a href="{{ path('sortie_edit', {'id': sortie.id}) }}" class="save-button">Modifier</a>
         {% if sortie.etat.libelle == "Créée" %}
             <a href="{{ path('sortie_publier', {'id': sortie.id}) }}" class="btn">Publier</a>
-
-
         {% endif %}
     {% endif %}
+
     {% if sortie.user == app.user %}
         <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler la sortie</a>
     {% endif %}
-</div>
 
 
+            </fieldset>
+        </div>
+    </div>
 {% endblock %}
 

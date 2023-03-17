@@ -4,46 +4,47 @@
     <head>
         <title>Login</title>
         <link rel="stylesheet" href="{{ asset('assets/css/styleLogin.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/containerPrinc.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/normalize.css') }}">
     </head>
 {% endblock %}
 
 {% block body %}
-    <form method="post">
-        {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
 
-        {% if app.user %}
-            <div class="mb-3">
-                You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-            </div>
-        {% endif %}
-
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
-                <!-- Tabs Titles -->
-                <h2 class="active"> Se connecter </h2>
-
-                <!-- Login Form -->
-                <form>
-                    <input type="text" value="{{ last_username }}" placeholder="Adresse email" name="email" id="login" class="fadeIn second" autocomplete="email" required autofocus>
-                    <input type="password" placeholder="Mot de passe" name="password" id="password" class="fadeIn third" autocomplete="current-password" required>
-                    <input type="submit" class="fadeIn fourth" value="Identification">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                </form>
-
-                <!-- Remind Passowrd -->
-                <div id="formFooter">
-                    <a class="underlineHover" href="#">Mot de passe oublié ?</a>
+    <div class="containerPrinc">
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            {% if app.user %}
+                <div class="mb-3">
+                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
                 </div>
+            {% endif %}
+                <div class="wrapper fadeInDown">
+                    <div id="formContent">
+                    <!-- Tabs Titles -->
+                    <h2 class="active"> Se connecter </h2>
+                    <!-- Login Form -->
+                    <form>
+                        <input type="text" value="{{ last_username }}" placeholder="Adresse email" name="email" id="login" class="fadeIn second" autocomplete="email" required autofocus>
+                        <input type="password" placeholder="Mot de passe" name="password" id="password" class="fadeIn third" autocomplete="current-password" required>
+                        <input type="submit" class="fadeIn fourth" value="Identification">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </form>
+                    <!-- Remind Passowrd -->
+                    <div id="formFooter">
+                        <a class="underlineHover" href="#">Mot de passe oublié ?</a>
+                    </div>
 
-                <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" name="_remember_me"> Se souvenir de moi
-                    </label>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                        </label>
+                    </div>
                 </div>
             </div>
-        </div>
-        {#    <a href="{{ path('forgot_password') }}">Mot de passe oublié</a>#}
-    </form>
+    {#            <a href="{{ path('forgot_password') }}">Mot de passe oublié</a>}#}
+        </form>
+    </div>
 {% endblock %}

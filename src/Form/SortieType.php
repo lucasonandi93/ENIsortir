@@ -23,15 +23,15 @@ class SortieType extends AbstractType
     {
         $builder
             ->add('nom',TextType::class,[
-                'label'=> 'Nom de la sortie : '
+                'label'=> 'Nom de la sortie  '
             ])
             ->add('campus', EntityType::class, [
-                'label'=> 'campus : ',
+                'label'=> 'campus  ',
                 'class' => Campus::class,
                 'choice_label' => 'nom'
             ])
             ->add('ville', EntityType::class,[
-            'label' => 'Ville :',
+            'label' => 'Ville ',
             'class' => Ville::class,
             'choice_label' => 'nom',
                 'attr' => [
@@ -40,7 +40,7 @@ class SortieType extends AbstractType
     ]
             ])
             ->add('lieu', EntityType::class,[
-                'label' => 'Lieu : ',
+                'label' => 'Lieu  ',
                 'class' => Lieu::class,
                 'attr' => [
                     'id' => 'sortie_lieu'],
@@ -48,7 +48,7 @@ class SortieType extends AbstractType
 
             ])
             ->add('dateHeureDebut',DateTimeType::class,[
-                'label' => 'Dâte et heure de la sortie : ',
+                'label' => 'Dâte et heure de la sortie  ',
                 'date_widget'=> 'single_text',
                 'time_widget'=> 'single_text',
                 'html5' => true
@@ -57,16 +57,16 @@ class SortieType extends AbstractType
                 'label'=> 'Durée de la sortie : (en minutes)'
             ])
             ->add('dateLimiteInscription', DateTimeType::class,[
-                'label' => 'Dâte limite d\'inscription : ',
+                'label' => 'Dâte limite d\'inscription  ',
                 'date_widget'=> 'single_text',
                 'time_widget'=> 'single_text',
                 'html5' => true
             ])
             ->add('nbInscriptionMax', NumberType::class,[
-                'label' => 'Nombre de places : '
+                'label' => 'Nombre de places  '
             ])
             ->add('infosSortie', TextareaType::class,[
-                'label'=> 'Descriptions et infos : '
+                'label'=> 'Descriptions et infos  '
             ])
             ->add('inscriptionAuto', CheckboxType::class, [
                 'label' => 'Voulez-vous vous inscrire à la sortie ? ',
