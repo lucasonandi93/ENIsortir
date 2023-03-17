@@ -14,6 +14,16 @@ body {
 
 }
 
+.dateCampus {
+   margin-left: -150px;
+    margin-right: 90px;
+}
+
+.containerFiltre {
+    margin-left: 6%;
+    margin-top: 14%;
+}
+
 .submitB {
     display: flex;
     justify-content: center;
@@ -70,7 +80,7 @@ button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 50%;
+    width: 60%;
     background-color: rgba(11, 143, 232, 0.29);
     height: 60%;
     border-radius: 10px;

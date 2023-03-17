@@ -7,7 +7,11 @@
 
 /* Style général */
 body {
+    font-family: 'Cabin', 'Arial', Sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
     font-family: Arial, sans-serif;
+    background-image: url("../img/background/background-home.png");
 }
 
 .fieldset1 {
@@ -15,6 +19,8 @@ body {
     margin-right: 5%;
     height: 60%;
     font-size: 20px;
+    background-color: rgba(11, 143, 232, 0.29);
+    color: black;
 }
 
 .bref {

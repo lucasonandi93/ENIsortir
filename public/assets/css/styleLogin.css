@@ -5,10 +5,11 @@ html {
     margin: 0px;
 }
 
-/* BASIC */
 body {
-    font-family: "Poppins", sans-serif
-
+    font-family: 'Cabin', 'Arial', Sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("../img/background/background-home.png");
 }
 
 a {
