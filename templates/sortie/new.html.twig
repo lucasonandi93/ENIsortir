@@ -131,14 +131,6 @@
             <div class="buttons-container">
                 <button class="save-button" name="enregistrer">Enregistrer</button>
 
-
-
-            {{ form_end(sortieForm) }}
-                <a href="{{ path('sortie_list') }}"><button type="button" class="cancel-button">Annuler</button></a>
-
-            </div>
-
-
                 <script>
                     // Recupera el elemento select con id "sortie_ville"
                     let selectVille = document.getElementById('sortie_ville');
@@ -176,6 +168,15 @@
                             });
                     });
                 </script>
+
+
+            {{ form_end(sortieForm) }}
+                <a href="{{ path('sortie_list') }}"><button type="button" class="cancel-button">Annuler</button></a>
+
+            </div>
+
+
+
 
         </div>
     </div>
