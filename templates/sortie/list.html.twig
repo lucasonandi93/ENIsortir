@@ -14,7 +14,7 @@
 {% block body %}
 
     <div class="containerPrinc">
-
+{{ form_start(filtre) }}
         <div class="form1">
             <div class="flexer">
                 <div class="dateCampus">
@@ -41,22 +41,28 @@
                             {{ form_label(filtre.sortieOrganisateur) }}
                         </div>
                         <div class="flexer">
+                            <div class="margR">
                             {{ form_widget(filtre.sortieInscrit) }}
+                            </div>
                             {{ form_label(filtre.sortieInscrit) }}
                         </div>
                         <div class="flexer">
+                            <div class="margR">
                             {{ form_widget(filtre.sortiePasInscrit) }}
+                            </div>
                             {{ form_label(filtre.sortiePasInscrit) }}
                         </div>
                         <div class="flexer">
+                            <div class="margR">
                             {{ form_widget(filtre.sortiePasses) }}
+                            </div>
                             {{ form_label(filtre.sortiePasses) }}
                         </div>
                     </div>
             </div>
                         <button>Rechercher</button>
         </div>
-
+{{ form_end(filtre) }}
     </div>
 
 

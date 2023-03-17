@@ -67,11 +67,6 @@ class SortieType extends AbstractType
             ])
             ->add('infosSortie', TextareaType::class,[
                 'label'=> 'Descriptions et infos  '
-            ])
-            ->add('inscriptionAuto', CheckboxType::class, [
-                'label' => 'Voulez-vous vous inscrire à la sortie ? ',
-                'mapped'=> false,
-                'required' => false
             ]);
     }
     public function configureOptions(OptionsResolver $resolver): void

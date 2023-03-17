@@ -14,14 +14,24 @@ body {
 
 }
 
-.dateCampus {
-   margin-left: -150px;
-    margin-right: 90px;
+.flexer {
+    display: flex;
+    width: 100%;
+    margin-top: 5%;
 }
 
 .containerFiltre {
-    margin-left: 6%;
-    margin-top: 14%;
+    align-items: center;
+    text-align: center;
+    width: 40%;
+}
+
+.dateCampus {
+    align-items: center;
+    text-align: center;
+    width: 40%;
+    margin-left: 5%;
+    margin-right: 10%;
 }
 
 .submitB {
@@ -81,7 +91,8 @@ button:hover {
     justify-content: center;
     align-items: center;
     width: 60%;
-    background-color: rgba(11, 143, 232, 0.29);
+    background-color: rgba(3, 159, 255, 0.66);
+    color: white;
     height: 60%;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -117,7 +128,6 @@ button:hover {
 }
 
 .form1 input[type="checkbox"] {
-    margin: 10px 0 20px;
 }
 
 .form1 button {
@@ -233,7 +243,7 @@ a:hover {
 
     /* styles pour le formulaire */
     .form1 {
-        max-width: 100%;
+        width: 100%;
         background-color: rgba(255, 255, 255, 0.7);
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
