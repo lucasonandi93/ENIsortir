@@ -24,6 +24,7 @@
                     <p class="margT">Durée : {{ sortie.duree }} minutes</p>
                     <p class="margT">Description et infos : {{ sortie.infosSortie }}</p>
 
+
                     <p class="margT">Campus : {{ sortie.campus.nom }}</p>
                     <p class="margT">Lieu: {{ sortie.lieu.nom }} , {{ sortie.lieu.ville.nom }}</p>
                     <p class="margT">Rue : {{ sortie.lieu.rue }}</p>
@@ -32,11 +33,12 @@
                     <p class="margT">Longitude : {{ sortie.lieu.longitude }}</p>
 
 
-
+<div>
+    <h2>List de participant:</h2>
             {% for sub in sortie.users %}
-                <li><a href="{{ path('profile_show', {id: sub.id}) }}">{{ sub.prenom }} /{{ sub.nom }}</a> </li>
+                <li style="background-color: white; color: #0d0d0d"><a href="{{ path('profile_show', {id: sub.id}) }}">{{ sub.prenom }}</a> </li>
             {% endfor %}
-
+</div>
 
 
 
@@ -50,6 +52,15 @@
     {% if sortie.user == app.user %}
         <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler la sortie</a>
     {% endif %}
+                <div>
+                    {% for label, messages in app.session.flashbag.all() %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ label }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
 
 
             </fieldset>

@@ -131,7 +131,9 @@ class UserController extends AbstractController
          $userRepository->save($user, true);
 
          // Redirige l'utilisateur vers la page de profil mise à jour
+         $this->addFlash('success', 'Votre profil a été mis à jour avec succès');
          return $this->redirectToRoute('profile_show', ['id' => $user->getId()]);
+
      }
 
      // Affiche le formulaire de mise à jour de profil pour l'utilisateur
