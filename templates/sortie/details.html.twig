@@ -49,7 +49,7 @@
         {% endif %}
     {% endif %}
 
-    {% if sortie.user == app.user %}
+    {% if sortie.user == app.user and not sortie.etat.libelle == "Annulée" %}
         <a href="{{ path('sortie_cancel', {'id': sortie.id}) }}" class="btn btn-danger">Annuler la sortie</a>
     {% endif %}
                 <div>

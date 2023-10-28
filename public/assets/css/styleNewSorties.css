@@ -9,55 +9,30 @@
 body {
     font-family: Arial, sans-serif;
 }
-
-.back {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img/background/background-home.png");
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
 }
+
 
 .fieldset1 {
     width: 100%;
     margin-right: 5%;
     height: 60%;
-    background-color: rgba(3, 159, 255, 0.66);
-    color: white;
     text-align: center;
 }
 
 .fieldset2 {
     width: 100%;
     height: 50%;
-    background-color: rgba(3, 159, 255, 0.66);
-    color: white;
 }
 
-.fieldset3 {
-    width: 50%;
-}
-
-.ez {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    align-items: center;
-    width: 80%;
-    height: 100%;
-}
 
 .btn-plus {
     background-color: #4CAF50; /* couleur de fond */
     border: none; /* pas de bordure */
     color: white; /* couleur du texte */
-    padding: 10px 20px; /* espacement intérieur */
-    text-align: center; /* alignement du texte */
-    text-decoration: none; /* pas de soulignement */
-    display: inline-block; /* afficher comme bloc en ligne */
-    font-size: 16px; /* taille de la police */
-    margin: 10px; /* marge autour du bouton */
-    margin-top: 15%;
-    margin-left: 45%;
     cursor: pointer; /* curseur de la souris */
     border-radius: 50%; /* arrondi */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* ombre */
@@ -65,14 +40,6 @@ body {
 
 .btn-plus:hover {
     background-color: #3e8e41; /* couleur de fond au survol */
-}
-
-
-.user-photo {
-    width: 80px; /* Set the width of the photo */
-    height: 80px; /* Set the height of the photo */
-    object-fit: cover; /* This property ensures that the aspect ratio of the photo is preserved while resizing */
-    border-radius: 50%; /* You can add this property to make the photo circular */
 }
 
 .cancel-button-container {
@@ -118,11 +85,6 @@ input[type="date" i] {
     background-color: #D92B26; /* Couleur d'arrière-plan rouge foncé au survol */
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
 
 h2 {
     text-align: center;
@@ -138,20 +100,6 @@ fieldset {
     width: 30%;
 }
 
-.ajust {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    position: absolute;
-    top: 85%;
-    left: 70%;
-    right: 20%;
-    transform: translate(-50%, -50%);
-    width: 60%;
-    height: 10%;
-
-}
 .margin-top{
     margin-top: 15px;
 }

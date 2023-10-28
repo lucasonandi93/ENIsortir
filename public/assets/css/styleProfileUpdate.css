@@ -1,0 +1,29 @@
+
+.containerPrinc {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerFormulaireUpdate {
+    border: 1px solid #ccc;
+    padding: 20px;
+}
+
+.formulaireUpdate {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.userInfo label {
+    margin-bottom: 5px;
+}
+.button_save{
+    margin-top: 10px;
+}

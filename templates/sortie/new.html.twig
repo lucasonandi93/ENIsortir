@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block body %}
-
+<div class="container">
     <div class="containerPrinc back">
         {{ form_start(sortieForm) }}
-        <div class="flexerMID ez">
+        <div class="flexerMID">
 
         <fieldset class="fieldset1">
             <legend>Sortie</legend>
@@ -83,8 +83,6 @@
                 </div>
             </div>
             </div>
-
-
         </fieldset>
 
         <fieldset class="fieldset2">
@@ -125,71 +123,55 @@
             </div>
         </fieldset>
         </div>
-
-
-        <div class="ajust">
+    </div>
             <div class="buttons-container">
                 <button class="save-button" name="enregistrer">Enregistrer</button>
-
-                <script>
-                    // Recupera el elemento select con id "sortie_ville"
-                    let selectVille = document.getElementById('sortie_ville');
-
-                    // Agrega un evento al cambiar de opción en el select
-                    selectVille.addEventListener('change', function() {
-
-                        // Obtiene el valor de la opción seleccionada
-                        let villeId = this.value;
-
-                        // Prepara los datos a enviar
-                        let data = new FormData();
-                        data.append('ville_id', villeId);
-
-                        // Llama a la API con una petición POST
-                        fetch('{{ path('sortie_lieux_by_ville') }}', {
-                            method: 'POST',
-                            body: data
-                        })
-                            .then(function(response) {
-                                return response.json();
-                            })
-                            .then(function(data) {
-
-                                // Actualiza la lista desplegable de Lieu con los nuevos valores
-                                let selectLieu = document.getElementById('sortie_lieu');
-                                selectLieu.innerHTML = '';
-                                for (let key in data) {
-                                    //console.log("key="+key)
-                                    let option = document.createElement('option');
-                                    option.value = data[key].id;
-                                    option.innerHTML = data[key].nom;
-                                    selectLieu.appendChild(option);
-                                }
-                            });
-                    });
-                </script>
 
 
             {{ form_end(sortieForm) }}
                 <a href="{{ path('sortie_list') }}"><button type="button" class="cancel-button">Annuler</button></a>
 
             </div>
+</div>
+    {% block javascript %}
+        <script>
+            // Recupera el elemento select con id "sortie_ville"
+            let selectVille = document.getElementById('sortie_ville');
 
+            // Agrega un evento al cambiar de opción en el select
+            selectVille.addEventListener('change', function() {
 
+                // Obtiene el valor de la opción seleccionada
+                let villeId = this.value;
 
+                // Prepara los datos a enviar
+                let data = new FormData();
+                data.append('ville_id', villeId);
 
-        </div>
-    </div>
+                // Llama a la API con una petición POST
+                fetch('{{ path('sortie_lieux_by_ville') }}', {
+                    method: 'POST',
+                    body: data
+                })
+                    .then(function(response) {
+                        return response.json();
+                    })
+                    .then(function(data) {
 
-
-
-
-
-
-
-
-
-
+                        // Actualiza la lista desplegable de Lieu con los nuevos valores
+                        let selectLieu = document.getElementById('sortie_lieu');
+                        selectLieu.innerHTML = '';
+                        for (let key in data) {
+                            //console.log("key="+key)
+                            let option = document.createElement('option');
+                            option.value = data[key].id;
+                            option.innerHTML = data[key].nom;
+                            selectLieu.appendChild(option);
+                        }
+                    });
+            });
+        </script>
+    {% endblock %}
 {% endblock %}
 
 

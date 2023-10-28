@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styleProfile.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
 {% endblock %}
-
+{#
 {% block nav %}
     <input type="checkbox" id="hamburger-input" class="burger-shower" />
     <label id="hamburger-menu" for="hamburger-input">
@@ -13,7 +13,6 @@
             <h3>Menu</h3>
             <ul>
                 {% if app.user %}
-                    {# Ajout de l'encadré avec la photo de l'utilisateur #}
                     <li class="navbar-item">
                         {% if app.user.photo is not null %}
                             <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
@@ -55,7 +54,7 @@
     <div class="overlay"></div>
 
 {% endblock %}
-
+#}
 {% block body %}
 <fieldset class="profile-content">
     <div>

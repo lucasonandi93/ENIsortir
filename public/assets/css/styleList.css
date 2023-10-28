@@ -1,103 +1,138 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 
 body {
-    font-family: 'Cabin', 'Arial', Sans-serif;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-image: url("../img/background/background-home.png");
+    font-family: 'Cabin', 'Arial', Sans-serif, serif;
 }
-
-.containerPrinc {
-    position: relative;
-    height: 60vh;
-    margin: 0;
-
+.margR{
+    margin-right: 15px;
 }
-
 .flexer {
     display: flex;
     width: 100%;
-    margin-top: 5%;
 }
 
 .containerFiltre {
-    align-items: center;
-    text-align: center;
     width: 40%;
+    align-items: center;
+}
+.containerCampus{
+    padding-bottom: 10px;
 }
 
-.dateCampus {
-    align-items: center;
-    text-align: center;
-    width: 40%;
-    margin-left: 5%;
-    margin-right: 10%;
-}
-
-.submitB {
+.form1 {
+    position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-left: 47%;
-
+    width: 80%;
+    color: black;
+    border-radius: 10px;
+    box-shadow:0px 0px 20px 5px rgba(0, 0, 0, 0.3);
+    padding: 5px;
+    margin: auto;
+}
+.checkboxFiltre{
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
 }
 
+.form1-filtres{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+
+.dateCampus {
+    text-align: center;
+    width: 40%;
+
+}
+.dateCampus label{
+    padding-bottom: 15px;
+}
 /* Styles pour le formulaire */
 
 
 /* Styles pour les champs de formulaire */
 label {
-    display: block;
-    font-size: 16px;
-    margin-bottom: 10px;
+    font-size: 20px;
+    font-family: "Sono", serif;
 }
 
-select, input[type="text"], input[type="number"] {
+select, input[type="text"], input[type="number"], input[type="search"]{
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
     font-size: 16px;
     margin-bottom: 20px;
 }
-
-/* Styles pour le bouton */
-button {
-
+select, input[type="date"]{
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
+    width: 60%;
     border: none;
-    padding: 10px 20px;
+}
+
+    /* Styles pour le bouton */
+button {
+    white-space: nowrap;
+    padding: 5px 10px;
     font-size: 16px;
     cursor: pointer;
+    border: 1px solid grey;
     border-radius: 4px;
     background-color: #3498db;
     color: #fff;
     transition: background-color 0.2s ease;
+    cursor: pointer;
 }
-
 button:hover {
-    background-color: #3e8e41;
+    background-color: blue;
+}
+.button_afficher{
+    background-color: darkgreen;
+}
+.button_inscrire{
+    background-color: #DE970B;
+}
+.button_desister{
+    background-color: darkred;
+}
+.button_modifier{
+    background-color: #DE970B;
+}
+.button_publier{
+    background-color: #5DA5A4;
+}
+.button_annuler{
+    background-color: darkred;
+}
+.button_action_list{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /*FORM */
 
-.form1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
-    background-color: rgba(3, 159, 255, 0.66);
-    color: white;
-    height: 60%;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.form-container{
+    width: 80%;
+    padding: 20px;
+    margin: auto;
 }
+.liste_sortir{
+    margin-top: 15px;
+    padding-top: 10px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 3px solid darkslategrey;
+    border-radius: 15px;
 
+}
 .alert-danger{
     background-color: orangered;
 }
@@ -116,7 +151,6 @@ button:hover {
 
 .form1 select {
     padding: 10px;
-    margin-bottom: 20px;
     width: 100%;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -128,37 +162,36 @@ button:hover {
 }
 
 .form1 input[type="checkbox"] {
+    padding-right: 10px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
 }
 
-.form1 button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-}
 
 .form button:hover {
     background-color: #4c8f8e;
 }
 
-a button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background-color: #ccc;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+.addBouton{
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 5px;
 }
-
-a button:hover {
-    background-color: #b3b3b3;
+.fond_cross {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cross {
+    margin: 0;
+    font-size: 40px;
+    color: red;
+}
+.fond_cross {
+    border: 1px solid #ccc;
+    border-radius: 10px;
 }
 
 a {
@@ -173,7 +206,6 @@ a:hover {
 /* Tableau */
 .table {
     width: 100%;
-    margin-top: 20px;
     background-color: white;
     border-collapse: collapse;
     font-size: 0.9em;
@@ -208,27 +240,29 @@ a:hover {
     background-size: 100% 20px;
 }
 
-.addBouton {
-    margin-left: 45%;
-    margin-bottom: 25px;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    background-color: #5DA5A4;
-    color: #fff;
-    transition: background-color 0.2s ease;
-}
-
 .table-responsive {
     overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    max-height: 400px;
-    margin-bottom: 5%;
-    width: 80%;
-    margin-top: -25px;
+    max-height: 500px;
     margin: auto;
+    padding: 10px;
+}
+.titre_list{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    border-radius: 20px;
+    font-family: "Sono", serif;
+}
+
+#title_filtre{
+    padding: 10px;
+    border-radius: 10px;
+}
+#title_filtre p{
+    font-size: x-large;
+    font-family: "Sono", serif;
+    margin: 0;
+    padding: 5px;
 }
 
 @media screen and (max-width: 600px) {
@@ -243,8 +277,6 @@ a:hover {
 
     /* styles pour le formulaire */
     .form1 {
-        width: 100%;
-        background-color: rgba(255, 255, 255, 0.7);
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
@@ -281,7 +313,6 @@ a:hover {
         text-align: right;
         padding-left: 50%;
         position: relative;
-        text-align: center;
     }
 
     .table td::before {
@@ -306,5 +337,6 @@ a:hover {
         max-height: 390px;
         margin-bottom: 5%;
     }
+
 }
 

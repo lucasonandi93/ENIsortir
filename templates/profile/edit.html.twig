@@ -3,13 +3,14 @@
 {% block title %}
     {% block header %}
         <link rel="stylesheet" href="{{ asset('assets/css/styleProfile.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/styleVerticalNav.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/navBis.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/containerPrinc.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/css/styleProfileUpdate.css') }}">
     {% endblock %}
 {% endblock %}
 
 {% block body %}
-    {% block nav %}
+    {#  {% block nav %}
 
         <input type="checkbox" id="hamburger-input" class="burger-shower" />
         <label id="hamburger-menu" for="hamburger-input">
@@ -17,7 +18,6 @@
                 <h3>Menu</h3>
                 <ul>
                     {% if app.user %}
-                        {# Ajout de l'encadré avec la photo de l'utilisateur #}
                         <li class="navbar-item">
                             {% if app.user.photo is not null %}
                                 <img class="user-photo" src="{{ asset('img/' ~ app.user.photo) }}" alt="{{ app.user.nom }}'s photo">
@@ -62,12 +62,51 @@
 
         <div class="overlay"></div>
     {% endblock %}
-<div class="container form-group margin-top">
-    <fieldset class="margin-top"><legend>Modification du profil</legend>
-{{ form_start(userUpdateForm) }}
-{{ form_widget(userUpdateForm) }}
-<button type="submit">update</button>
-{{ form_end(userUpdateForm) }}
-    </fieldset>
-</div>
+    #}
+    <div class="container">
+        <div class="containerPrinc">
+            <fieldset class="containerFormulaireUpdate">
+                <legend>Modification du profil</legend>
+                <div class="formulaireUpdate">
+                    {{ form_start(userUpdateForm) }}
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.username) }}
+                        {{ form_widget(userUpdateForm.username) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.prenom) }}
+                        {{ form_widget(userUpdateForm.prenom) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.nom) }}
+                        {{ form_widget(userUpdateForm.nom) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.telephone) }}
+                        {{ form_widget(userUpdateForm.telephone) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.email) }}
+                        {{ form_widget(userUpdateForm.email) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.plainPassword.first) }}
+                        {{ form_widget(userUpdateForm.plainPassword.first) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.plainPassword.second) }}
+                        {{ form_widget(userUpdateForm.plainPassword.second) }}
+                    </div>
+                    <div class="userInfo">
+                        {{ form_label(userUpdateForm.campus) }}
+                        {{ form_widget(userUpdateForm.campus) }}
+                    </div>
+
+                    {{ form_widget(userUpdateForm) }}
+                    <button class="button_save" type="submit">update</button>
+                    {{ form_end(userUpdateForm) }}
+                </div>
+            </fieldset>
+        </div>
+    </div>
 {% endblock %}
